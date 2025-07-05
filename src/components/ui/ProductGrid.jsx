@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "./ProductCard";
 const products = [
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Adidas x Bad Bunny Unisex Response CL Shoes",
@@ -14,7 +14,7 @@ const products = [
     deliveryText: "Free delivery by 8 Jul",
   },
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Nike Air Max Alpha Training Shoes",
@@ -26,7 +26,7 @@ const products = [
     deliveryText: "Free delivery by 9 Jul",
   },
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Puma Motorsport Edition Sneaker",
@@ -38,7 +38,7 @@ const products = [
     deliveryText: "Free delivery by 10 Jul",
   },
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Skechers GO Walk Arch Fit Shoes",
@@ -50,7 +50,7 @@ const products = [
     deliveryText: "Free delivery by 11 Jul",
   },
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Reebok Training Sports Sneakers",
@@ -62,7 +62,7 @@ const products = [
     deliveryText: "Free delivery by 12 Jul",
   },
   {
-    href: "#",
+    href: "/product",
     image:
       "https://cdn.shopify.com/s/files/1/0745/3756/6505/files/ID0780-1.jpg?v=1697570939",
     title: "Campus Roadster Lightweight Shoes",
