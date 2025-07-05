@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "mobile-1751732479103",
+      "name": "Galaxy S25 Ultra 5G Smartphone with Galaxy AI (Titanium Whitesilver, 12GB RAM, 256GB Storage), Titanium Frame, Snapdragon 8 Elite, 200 MP Camera with ProVisual Engine and 5000mAh Battery",
+      "brand": "Samsung",
+      "category": "mobile",
+      "basePrice": 129999,
+      "discountPercentage": 90,
+      "images": [
+        "https://m.media-amazon.com/images/I/71-d7XDbhIL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/71dtnI25tmL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/71PrkZz2itL._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/81gJVEFtA8L._SX679_.jpg",
+        "https://m.media-amazon.com/images/I/71pfjBJUA7L._SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/611g2+85L8L._SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/712NYl2u91L._SL1500_.jpg",
+        "https://m.media-amazon.com/images/I/71zurXypP7L._SL1500_.jpg"
+      ],
+      "averageRating": 4,
+      "totalReviews": 45178,
+      "stockStatus": "Hot Deal",
+      "variants": [
+        {
+          "type": "color",
+          "name": "Titanium Whitesilver"
+        },
+        {
+          "type": "storage",
+          "name": "12GB + 256GB"
+        }
+      ],
+      "delivery": 2
+    },
+    {
       "id": "prod_013",
       "name": "POCO M6 Plus 5G (Misty Lavender, 128 GB)  (8 GB RAM)",
       "brand": "POCO",
@@ -28,7 +60,7 @@
         },
         {
           "type": "storage",
-          "name": "8GB + 128GB"
+          "name": "256 GB"
         }
       ],
       "delivery": 2
@@ -61,280 +93,48 @@
         },
         {
           "type": "storage",
-          "name": "256"
+          "name": "256 GB"
         }
       ],
       "delivery": 2
     },
     {
-      "id": "prod_004",
-      "name": "iPhone 15 Pro Max",
-      "brand": "Apple",
-      "category": "mobile",
-      "basePrice": 159900,
-      "discountPercentage": 8,
-      "images": [
-        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-naturaltitanium-pdp-image-position-1a_5G?wid=1200&hei=1200&fmt=jpeg&qlt=95&.v=1693086369818",
-        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-naturaltitanium-pdp-image-position-2_5G?wid=1200&hei=1200&fmt=jpeg&qlt=95&.v=1693086369818",
-        "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-naturaltitanium-pdp-image-position-3a_5G?wid=1200&hei=1200&fmt=jpeg&qlt=95&.v=1693086369818"
-      ],
-      "averageRating": 4.6,
-      "totalReviews": 12847,
-      "stockStatus": "Lowest Price",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Natural Titanium",
-          "value": "#8E8E93"
-        },
-        {
-          "type": "color",
-          "name": "Blue Titanium",
-          "value": "#5E7C99"
-        },
-        {
-          "type": "color",
-          "name": "White Titanium",
-          "value": "#F5F5DC"
-        },
-        {
-          "type": "color",
-          "name": "Black Titanium",
-          "value": "#2C2C2E"
-        },
-        {
-          "type": "storage",
-          "name": "256GB"
-        },
-        {
-          "type": "storage",
-          "name": "512GB"
-        },
-        {
-          "type": "storage",
-          "name": "1TB"
-        }
-      ],
-      "delivery": 1
-    },
-    {
-      "id": "prod_005",
-      "name": "Samsung Galaxy S24 Ultra",
-      "brand": "Samsung",
-      "category": "mobile",
-      "basePrice": 129999,
-      "discountPercentage": 15,
-      "images": [
-        "https://images.samsung.com/is/image/samsung/p6pim/in/2401/gallery/in-galaxy-s24-ultra-s928-sm-s928bztqins-thumb-539573073",
-        "https://images.samsung.com/is/image/samsung/p6pim/in/2401/gallery/in-galaxy-s24-ultra-s928-sm-s928bztqins-thumb-539573074",
-        "https://images.samsung.com/is/image/samsung/p6pim/in/2401/gallery/in-galaxy-s24-ultra-s928-sm-s928bztqins-thumb-539573075"
-      ],
-      "averageRating": 4.4,
-      "totalReviews": 8934,
-      "stockStatus": "Only 1 left",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Titanium Black",
-          "value": "#1C1C1E"
-        },
-        {
-          "type": "color",
-          "name": "Titanium Gray",
-          "value": "#8E8E93"
-        },
-        {
-          "type": "color",
-          "name": "Titanium Violet",
-          "value": "#8B5A96"
-        },
-        {
-          "type": "color",
-          "name": "Titanium Yellow",
-          "value": "#FFD60A"
-        },
-        {
-          "type": "storage",
-          "name": "256GB"
-        },
-        {
-          "type": "storage",
-          "name": "512GB"
-        },
-        {
-          "type": "storage",
-          "name": "1TB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "prod_006",
-      "name": "Levi's Men's Regular Fit Jeans",
-      "brand": "Levi's",
+      "id": "bodyguard-jacket",
+      "name": "Men Solid Leather Jacket",
+      "brand": "BodyGuard",
       "category": "cloth",
-      "basePrice": 3999,
-      "discountPercentage": 60,
+      "basePrice": 6999,
+      "discountPercentage": 91,
       "images": [
-        "https://lsco.scene7.com/is/image/lsco/005010114-front-pdp-lse?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=1840",
-        "https://lsco.scene7.com/is/image/lsco/005010114-back-pdp-lse?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=1840",
-        "https://lsco.scene7.com/is/image/lsco/005010114-side-pdp-lse?fmt=jpeg&qlt=70&resMode=bisharp&fit=crop,1&op_usm=0.6,0.6,8&wid=2000&hei=1840"
+        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/f/c/1/s-1-no-m-c-bodyguard-original-imahbwgus8xrucxu.jpeg?q=70&crop=false",
+        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/k/r/9/s-1-no-m-c-bodyguard-original-imahbwguj7frztwz.jpeg?q=70&crop=false",
+        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/0/e/q/s-1-no-m-c-bodyguard-original-imahbwguyzfgeekd.jpeg?q=70&crop=false"
       ],
-      "averageRating": 4.1,
-      "totalReviews": 5672,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 4
-    },
-    {
-      "id": "prod_007",
-      "name": "H&M Women's Cotton T-Shirt",
-      "brand": "H&M",
-      "category": "cloth",
-      "basePrice": 1299,
-      "discountPercentage": 50,
-      "images": [
-        "https://lp2.hm.com/hmgoepprod?set=source[/13/a4/13a4c2c8c8f4c4c4c4c4c4c4c4c4c4c4c4c4c4c4.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
-        "https://lp2.hm.com/hmgoepprod?set=source[/13/a4/13a4c2c8c8f4c4c4c4c4c4c4c4c4c4c4c4c4c4c4.jpg],origin[dam],category[],type[LOOKBOOK],res[m],hmver[1]&call=url[file:/product/style]",
-        "https://lp2.hm.com/hmgoepprod?set=source[/13/a4/13a4c2c8c8f4c4c4c4c4c4c4c4c4c4c4c4c4c4c4.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[3]&call=url[file:/product/style]"
-      ],
-      "averageRating": 3.9,
-      "totalReviews": 2847,
-      "stockStatus": null,
-      "variants": null,
-      "delivery": 3
-    },
-    {
-      "id": "prod_008",
-      "name": "OnePlus 12R",
-      "brand": "OnePlus",
-      "category": "mobile",
-      "basePrice": 42999,
-      "discountPercentage": 12,
-      "images": [
-        "https://oasis.opstatics.com/content/dam/oasis/page/2024/global/products/12r/specs/12r-specs-design-cool-blue-image.png",
-        "https://oasis.opstatics.com/content/dam/oasis/page/2024/global/products/12r/specs/12r-specs-design-iron-gray-image.png",
-        "https://oasis.opstatics.com/content/dam/oasis/page/2024/global/products/12r/specs/12r-specs-design-sunset-dune-image.png"
-      ],
-      "averageRating": 4.3,
-      "totalReviews": 6789,
-      "stockStatus": "Bank Offer",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Cool Blue",
-          "value": "#4A90E2"
-        },
-        {
-          "type": "color",
-          "name": "Iron Gray",
-          "value": "#6C757D"
-        },
-        {
-          "type": "color",
-          "name": "Sunset Dune",
-          "value": "#FF8C42"
-        },
-        {
-          "type": "storage",
-          "name": "128GB"
-        },
-        {
-          "type": "storage",
-          "name": "256GB"
-        }
-      ],
-      "delivery": 1
-    },
-    {
-      "id": "prod_009",
-      "name": "Puma Motorsport Edition Sneaker",
-      "brand": "Puma",
-      "category": "shoes",
-      "basePrice": 6000,
-      "discountPercentage": 70,
-      "images": [
-        "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/306736/01/sv01/fnd/IND/fmt/png/BMW-M-Motorsport-Speedcat-OG-Sparco-Sneakers",
-        "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/306736/01/sv02/fnd/IND/fmt/png/BMW-M-Motorsport-Speedcat-OG-Sparco-Sneakers",
-        "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/306736/01/sv03/fnd/IND/fmt/png/BMW-M-Motorsport-Speedcat-OG-Sparco-Sneakers"
-      ],
-      "averageRating": 4.5,
-      "totalReviews": 3421,
-      "stockStatus": "Limited Deal",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "prod_010",
-      "name": "Zara Men's Formal Shirt",
-      "brand": "Zara",
-      "category": "cloth",
-      "basePrice": 2990,
-      "discountPercentage": 40,
-      "images": [
-        "https://static.zara.net/photos///2023/I/0/1/p/7545/427/250/2/w/850/7545427250_6_1_1.jpg?ts=1693834285017",
-        "https://static.zara.net/photos///2023/I/0/1/p/7545/427/250/2/w/850/7545427250_6_2_1.jpg?ts=1693834285017",
-        "https://static.zara.net/photos///2023/I/0/1/p/7545/427/250/2/w/850/7545427250_6_3_1.jpg?ts=1693834285017"
-      ],
-      "averageRating": 4.0,
+      "averageRating": 4,
       "totalReviews": 1923,
-      "stockStatus": "New Arrival",
+      "stockStatus": "Hot Deal",
       "variants": null,
       "delivery": 5
     },
     {
-      "id": "prod_011",
-      "name": "Skechers GO Walk Arch Fit Shoes",
-      "brand": "Skechers",
+      "id": "air-max-impact-4",
+      "name": "Air Max Impact 4 Sneakers For Men (Black)",
+      "brand": "NIKE",
       "category": "shoes",
-      "basePrice": 5500,
-      "discountPercentage": 60,
+      "basePrice": 8495,
+      "discountPercentage": 95,
       "images": [
-        "https://www.skechers.in/dw/image/v2/BGNZ_PRD/on/demandware.static/-/Sites-skechers_india/default/dw8c4c4c4c/images/large/216011_BKW.jpg?sw=800",
-        "https://www.skechers.in/dw/image/v2/BGNZ_PRD/on/demandware.static/-/Sites-skechers_india/default/dw8c4c4c4c/images/large/216011_BKW_2.jpg?sw=800",
-        "https://www.skechers.in/dw/image/v2/BGNZ_PRD/on/demandware.static/-/Sites-skechers_india/default/dw8c4c4c4c/images/large/216011_BKW_3.jpg?sw=800"
+        "https://rukminim1.flixcart.com/image/808/1212/xif0q/shoe/h/z/b/-original-imah58q5vmhqh8xa.jpeg?q=60&crop=false",
+        "https://rukminim1.flixcart.com/image/808/1212/xif0q/shoe/f/1/j/-original-imah58q59zgrfwzv.jpeg?q=60&crop=false",
+        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/k/8/b/-original-imah58q5tzp3abng.jpeg?q=90&crop=false",
+        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/e/6/0/-original-imah58q5pqqd2zam.jpeg?q=90&crop=false",
+        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/c/a/n/-original-imah58q55sk9rtrb.jpeg?q=90&crop=false",
+        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/x/z/z/-original-imah58q5e4vgbpr6.jpeg?q=90&crop=false"
       ],
       "averageRating": 4.2,
       "totalReviews": 4567,
-      "stockStatus": "Comfort Deal",
+      "stockStatus": "Top Discount",
       "variants": null,
-      "delivery": 3
-    },
-    {
-      "id": "prod_012",
-      "name": "Xiaomi 14 Ultra",
-      "brand": "Xiaomi",
-      "category": "mobile",
-      "basePrice": 99999,
-      "discountPercentage": 10,
-      "images": [
-        "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14-ultra/pc/47c0138e5b2e8b8b8b8b8b8b8b8b8b8b.png",
-        "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14-ultra/pc/47c0138e5b2e8b8b8b8b8b8b8b8b8b8b_2.png",
-        "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14-ultra/pc/47c0138e5b2e8b8b8b8b8b8b8b8b8b8b_3.png"
-      ],
-      "averageRating": 4.4,
-      "totalReviews": 7234,
-      "stockStatus": "Pro Camera",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Black",
-          "value": "#000000"
-        },
-        {
-          "type": "color",
-          "name": "White",
-          "value": "#FFFFFF"
-        },
-        {
-          "type": "storage",
-          "name": "512GB"
-        },
-        {
-          "type": "storage",
-          "name": "1TB"
-        }
-      ],
       "delivery": 2
     }
   ]
