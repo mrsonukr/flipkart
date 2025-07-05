@@ -8,6 +8,12 @@ import "swiper/css/pagination";
 const images = [
   "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
   "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
+  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
+  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
+  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
+  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
+  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
+  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
 ];
 
 const ProductSlider = () => {
@@ -84,44 +90,26 @@ const ProductSlider = () => {
 
       {/* 👇 Embedded Style */}
       <style>{`
-        .custom-pagination span {
-          display: inline-block;
-          position: relative;
-          height: 4px;
-          width: 12px;
-          background-color: #d1d5db;
-          border-radius: 9999px;
-          margin: 0 4px;
-          overflow: hidden;
-          transition: all 0.3s ease;
-          opacity: 1;
-        }
+  .custom-pagination span {
+    display: inline-block;
+    height: 6px;
+    width: 6px;
+    background-color: #d1d5db; /* gray-300 */
+    border-radius: 9999px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    opacity: 1;
+  }
 
-        .custom-pagination .swiper-pagination-bullet-active {
-          width: 50px;
-          background-color: #d1d5db;
-        }
+  .custom-pagination .swiper-pagination-bullet-active {
+    width: 12px;
+    background-color: #9ca3af; /* gray-400 */
+  }
 
-        .custom-pagination .swiper-pagination-bullet-active::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          width: 100%;
-          background-color: #1f2937;
-          animation: fillProgress 3s linear forwards;
-        }
-
-        @keyframes fillProgress {
-          0% {
-            width: 0%;
-          }
-          100% {
-            width: 100%;
-          }
-        }
-      `}</style>
+  .custom-pagination .swiper-pagination-bullet-active::before {
+    display: none;
+  }
+`}</style>
     </div>
   );
 };
