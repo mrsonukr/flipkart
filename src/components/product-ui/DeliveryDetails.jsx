@@ -1,11 +1,18 @@
 import React from "react";
+import { getDeliveryDate } from "../../utils/productUtils";
 
-const DeliveryDetails = () => {
+const DeliveryDetails = ({ product }) => {
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
+  const deliveryDate = getDeliveryDate(product.delivery);
+
   return (
     <div>
       {/* Pincode Box */}
       <div className="flex justify-between items-center px-3 py-3 mx-2 border-b border-gray-200">
-        <p className="text-sm f">Find a seller that delivers to you</p>
+        <p className="text-sm">Find a seller that delivers to you</p>
         <button className="border border-gray-300 px-4 py-1.5 text-blue-600 rounded font-medium text-sm">
           Enter Pincode
         </button>
@@ -20,7 +27,7 @@ const DeliveryDetails = () => {
             className="w-6 h-6"
           />
           <p className="text-sm text-gray-800 font-medium">
-            Delivery by 8 Jul, Tuesday
+            Delivery by {deliveryDate}
           </p>
         </div>
         <div className="w-3.5 h-3.5 -mr-1">

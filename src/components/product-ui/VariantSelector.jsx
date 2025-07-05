@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-const VariantSelector = ({ color = "Midnight Black", storage = "128GB" }) => {
+const VariantSelector = ({ 
+  color = "Midnight Black", 
+  storage = "128GB",
+  colorVariants = [],
+  storageVariants = []
+}) => {
+  const [selectedColor, setSelectedColor] = useState(color);
+  const [selectedStorage, setSelectedStorage] = useState(storage);
+
   return (
     <div className="bg-white">
       {/* Top gray line */}
@@ -12,28 +20,32 @@ const VariantSelector = ({ color = "Midnight Black", storage = "128GB" }) => {
       </div>
 
       {/* Color Selector */}
-      <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
-        <div className="text-sm">
-          Color: <span className="font-medium">{color}</span>
+      {colorVariants.length > 0 && (
+        <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
+          <div className="text-sm">
+            Color: <span className="font-medium">{selectedColor}</span>
+          </div>
+          <img
+            src="/assets/images/img/next-arrow.png"
+            alt="Next"
+            className="h-3.5"
+          />
         </div>
-        <img
-          src="/assets/images/img/next-arrow.png"
-          alt="Next"
-          className="h-3.5"
-        />
-      </div>
+      )}
 
       {/* Storage Selector */}
-      <div className="flex justify-between items-center px-4 py-3">
-        <div className="text-sm">
-          Storage: <span className="font-medium">{storage}</span>
+      {storageVariants.length > 0 && (
+        <div className="flex justify-between items-center px-4 py-3">
+          <div className="text-sm">
+            Storage: <span className="font-medium">{selectedStorage}</span>
+          </div>
+          <img
+            src="/assets/images/img/next-arrow.png"
+            alt="Next"
+            className="h-3.5"
+          />
         </div>
-        <img
-          src="/assets/images/img/next-arrow.png"
-          alt="Next"
-          className="h-3.5"
-        />
-      </div>
+      )}
     </div>
   );
 };

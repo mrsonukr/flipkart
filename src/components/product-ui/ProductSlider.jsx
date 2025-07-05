@@ -5,18 +5,11 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const images = [
-  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
-  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
-  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
-  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
-  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
-  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
-  "https://cdn.shopify.com/s/files/1/0637/4834/1981/files/1_AARD-2108-GREEN-PEACHMODE_04a20e2a-15b1-481d-8ab7-e97ef7613572.jpg?v=1725963629",
-  "https://cdn.shopify.com/s/files/1/0886/3665/3863/files/41bbh12MXrL._SX679.jpg?v=1721769745",
-];
+const ProductSlider = ({ product }) => {
+  if (!product || !product.images) {
+    return <div>Loading...</div>;
+  }
 
-const ProductSlider = () => {
   return (
     <div className="w-full max-w-7xl mx-auto my-4 relative">
       {/* Icon container on top-right */}
@@ -72,13 +65,13 @@ const ProductSlider = () => {
           clickable: true,
         }}
       >
-        {images.map((src, index) => (
+        {product.images.map((src, index) => (
           <SwiperSlide key={index}>
             <div className="h-[450px] flex items-center justify-center">
               <img
                 src={src}
-                alt={`Product ${index + 1}`}
-                className="max-h-full h-auto w-auto max-w-full"
+                alt={`${product.name} ${index + 1}`}
+                className="max-h-full h-auto w-auto max-w-full object-contain"
               />
             </div>
           </SwiperSlide>

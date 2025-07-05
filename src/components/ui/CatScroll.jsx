@@ -9,11 +9,12 @@ const CatScroll = () => {
   return (
     <div className="w-full overflow-x-auto whitespace-nowrap scrollbar-hide px-2">
       <div className="inline-flex gap-3">
-        {images.map((image) => (
+        {images.map((image, index) => (
           <img
+            key={index}
             src={image.src}
             alt={image.alt}
-            className="w-full h-16 "
+            className="w-full h-16"
           />
         ))}
       </div>

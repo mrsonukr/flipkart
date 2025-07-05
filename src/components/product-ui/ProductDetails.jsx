@@ -1,8 +1,15 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import FlashingTag from "../ui/FlashingTag";
+import { calculateDiscountedPrice, formatPrice, getRatingLabel } from "../../utils/productUtils";
 
-const ProductDetails = () => {
+const ProductDetails = ({ product }) => {
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
+  const discountedPrice = calculateDiscountedPrice(product.basePrice, product.discountPercentage);
+
   return (
     <div className="px-4">
       <div className="flex items-center justify-center space-x-2 mb-3">
@@ -14,35 +21,37 @@ const ProductDetails = () => {
           />
         </div>
         <div className="text-xs text-gray-700">
-          583 people ordered this in the last 1 week
+          {Math.floor(Math.random() * 500) + 100} people ordered this in the last 1 week
         </div>
       </div>
+      
       <h2 className="text-sm">
-        <strong>PUMA</strong> UNITED COLORS OF BENETTON Winso Polyester 32L
-        Laptop Backpack For Unisex
+        <strong>{product.brand}</strong> {product.name}
       </h2>
-      {/* rating  */}
+      
+      {/* rating */}
       <div className="flex items-center space-x-2 my-2">
         {/* Star Ratings */}
         <div className="flex space-x-[2px] py-1">
           {[...Array(5)].map((_, i) => (
             <FaStar
               key={i}
-              className={i < 3 ? "text-green-600" : "text-gray-300"}
+              className={i < Math.round(product.averageRating) ? "text-green-600" : "text-gray-300"}
             />
           ))}
         </div>
 
         {/* Rating Text */}
         <div className="flex items-center text-xs text-gray-500 space-x-2">
-          <span>3.0</span>
+          <span>{product.averageRating.toFixed(1)}</span>
           <span className="w-[3px] h-[3px] bg-black rounded-full"></span>
-          <span className="font-medium text-blue-700">Good</span>
+          <span className="font-medium text-blue-700">{getRatingLabel(product.averageRating)}</span>
           <span className="w-[3px] h-[3px] bg-black rounded-full"></span>
-          <span className=" text-blue-700">7,203 ratings</span>
+          <span className="text-blue-700">{product.totalReviews.toLocaleString()} ratings</span>
         </div>
       </div>
-      <FlashingTag />
+      
+      {product.stockStatus && <FlashingTag text={product.stockStatus} />}
 
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-1">
@@ -52,13 +61,16 @@ const ProductDetails = () => {
               fill="#008C00"
             ></path>
           </svg>
-          <span className="text-lg text-green-700 font-semibold">49%</span>
+          <span className="text-lg text-green-700 font-semibold">{product.discountPercentage}%</span>
         </div>
-        <span className="text-lg font-semibold text-gray-500 line-through ">
-          ₹9,990
+        <span className="text-lg font-semibold text-gray-500 line-through">
+          {formatPrice(product.basePrice)}
         </span>
-        <span className="text-lg font-semibold ">₹9,990</span>
+        <span className="text-lg font-semibold">
+          {formatPrice(discountedPrice)}
+        </span>
       </div>
+      
       <p className="capitalize text-[14px] my-3">
         5% cashback & no joining fee with flipkart axis bank credit card{" "}
         <span className="text-blue-600">complete now</span>
