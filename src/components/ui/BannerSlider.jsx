@@ -6,11 +6,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const images = [
-  "/assets/images/slider/slider1.jpg",
-  "/assets/images/slider/slider2.jpg",
-  "/assets/images/slider/slider3.jpg",
+  "https://rukminim1.flixcart.com/fk-p-flap/3240/1580/image/4902ac8d1411e50a.png?q=60",
+  "https://rukminim1.flixcart.com/fk-p-flap/960/460/image/de79f66d25c80afb.jpeg?q=60",
+  "https://rukminim1.flixcart.com/fk-p-flap/3240/1580/image/36d677f51218c6b8.jpeg?q=60",
+  "https://rukminim1.flixcart.com/fk-p-flap/960/460/image/60f88e6e12d3aeca.jpeg?q=60",
 ];
-
 const BannerSlider = () => {
   return (
     <div className="w-full max-w-7xl mx-auto mb-4">
@@ -26,11 +26,13 @@ const BannerSlider = () => {
       >
         {images.map((src, index) => (
           <SwiperSlide key={index}>
-            <img
-              src={src}
-              alt={`Banner ${index + 1}`}
-              className="w-full h-[200px] md:h-[300px] object-cover rounded-lg p-2"
-            />
+            <div className="rounded-lg overflow-hidden mx-3 mb-2">
+              <img
+                src={src}
+                alt={`Banner ${index + 1}`}
+                className="w-full h-[200px] md:h-[300px] object-cover"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -45,7 +47,7 @@ const BannerSlider = () => {
           position: relative;
           height: 4px;
           width: 12px;
-          background-color: #d1d5db; /* gray-300 */
+          background-color: #d1d5db;
           border-radius: 9999px;
           margin: 0 4px;
           overflow: hidden;
@@ -55,7 +57,7 @@ const BannerSlider = () => {
 
         .custom-pagination .swiper-pagination-bullet-active {
           width: 50px;
-          background-color: #d1d5db; /* keep base color visible */
+          background-color: #d1d5db;
         }
 
         .custom-pagination .swiper-pagination-bullet-active::before {
@@ -65,17 +67,13 @@ const BannerSlider = () => {
           top: 0;
           height: 100%;
           width: 100%;
-          background-color: #1f2937; /* black progress fill */
+          background-color: #1f2937;
           animation: fillProgress 3s linear forwards;
         }
 
         @keyframes fillProgress {
-          0% {
-            width: 0%;
-          }
-          100% {
-            width: 100%;
-          }
+          0% { width: 0%; }
+          100% { width: 100%; }
         }
       `}</style>
     </div>
