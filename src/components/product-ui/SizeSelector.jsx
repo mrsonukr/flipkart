@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 
-const sizes = ["S", "M", "L", "XL", "XXL", "XXXL"];
+const clothingSizes = ["S", "M", "L", "XL", "XXL", "XXXL"];
+const shoeSizes = ["6", "7", "8", "9", "10", "11", "12"];
 
-const SizeSelector = () => {
-  const [selectedSize, setSelectedSize] = useState("XL");
+const SizeSelector = ({ category = "cloth" }) => {
+  // Determine which sizes to use based on category
+  const sizes = category === "shoes" ? shoeSizes : clothingSizes;
+  
+  // Set default selected size based on category
+  const defaultSize = category === "shoes" ? "8" : "XL";
+  const [selectedSize, setSelectedSize] = useState(defaultSize);
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);

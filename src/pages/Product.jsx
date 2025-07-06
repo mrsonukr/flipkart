@@ -54,7 +54,7 @@ const Product = () => {
       
       {/* Show size selector only for cloth and shoes category */}
       {(product.category === 'cloth' || product.category === 'shoes') && (
-        <SizeSelector />
+        <SizeSelector category={product.category} />
       )}
       
       <div className="h-2 bg-gray-100"></div>

@@ -92,6 +92,13 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
   const finalPrice = calculateItemPrice(product.basePrice, product.discountPercentage);
   const deliveryText = formatDeliveryDate(product.delivery);
 
+  // Generate random number of offers (1-4)
+  const getRandomOfferCount = () => {
+    return Math.floor(Math.random() * 4) + 1; // Random number between 1 and 4
+  };
+
+  const [offerCount] = useState(getRandomOfferCount()); // Set once when component mounts
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -124,6 +131,20 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
     if (product.variants.size) variantParts.push(`Size: ${product.variants.size}`);
     
     return variantParts.join(', ');
+  };
+
+  // Get size display for shoes and clothing
+  const getSizeDisplay = () => {
+    if (product.category === 'shoes' || product.category === 'cloth') {
+      // For demo purposes, we'll show a default size since we don't have size in cart data yet
+      // In a real app, this would come from the selected size when adding to cart
+      if (product.category === 'shoes') {
+        return 'Size: 9'; // Default shoe size for demo
+      } else if (product.category === 'cloth') {
+        return 'Size: L'; // Default clothing size for demo
+      }
+    }
+    return null;
   };
 
   return (
@@ -181,6 +202,13 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
             {product.brand} {product.name}
           </div>
 
+          {/* Size Display for shoes and clothing */}
+          {getSizeDisplay() && (
+            <div className="text-xs text-gray-500">
+              {getSizeDisplay()}
+            </div>
+          )}
+
           {/* Variants */}
           {getVariantDisplay() && (
             <div className="text-xs text-gray-500">
@@ -220,9 +248,9 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
             <span className="text-black">₹{finalPrice.toLocaleString()}</span>
           </div>
 
-          {/* Offers */}
+          {/* Offers - Now shows random count */}
           <div className="mt-[-5px] text-green-700 text-sm font-medium">
-            3 offers available
+            {offerCount} offer{offerCount > 1 ? 's' : ''} available
           </div>
         </div>
       </div>
