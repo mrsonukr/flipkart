@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart"; // Uncomment if you have a Cart page
+import AddressForm from "./pages/Address";
 
 const Routing = () => {
   return (
@@ -11,8 +12,9 @@ const Routing = () => {
       <Route path="/" element={<Home />} />
       <Route path="/product/:id" element={<Product />} />
       <Route path="/cart" element={<Cart />} /> {/* Uncomment if you have a Cart page */}
+      <Route path="/address" element={<AddressForm />} />
       {/* Add more routes as needed */}
-
+    
     </Routes>
   );
 };
