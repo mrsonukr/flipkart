@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getCartItemCount } from "../utils/cartUtils";
 
 const Header2 = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    updateCartCount();
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      updateCartCount();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+  }, []);
+
+  const updateCartCount = () => {
+    const count = getCartItemCount();
+    setCartCount(count);
+  };
+
   return (
     <div className="w-full">
       <div id="header" className="w-full">
@@ -11,6 +31,7 @@ const Header2 = () => {
               <a
                 id="back-btn"
                 className="flex items-center justify-center mt-1"
+                onClick={() => window.history.back()}
               >
                 <svg
                   width="19"
@@ -56,15 +77,17 @@ const Header2 = () => {
 
             {/* Right Section - Cart */}
             <div className="flex items-center justify-end relative">
-              <a href="/cart.php" className="relative">
+              <a href="/cart" className="relative">
                 <img
                   src="/assets/images/svg/cart.svg"
                   alt="cart"
                   className="w-6"
                 />
-                <span className="absolute -top-2 -right-1 bg-red-600 text-white font-semibold text-[0.625rem] h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">
-                  1
-                </span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-1 bg-red-600 text-white font-semibold text-[0.625rem] h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">
+                    {cartCount > 99 ? '99+' : cartCount}
+                  </span>
+                )}
               </a>
             </div>
           </div>

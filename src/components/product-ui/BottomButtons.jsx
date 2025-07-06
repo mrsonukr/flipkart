@@ -1,24 +1,45 @@
 import React, { useState } from "react";
+import { addToCart } from "../../utils/cartUtils";
 
-const BottomButtons = () => {
+const BottomButtons = ({ product }) => {
   const [loadingCart, setLoadingCart] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
-
   const [loadingBuy, setLoadingBuy] = useState(false);
 
-  const addToCart = () => {
+  const handleAddToCart = () => {
+    if (!product) return;
+
     setLoadingCart(true);
     setShowAdded(false);
 
+    // Get selected variants (you can extend this to get actual selected variants)
+    const selectedVariants = {};
+    if (product.category === 'mobile' && product.variants) {
+      const colorVariant = product.variants.find(v => v.type === 'color');
+      const storageVariant = product.variants.find(v => v.type === 'storage');
+      if (colorVariant) selectedVariants.color = colorVariant.name;
+      if (storageVariant) selectedVariants.storage = storageVariant.name;
+    }
+
     // 0.5s: show "Added"
     setTimeout(() => {
-      setShowAdded(true);
+      try {
+        addToCart(product, 1, selectedVariants);
+        setShowAdded(true);
 
-      // 2s later: reset button
-      setTimeout(() => {
+        // Update cart count in header if needed
+        window.dispatchEvent(new Event('cartUpdated'));
+
+        // 2s later: reset button
+        setTimeout(() => {
+          setLoadingCart(false);
+          setShowAdded(false);
+        }, 2000);
+      } catch (error) {
+        console.error('Error adding to cart:', error);
         setLoadingCart(false);
-        setShowAdded(false);
-      }, 2000);
+        alert('Failed to add item to cart');
+      }
     }, 500);
   };
 
@@ -26,7 +47,18 @@ const BottomButtons = () => {
     setLoadingBuy(true);
     setTimeout(() => {
       setLoadingBuy(false);
-      alert("Buying Now!");
+      // Add to cart first, then redirect to cart
+      if (product) {
+        const selectedVariants = {};
+        if (product.category === 'mobile' && product.variants) {
+          const colorVariant = product.variants.find(v => v.type === 'color');
+          const storageVariant = product.variants.find(v => v.type === 'storage');
+          if (colorVariant) selectedVariants.color = colorVariant.name;
+          if (storageVariant) selectedVariants.storage = storageVariant.name;
+        }
+        addToCart(product, 1, selectedVariants);
+        window.location.href = '/cart';
+      }
     }, 1000);
   };
 
@@ -35,7 +67,7 @@ const BottomButtons = () => {
       {/* Add to Cart Button */}
       <button
         disabled={loadingCart || loadingBuy}
-        onClick={addToCart}
+        onClick={handleAddToCart}
         className={`w-1/2 flex items-center justify-center text-[15px] font-medium
           bg-white text-black transition-all duration-300
           ${loadingCart || loadingBuy ? "cursor-not-allowed" : ""}
@@ -59,7 +91,11 @@ const BottomButtons = () => {
           ${loadingCart || loadingBuy ? "cursor-not-allowed" : ""}
         `}
       >
-        Buy Now
+        {loadingBuy ? (
+          <span className="w-[15px] h-[15px] border-2 border-black rounded-full animate-spin border-t-transparent"></span>
+        ) : (
+          "Buy Now"
+        )}
       </button>
     </div>
   );

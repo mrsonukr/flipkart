@@ -1,46 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { getCartFromStorage, updateCartItemQuantity, removeFromCart, calculateItemPrice } from "../../utils/cartUtils";
 
-// Your products array
-const products = [
-  {
-    id: "prod_013",
-    name: "POCO M6 Plus 5G (Misty Lavender, 128 GB)  (8 GB RAM)",
-    brand: "POCO",
-    category: "mobile",
-    basePrice: 17999,
-    discountPercentage: 80,
-    images: [
-      "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/9/b/n/-original-imah3afnqj84usyy.jpeg",
-    ],
-    averageRating: 4,
-    totalReviews: 18523,
-    stockStatus: "Performance Beast",
-    variants: [
-      { type: "color", name: "Misty Lavender" },
-      { type: "storage", name: "256 GB" },
-    ],
-    delivery: 2,
-  },
-  {
-    id: "iphone-16-pro-max",
-    name: "iPhone 16 Pro Max (Natural Titanium, 256 GB)",
-    brand: "Apple",
-    category: "mobile",
-    basePrice: 144900,
-    discountPercentage: 90,
-    images: [
-      "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/u/8/w/-original-imah4jz6qhwgukgt.jpeg?q=60&crop=false",
-    ],
-    averageRating: 5,
-    totalReviews: 71204,
-    stockStatus: "Top Discount",
-    variants: [
-      { type: "color", name: "Natural Titanium" },
-      { type: "storage", name: "256 GB" },
-    ],
-    delivery: 2,
-  },
-];
 const formatDeliveryDate = (days) => {
   const today = new Date();
   const deliveryDate = new Date(today);
@@ -55,25 +15,81 @@ const formatDeliveryDate = (days) => {
   return `${day} ${month}, ${weekday}`;
 };
 
-const CartProduct = () => {
+const CartProduct = ({ onCartUpdate }) => {
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    loadCartItems();
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      loadCartItems();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+  }, []);
+
+  const loadCartItems = () => {
+    const items = getCartFromStorage();
+    setCartItems(items);
+    if (onCartUpdate) {
+      onCartUpdate(items);
+    }
+  };
+
+  const handleQuantityUpdate = (productId, variants, newQuantity) => {
+    updateCartItemQuantity(productId, variants, newQuantity);
+    loadCartItems();
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  const handleRemoveItem = (productId, variants) => {
+    removeFromCart(productId, variants);
+    loadCartItems();
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="bg-white p-8 text-center">
+        <img 
+          src="/assets/images/img/grocery-emp.webp" 
+          alt="Empty Cart" 
+          className="w-32 h-32 mx-auto mb-4 opacity-50"
+        />
+        <h3 className="text-lg font-medium text-gray-800 mb-2">Your cart is empty</h3>
+        <p className="text-gray-500 mb-4">Add items to get started</p>
+        <a 
+          href="/" 
+          className="inline-block bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
+        >
+          Shop Now
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {cartItems.map((item) => (
+        <ProductCard 
+          key={`${item.id}-${JSON.stringify(item.variants)}`} 
+          product={item} 
+          onQuantityUpdate={handleQuantityUpdate}
+          onRemoveItem={handleRemoveItem}
+        />
       ))}
     </div>
   );
 };
 
-const ProductCard = ({ product }) => {
-  const [selectedQty, setSelectedQty] = useState(1);
+const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
+  const [selectedQty, setSelectedQty] = useState(product.quantity);
   const [showQtyDropdown, setShowQtyDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const discountAmount = Math.round(
-    (product.basePrice * product.discountPercentage) / 100
-  );
-  const finalPrice = product.basePrice - discountAmount;
+  const finalPrice = calculateItemPrice(product.basePrice, product.discountPercentage);
   const deliveryText = formatDeliveryDate(product.delivery);
 
   useEffect(() => {
@@ -86,6 +102,30 @@ const ProductCard = ({ product }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleQtyChange = (newQty) => {
+    setSelectedQty(newQty);
+    setShowQtyDropdown(false);
+    onQuantityUpdate(product.id, product.variants, newQty);
+  };
+
+  const handleRemove = () => {
+    onRemoveItem(product.id, product.variants);
+  };
+
+  // Format variant display
+  const getVariantDisplay = () => {
+    if (!product.variants || Object.keys(product.variants).length === 0) {
+      return null;
+    }
+    
+    const variantParts = [];
+    if (product.variants.color) variantParts.push(product.variants.color);
+    if (product.variants.storage) variantParts.push(product.variants.storage);
+    if (product.variants.size) variantParts.push(`Size: ${product.variants.size}`);
+    
+    return variantParts.join(', ');
+  };
+
   return (
     <div className="bg-white px-4 pt-4 mt-3">
       <div className="flex justify-start flex-row gap-5 mt-1">
@@ -93,7 +133,7 @@ const ProductCard = ({ product }) => {
         <div className="flex flex-col justify-start gap-2">
           <div className="w-20 h-18 border border-gray-400 rounded overflow-hidden">
             <img
-              src={product.images[0]}
+              src={product.image}
               alt={product.name}
               className="w-full h-full object-contain"
             />
@@ -124,10 +164,7 @@ const ProductCard = ({ product }) => {
                     className={`px-3 py-1 cursor-pointer hover:bg-gray-100 ${
                       qty === selectedQty ? "font-semibold text-blue-600" : ""
                     }`}
-                    onClick={() => {
-                      setSelectedQty(qty);
-                      setShowQtyDropdown(false);
-                    }}
+                    onClick={() => handleQtyChange(qty)}
                   >
                     {qty}
                   </div>
@@ -140,9 +177,16 @@ const ProductCard = ({ product }) => {
         {/* Product Info */}
         <div className="flex flex-col justify-start gap-2">
           {/* Name (brand + name) */}
-          <div className="text-sm font-medium text-gray-900 leading-snug line-clamp-2 max-w-[230px]">
+          <div className="text-sm text-gray-900 leading-snug line-clamp-2 ">
             {product.brand} {product.name}
           </div>
+
+          {/* Variants */}
+          {getVariantDisplay() && (
+            <div className="text-xs text-gray-500">
+              {getVariantDisplay()}
+            </div>
+          )}
 
           {/* Rating */}
           <div className="flex items-center gap-2 text-xs">
@@ -234,7 +278,10 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="flex-1 text-center">
-          <div className="inline-flex items-center gap-2 justify-center text-sm font-medium text-gray-500">
+          <div 
+            className="inline-flex items-center gap-2 justify-center text-sm font-medium text-gray-500 cursor-pointer"
+            onClick={handleRemove}
+          >
             <svg
               width="16"
               height="16"

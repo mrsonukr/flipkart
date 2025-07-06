@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { getCartItemCount } from "../utils/cartUtils";
 
 const Header = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    updateCartCount();
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      updateCartCount();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+  }, []);
+
+  const updateCartCount = () => {
+    const count = getCartItemCount();
+    setCartCount(count);
+  };
+
   return (
     <div>
       <header className="flex justify-between items-center p-4 py-2 bg-white shadow-md">
@@ -10,7 +30,14 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <img src="/assets/images/svg/download.svg" alt="" />
-          <img src="/assets/images/svg/cart.svg" alt="" />
+          <a href="/cart" className="relative">
+            <img src="/assets/images/svg/cart.svg" alt="" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-1 bg-red-600 text-white font-semibold text-[0.625rem] h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">
+                {cartCount > 99 ? '99+' : cartCount}
+              </span>
+            )}
+          </a>
         </div>
       </header>
       <div className="w-full py-1 px-2 bg-white" id="customSearchGuid">
