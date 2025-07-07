@@ -210,7 +210,7 @@ const Address = () => {
             />
             {errors.city && (
               <span className="text-[14px] text-[#c00]">
-                Please provide the necessary details.
+                Required*
               </span>
             )}
           </Box>
