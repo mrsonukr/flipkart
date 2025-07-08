@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import StateSelect from "../components/address-ui/StateSelect";
 import ButtonRadioGroup from "../components/address-ui/ButtonRadioGroup";
+import Header3 from "../components/Header3";
 
 const textFieldStyles = {
   "& .MuiOutlinedInput-root": {
@@ -61,108 +62,114 @@ const Address = () => {
   };
 
   return (
-    <div className="p-4">
-      <Box
-        component="form"
-        sx={{ width: "100%", maxWidth: "100%" }}
-        noValidate
-        autoComplete="off"
-      >
-        {/* Full Name */}
-        <TextField
-          id={fields[0].id}
-          label={fields[0].label}
-          variant="outlined"
-          fullWidth
-          sx={textFieldStyles}
-          margin="normal"
-        />
-
-        {/* Mobile Number */}
-        <TextField
-          id={fields[1].id}
-          label={fields[1].label}
-          variant="outlined"
-          fullWidth
-          sx={textFieldStyles}
-          margin="normal"
-        />
-
-        {/* + Add Alternate Phone */}
-        {showAlternateInput ? (
+    <div>
+      <Header3 title="Add delivery address" />
+      <div className="flex justify-center items-center mt-2 border-b shadow-md border-gray-300 pb-2">
+        <img className="mb-2" src="/assets/images/svg/p1.svg" alt="" />
+      </div>
+      <div className="p-4">
+        <Box
+          component="form"
+          sx={{ width: "100%", maxWidth: "100%" }}
+          noValidate
+          autoComplete="off"
+        >
+          {/* Full Name */}
           <TextField
-            inputRef={alternateRef}
-            value={alternatePhone}
-            onChange={(e) => setAlternatePhone(e.target.value)}
-            onBlur={handleBlurAlternate}
-            label="+ Add Alternate Phone Number"
+            id={fields[0].id}
+            label={fields[0].label}
             variant="outlined"
             fullWidth
             sx={textFieldStyles}
             margin="normal"
           />
-        ) : (
-          <div onClick={() => setShowAlternateInput(true)}>
-            <p className="text-blue-600 text-sm mt-1 cursor-pointer">
-              + Add Alternate Phone Number
-            </p>
-          </div>
-        )}
 
-        {/* Pincode + Use My Location */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          {/* Mobile Number */}
           <TextField
-            id="pincode"
-            label="Pincode (Required)*"
+            id={fields[1].id}
+            label={fields[1].label}
             variant="outlined"
-            sx={{ ...textFieldStyles, width: "50%" }}
+            fullWidth
+            sx={textFieldStyles}
             margin="normal"
           />
-          <div
-            className="bg-[#2874f0] gap-2 flex items-center mt-2 justify-center text-white text-sm p-3 rounded-md cursor-pointer whitespace-nowrap"
-            style={{ width: "50%", height: "37px" }}
-          >
-            <img src="/assets/images/svg/location.svg" alt="" />
-            <span>Use my location</span>
-          </div>
-        </Box>
 
-        {/* State and City */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
-          <Box sx={{ width: "50%" }}>
-            <StateSelect sx={textFieldStyles} />
+          {/* + Add Alternate Phone */}
+          {showAlternateInput ? (
+            <TextField
+              inputRef={alternateRef}
+              value={alternatePhone}
+              onChange={(e) => setAlternatePhone(e.target.value)}
+              onBlur={handleBlurAlternate}
+              label="+ Add Alternate Phone Number"
+              variant="outlined"
+              fullWidth
+              sx={textFieldStyles}
+              margin="normal"
+            />
+          ) : (
+            <div onClick={() => setShowAlternateInput(true)}>
+              <p className="text-blue-600 text-sm mt-1 cursor-pointer">
+                + Add Alternate Phone Number
+              </p>
+            </div>
+          )}
+
+          {/* Pincode + Use My Location */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <TextField
+              id="pincode"
+              label="Pincode (Required)*"
+              variant="outlined"
+              sx={{ ...textFieldStyles, width: "50%" }}
+              margin="normal"
+            />
+            <div
+              className="bg-[#2874f0] gap-2 flex items-center mt-2 justify-center text-white text-sm p-3 rounded-md cursor-pointer whitespace-nowrap"
+              style={{ width: "50%", height: "37px" }}
+            >
+              <img src="/assets/images/svg/location.svg" alt="" />
+              <span>Use my location</span>
+            </div>
           </Box>
-          <TextField
-            id="city"
-            label="City (Required)*"
-            variant="outlined"
-            sx={{ ...textFieldStyles, width: "50%", mb: 2 }}
-            margin="normal"
-          />
+
+          {/* State and City */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
+            <Box sx={{ width: "50%" }}>
+              <StateSelect sx={textFieldStyles} />
+            </Box>
+            <TextField
+              id="city"
+              label="City (Required)*"
+              variant="outlined"
+              sx={{ ...textFieldStyles, width: "50%", mb: 2 }}
+              margin="normal"
+            />
+          </Box>
+
+          {/* Address Lines */}
+          {fields.slice(2).map(({ id, label }) => (
+            <TextField
+              key={id}
+              id={id}
+              label={label}
+              variant="outlined"
+              fullWidth
+              sx={textFieldStyles}
+              margin="normal"
+            />
+          ))}
         </Box>
 
-        {/* Address Lines */}
-        {fields.slice(2).map(({ id, label }) => (
-          <TextField
-            key={id}
-            id={id}
-            label={label}
-            variant="outlined"
-            fullWidth
-            sx={textFieldStyles}
-            margin="normal"
-          />
-        ))}
-      </Box>
+        {/* Address Type */}
+        <p className="text-[13px] mt-2 text-gray-500">Type of address</p>
+        <ButtonRadioGroup />
 
-      {/* Address Type */}
-      <p className="text-[13px] mt-2 text-gray-500">Type of address</p>
-      <ButtonRadioGroup />
-
-      {/* Submit */}
-      <button className="bg-[#fb641b] w-full h-12 rounded-sm text-white mt-4">
-        Save Address
-      </button>
+        {/* Submit */}
+        <button className="bg-[#fb641b] w-full h-12 rounded-sm text-white mt-4">
+          Save Address
+        </button>
+      </div>
     </div>
   );
 };

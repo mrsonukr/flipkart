@@ -2,7 +2,7 @@ import React from "react";
 
 const AddressBar = () => {
   return (
-    <div className="flex justify-between items-center text-sm shadow-sm py-2 bg-white px-4">
+    <div className="flex justify-between items-center border-t-2 border-gray-100 text-sm shadow-sm py-2 bg-white px-4">
       <div className="py-2 w-[70%]">
         <div className="mb-1">
           Deliver To:{""}

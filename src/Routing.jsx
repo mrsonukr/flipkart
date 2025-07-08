@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart"; // Uncomment if you have a Cart page
 import AddressForm from "./pages/Address";
+import Summary from "./pages/Summary";
 
 const Routing = () => {
   return (
@@ -13,6 +14,8 @@ const Routing = () => {
       <Route path="/product/:id" element={<Product />} />
       <Route path="/cart" element={<Cart />} /> {/* Uncomment if you have a Cart page */}
       <Route path="/address" element={<AddressForm />} />
+      <Route path="/summary" element={<Summary />} />
+
       {/* Add more routes as needed */}
     
     </Routes>
