@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getCartFromStorage, updateCartItemQuantity, removeFromCart, calculateItemPrice } from "../../utils/cartUtils";
+import {
+  getCartFromStorage,
+  updateCartItemQuantity,
+  removeFromCart,
+  calculateItemPrice,
+} from "../../utils/cartUtils";
+import Lottie from "lottie-react";
 
 const formatDeliveryDate = (days) => {
   const today = new Date();
@@ -20,14 +26,14 @@ const CartProduct = ({ onCartUpdate }) => {
 
   useEffect(() => {
     loadCartItems();
-    
+
     // Listen for cart updates
     const handleCartUpdate = () => {
       loadCartItems();
     };
-    
-    window.addEventListener('cartUpdated', handleCartUpdate);
-    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate);
   }, []);
 
   const loadCartItems = () => {
@@ -41,27 +47,32 @@ const CartProduct = ({ onCartUpdate }) => {
   const handleQuantityUpdate = (productId, variants, newQuantity) => {
     updateCartItemQuantity(productId, variants, newQuantity);
     loadCartItems();
-    window.dispatchEvent(new Event('cartUpdated'));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const handleRemoveItem = (productId, variants) => {
     removeFromCart(productId, variants);
     loadCartItems();
-    window.dispatchEvent(new Event('cartUpdated'));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   if (cartItems.length === 0) {
     return (
-      <div className="bg-white p-8 text-center">
-        <img 
-          src="/assets/images/img/grocery-emp.webp" 
-          alt="Empty Cart" 
-          className="w-32 h-32 mx-auto mb-4 opacity-50"
-        />
-        <h3 className="text-lg font-medium text-gray-800 mb-2">Your cart is empty</h3>
+      <div className="bg-white h-screen p-8 text-center">
+        <div className="w-full  mx-auto mb-4 opacity-50">
+          <Lottie
+            animationData={null} // Will load via `path`
+            path="/assets/json/animation.json" // 👈 Use path when it's in public folder
+            loop
+            autoplay
+          />
+        </div>
+        <h3 className="text-lg font-medium text-gray-800 mb-2">
+          Your cart is empty
+        </h3>
         <p className="text-gray-500 mb-4">Add items to get started</p>
-        <a 
-          href="/" 
+        <a
+          href="/"
           className="inline-block bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
         >
           Shop Now
@@ -73,9 +84,9 @@ const CartProduct = ({ onCartUpdate }) => {
   return (
     <div>
       {cartItems.map((item) => (
-        <ProductCard 
-          key={`${item.id}-${JSON.stringify(item.variants)}`} 
-          product={item} 
+        <ProductCard
+          key={`${item.id}-${JSON.stringify(item.variants)}`}
+          product={item}
           onQuantityUpdate={handleQuantityUpdate}
           onRemoveItem={handleRemoveItem}
         />
@@ -89,7 +100,10 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
   const [showQtyDropdown, setShowQtyDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const finalPrice = calculateItemPrice(product.basePrice, product.discountPercentage);
+  const finalPrice = calculateItemPrice(
+    product.basePrice,
+    product.discountPercentage
+  );
   const deliveryText = formatDeliveryDate(product.delivery);
 
   // Generate random number of offers (1-4)
@@ -124,24 +138,25 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
     if (!product.variants || Object.keys(product.variants).length === 0) {
       return null;
     }
-    
+
     const variantParts = [];
     if (product.variants.color) variantParts.push(product.variants.color);
     if (product.variants.storage) variantParts.push(product.variants.storage);
-    if (product.variants.size) variantParts.push(`Size: ${product.variants.size}`);
-    
-    return variantParts.join(', ');
+    if (product.variants.size)
+      variantParts.push(`Size: ${product.variants.size}`);
+
+    return variantParts.join(", ");
   };
 
   // Get size display for shoes and clothing
   const getSizeDisplay = () => {
-    if (product.category === 'shoes' || product.category === 'cloth') {
+    if (product.category === "shoes" || product.category === "cloth") {
       // For demo purposes, we'll show a default size since we don't have size in cart data yet
       // In a real app, this would come from the selected size when adding to cart
-      if (product.category === 'shoes') {
-        return 'Size: 9'; // Default shoe size for demo
-      } else if (product.category === 'cloth') {
-        return 'Size: L'; // Default clothing size for demo
+      if (product.category === "shoes") {
+        return "Size: 9"; // Default shoe size for demo
+      } else if (product.category === "cloth") {
+        return "Size: L"; // Default clothing size for demo
       }
     }
     return null;
@@ -204,16 +219,12 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
 
           {/* Size Display for shoes and clothing */}
           {getSizeDisplay() && (
-            <div className="text-xs text-gray-500">
-              {getSizeDisplay()}
-            </div>
+            <div className="text-xs text-gray-500">{getSizeDisplay()}</div>
           )}
 
           {/* Variants */}
           {getVariantDisplay() && (
-            <div className="text-xs text-gray-500">
-              {getVariantDisplay()}
-            </div>
+            <div className="text-xs text-gray-500">{getVariantDisplay()}</div>
           )}
 
           {/* Rating */}
@@ -250,7 +261,7 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
 
           {/* Offers - Now shows random count */}
           <div className="mt-[-5px] text-green-700 text-sm font-medium">
-            {offerCount} offer{offerCount > 1 ? 's' : ''} available
+            {offerCount} offer{offerCount > 1 ? "s" : ""} available
           </div>
         </div>
       </div>
@@ -306,7 +317,7 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
         </div>
 
         <div className="flex-1 text-center">
-          <div 
+          <div
             className="inline-flex items-center gap-2 justify-center text-sm font-medium text-gray-500 cursor-pointer"
             onClick={handleRemove}
           >
