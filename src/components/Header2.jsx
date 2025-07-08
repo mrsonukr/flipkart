@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getCartItemCount } from "../utils/cartUtils";
 
 const Header2 = () => {
@@ -31,7 +32,11 @@ const Header2 = () => {
               <a
                 id="back-btn"
                 className="flex items-center justify-center mt-1"
-                onClick={() => window.history.back()}
+                href="javascript:void(0)"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.history.back();
+                }}
               >
                 <svg
                   width="19"
@@ -66,18 +71,18 @@ const Header2 = () => {
               </a>
 
               {/* Logo */}
-              <a href="/" className="mx-3">
+              <Link to="/" className="mx-3">
                 <img
                   src="/assets/images/img/favicon.png"
                   alt="logo"
                   className="w-8" // Approx 24px
                 />
-              </a>
+              </Link>
             </div>
 
             {/* Right Section - Cart */}
             <div className="flex items-center justify-end relative">
-              <a href="/cart" className="relative">
+              <Link to="/cart" className="relative">
                 <img
                   src="/assets/images/svg/cart.svg"
                   alt="cart"
@@ -88,7 +93,7 @@ const Header2 = () => {
                     {cartCount > 99 ? '99+' : cartCount}
                   </span>
                 )}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

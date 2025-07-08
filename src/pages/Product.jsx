@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Header2 from "../components/Header2";
 import ProductSlider from "../components/product-ui/ProductSlider";
@@ -14,6 +15,14 @@ import { getProductById } from "../utils/productUtils";
 const Product = () => {
   const { id } = useParams();
   const product = getProductById(id);
+  // Set default size based on category
+  const getDefaultSize = () => {
+    if (product?.category === 'shoes') return '8';
+    if (product?.category === 'cloth') return 'XL';
+    return null;
+  };
+  
+  const [selectedSize, setSelectedSize] = useState(getDefaultSize());
 
   if (!product) {
     return (
@@ -21,9 +30,9 @@ const Product = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h2>
           <p className="text-gray-600">The product you're looking for doesn't exist.</p>
-          <a href="/" className="text-blue-600 hover:underline mt-4 inline-block">
+          <Link to="/" className="text-blue-600 hover:underline mt-4 inline-block">
             Go back to home
-          </a>
+          </Link>
         </div>
       </div>
     );
@@ -36,6 +45,9 @@ const Product = () => {
   const selectedColor = colorVariants[0]?.name || "Default";
   const selectedStorage = storageVariants[0]?.name || "Standard";
 
+  const handleSizeChange = (size) => {
+    setSelectedSize(size);
+  };
   return (
     <div>
       <Header2 />
@@ -54,7 +66,10 @@ const Product = () => {
       
       {/* Show size selector only for cloth and shoes category */}
       {(product.category === 'cloth' || product.category === 'shoes') && (
-        <SizeSelector category={product.category} />
+        <SizeSelector 
+          category={product.category} 
+          onSizeChange={handleSizeChange}
+        />
       )}
       
       <div className="h-2 bg-gray-100"></div>
@@ -63,7 +78,7 @@ const Product = () => {
       <ProductPolicy />
       <div className="h-2 bg-gray-100"></div>
       <Reviews />
-      <BottomButtons product={product} />
+      <BottomButtons product={product} selectedSize={selectedSize} />
     </div>
   );
 };

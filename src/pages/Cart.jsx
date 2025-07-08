@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header3 from "../components/Header3";
 import PriceDetails from "../components/cart-ui/PriceDetails";
 import AddressBar from "../components/cart-ui/AddressBar";
 import CartProduct from "../components/cart-ui/CartProduct";
 import { calculateCartTotals } from "../utils/cartUtils";
+import { getAddressFromStorage } from "../utils/addressUtils";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [cartTotals, setCartTotals] = useState({
     totalMRP: 0,
     totalDiscount: 0,
@@ -52,15 +55,27 @@ const Cart = () => {
         </div>
       </div>
       <div>
-        <a
-          href="#"
+        <button
+          onClick={handlePlaceOrder}
           className="inline-block bg-yellow-400 text-black py-3 px-12 text-sm font-medium rounded hover:bg-yellow-500 transition-colors"
         >
           Place Order
-        </a>
+        </button>
       </div>
     </div>
   );
+
+  const handlePlaceOrder = () => {
+    const savedAddress = getAddressFromStorage();
+    
+    if (savedAddress) {
+      // Address exists, go to summary
+      navigate('/summary');
+    } else {
+      // No address, go to address page with summary as destination
+      navigate('/address?from=/summary');
+    }
+  };
 
   return (
     <div>

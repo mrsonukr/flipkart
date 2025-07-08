@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getCartItemCount } from "../utils/cartUtils";
 
 const Header = () => {
@@ -30,19 +31,19 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4">
           <img src="/assets/images/svg/download.svg" alt="" />
-          <a href="/cart" className="relative">
+          <Link to="/cart" className="relative">
             <img src="/assets/images/svg/cart.svg" alt="" />
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-1 bg-red-600 text-white font-semibold text-[0.625rem] h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">
                 {cartCount > 99 ? '99+' : cartCount}
               </span>
             )}
-          </a>
+          </Link>
         </div>
       </header>
       <div className="w-full py-1 px-2 bg-white" id="customSearchGuid">
-        <a
-          href="#"
+        <Link
+          to="#"
           className="mx-[10px] block w-[calc(100%-20px)] h-10 text-sm text-[#777] text-left rounded-[10px] bg-white relative overflow-hidden whitespace-nowrap"
         >
           {/* Search Icon inside input */}
@@ -57,7 +58,7 @@ const Header = () => {
             placeholder="Search for Products, Brands and More"
             readOnly
           />
-        </a>
+        </Link>
       </div>
     </div>
   );

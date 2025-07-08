@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const clothingSizes = ["S", "M", "L", "XL", "XXL", "XXXL"];
 const shoeSizes = ["6", "7", "8", "9", "10", "11", "12"];
 
-const SizeSelector = ({ category = "cloth" }) => {
+const SizeSelector = ({ category = "cloth", onSizeChange }) => {
   // Determine which sizes to use based on category
   const sizes = category === "shoes" ? shoeSizes : clothingSizes;
   
@@ -11,8 +11,19 @@ const SizeSelector = ({ category = "cloth" }) => {
   const defaultSize = category === "shoes" ? "8" : "XL";
   const [selectedSize, setSelectedSize] = useState(defaultSize);
 
+  // Call onSizeChange with default size when component mounts
+  React.useEffect(() => {
+    if (onSizeChange) {
+      onSizeChange(defaultSize);
+    }
+  }, [defaultSize, onSizeChange]);
+
   const handleSizeClick = (size) => {
     setSelectedSize(size);
+    // Notify parent component about size change
+    if (onSizeChange) {
+      onSizeChange(size);
+    }
   };
 
   return (

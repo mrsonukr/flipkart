@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 
 const ProductCard = ({
@@ -41,8 +42,8 @@ const ProductCard = ({
   };
 
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
       className="flex flex-col relative box-border border-b border-r border-gray-200 bg-white"
     >
       <div className="relative p-2 h-[200px] bg-white w-full overflow-hidden">
@@ -110,7 +111,7 @@ const ProductCard = ({
 
         <div className="text-xs font-medium py-1 rounded">{deliveryText}</div>
       </div>
-    </a>
+    </Link>
   );
 };
 

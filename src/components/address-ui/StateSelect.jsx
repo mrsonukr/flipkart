@@ -80,10 +80,10 @@ const StateSelect = ({ value, onChange, sx }) => {
           <path
             fill="none"
             stroke="#3f3f3f"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="m17 14l-5-5l-5 5"
-            stroke-width="1"
+            strokeWidth="1"
           />
         </svg>
       </div>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Home, Building2 } from "lucide-react"; // Optional: or use your same SVGs
 
-const ButtonRadioGroup = () => {
-  const [selected, setSelected] = useState("home");
+const ButtonRadioGroup = ({ selected = "home", onSelectionChange }) => {
 
   const options = [
     {
@@ -46,7 +45,7 @@ const ButtonRadioGroup = () => {
       {options.map((option) => (
         <button
           key={option.key}
-          onClick={() => setSelected(option.key)}
+          onClick={() => onSelectionChange && onSelectionChange(option.key)}
           className={`flex items-center gap-2 px-8 py-2 border rounded-full mt-2 text-sm 
             ${
               selected === option.key

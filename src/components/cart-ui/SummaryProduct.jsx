@@ -126,15 +126,7 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
 
   // Get size display for shoes and clothing
   const getSizeDisplay = () => {
-    if (product.category === 'shoes' || product.category === 'cloth') {
-      // For demo purposes, we'll show a default size since we don't have size in cart data yet
-      // In a real app, this would come from the selected size when adding to cart
-      if (product.category === 'shoes') {
-        return 'Size: 9'; // Default shoe size for demo
-      } else if (product.category === 'cloth') {
-        return 'Size: L'; // Default clothing size for demo
-      }
-    }
+    // Don't show separate size display since it's handled in getVariantDisplay
     return null;
   };
 
@@ -194,13 +186,6 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
           </div>
 
           {/* Size Display for shoes and clothing */}
-          {getSizeDisplay() && (
-            <div className="text-xs text-gray-500">
-              {getSizeDisplay()}
-            </div>
-          )}
-
-          {/* Variants */}
           {getVariantDisplay() && (
             <div className="text-xs text-gray-500">
               {getVariantDisplay()}

@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import StateSelect from "../components/address-ui/StateSelect";
 import ButtonRadioGroup from "../components/address-ui/ButtonRadioGroup";
 import Header3 from "../components/Header3";
+import { saveAddressToStorage, getAddressFromStorage } from "../utils/addressUtils";
+import { useLocation } from "react-router-dom";
 
 const textFieldStyles = {
   "& .MuiOutlinedInput-root": {
@@ -38,6 +41,24 @@ const textFieldStyles = {
 };
 
 const Address = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const fromPage = searchParams.get('from') || '/cart'; // Default to cart if no 'from' param
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    fullName: '',
+    mobileNumber: '',
+    alternatePhone: '',
+    pincode: '',
+    state: '',
+    city: '',
+    houseNo: '',
+    roadName: '',
+    addressType: 'home'
+  });
+  
   const fields = [
     { id: "full-name", label: "Full Name (Required)*" },
     { id: "mobile-number", label: "Mobile Number (Required)*" },
@@ -46,8 +67,18 @@ const Address = () => {
   ];
 
   const [showAlternateInput, setShowAlternateInput] = useState(false);
-  const [alternatePhone, setAlternatePhone] = useState("");
   const alternateRef = useRef(null);
+
+  // Load existing address on component mount
+  useEffect(() => {
+    const savedAddress = getAddressFromStorage();
+    if (savedAddress) {
+      setFormData(savedAddress);
+      if (savedAddress.alternatePhone) {
+        setShowAlternateInput(true);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (showAlternateInput && alternateRef.current) {
@@ -55,9 +86,53 @@ const Address = () => {
     }
   }, [showAlternateInput]);
 
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   const handleBlurAlternate = () => {
-    if (alternatePhone.trim() === "") {
+    if (formData.alternatePhone.trim() === "") {
       setShowAlternateInput(false);
+    }
+  };
+
+  const handleAddressTypeChange = (type) => {
+    setFormData(prev => ({
+      ...prev,
+      addressType: type
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Check all required fields
+    const requiredFields = ['fullName', 'mobileNumber', 'pincode', 'state', 'city', 'houseNo', 'roadName'];
+    const isValid = requiredFields.every(field => formData[field].trim() !== '');
+    
+    if (!isValid) {
+      // Don't submit if validation fails - user will see empty required fields
+      return;
+    }
+    
+    // Save to localStorage
+    const success = saveAddressToStorage(formData);
+    
+    if (success) {
+      // Dispatch event to update AddressBar
+      window.dispatchEvent(new Event('addressUpdated'));
+      
+      // Smart redirect based on source page
+      if (fromPage === '/summary') {
+        // If coming from summary or buy now, go to summary
+        navigate('/summary');
+      } else {
+        // If coming from cart, go back to cart
+        navigate('/cart');
+      }
     }
   };
 
@@ -70,6 +145,7 @@ const Address = () => {
       <div className="p-4">
         <Box
           component="form"
+          onSubmit={handleSubmit}
           sx={{ width: "100%", maxWidth: "100%" }}
           noValidate
           autoComplete="off"
@@ -80,6 +156,9 @@ const Address = () => {
             label={fields[0].label}
             variant="outlined"
             fullWidth
+            required
+            value={formData.fullName}
+            onChange={(e) => handleInputChange('fullName', e.target.value)}
             sx={textFieldStyles}
             margin="normal"
           />
@@ -90,6 +169,9 @@ const Address = () => {
             label={fields[1].label}
             variant="outlined"
             fullWidth
+            required
+            value={formData.mobileNumber}
+            onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
             sx={textFieldStyles}
             margin="normal"
           />
@@ -98,8 +180,8 @@ const Address = () => {
           {showAlternateInput ? (
             <TextField
               inputRef={alternateRef}
-              value={alternatePhone}
-              onChange={(e) => setAlternatePhone(e.target.value)}
+              value={formData.alternatePhone}
+              onChange={(e) => handleInputChange('alternatePhone', e.target.value)}
               onBlur={handleBlurAlternate}
               label="+ Add Alternate Phone Number"
               variant="outlined"
@@ -121,6 +203,9 @@ const Address = () => {
               id="pincode"
               label="Pincode (Required)*"
               variant="outlined"
+              required
+              value={formData.pincode}
+              onChange={(e) => handleInputChange('pincode', e.target.value)}
               sx={{ ...textFieldStyles, width: "50%" }}
               margin="normal"
             />
@@ -136,37 +221,56 @@ const Address = () => {
           {/* State and City */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
             <Box sx={{ width: "50%" }}>
-              <StateSelect sx={textFieldStyles} />
+              <StateSelect 
+                value={formData.state}
+                onChange={(e) => handleInputChange('state', e.target.value)}
+                sx={textFieldStyles} 
+              />
             </Box>
             <TextField
               id="city"
               label="City (Required)*"
               variant="outlined"
+              required
+              value={formData.city}
+              onChange={(e) => handleInputChange('city', e.target.value)}
               sx={{ ...textFieldStyles, width: "50%", mb: 2 }}
               margin="normal"
             />
           </Box>
 
           {/* Address Lines */}
-          {fields.slice(2).map(({ id, label }) => (
+          {fields.slice(2).map(({ id, label }, index) => {
+            const fieldName = index === 0 ? 'houseNo' : 'roadName';
+            return (
             <TextField
               key={id}
               id={id}
               label={label}
               variant="outlined"
               fullWidth
+              required
+              value={formData[fieldName]}
+              onChange={(e) => handleInputChange(fieldName, e.target.value)}
               sx={textFieldStyles}
               margin="normal"
             />
-          ))}
+          )})}
         </Box>
 
         {/* Address Type */}
         <p className="text-[13px] mt-2 text-gray-500">Type of address</p>
-        <ButtonRadioGroup />
+        <ButtonRadioGroup 
+          selected={formData.addressType}
+          onSelectionChange={handleAddressTypeChange}
+        />
 
         {/* Submit */}
-        <button className="bg-[#fb641b] w-full h-12 rounded-sm text-white mt-4">
+        <button 
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-[#fb641b] w-full h-12 rounded-sm text-white mt-4 hover:bg-[#e55a17] transition-colors"
+        >
           Save Address
         </button>
       </div>

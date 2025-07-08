@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import { addToCart } from "../../utils/cartUtils";
+import { useNavigate } from "react-router-dom";
+import { addToCart, clearCart } from "../../utils/cartUtils";
+import { getAddressFromStorage } from "../../utils/addressUtils";
 
-const BottomButtons = ({ product }) => {
+const BottomButtons = ({ product, selectedSize }) => {
+  const navigate = useNavigate();
   const [loadingCart, setLoadingCart] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
   const [loadingBuy, setLoadingBuy] = useState(false);
@@ -12,13 +15,18 @@ const BottomButtons = ({ product }) => {
     setLoadingCart(true);
     setShowAdded(false);
 
-    // Get selected variants (you can extend this to get actual selected variants)
+    // Get selected variants including size
     const selectedVariants = {};
     if (product.category === 'mobile' && product.variants) {
       const colorVariant = product.variants.find(v => v.type === 'color');
       const storageVariant = product.variants.find(v => v.type === 'storage');
       if (colorVariant) selectedVariants.color = colorVariant.name;
       if (storageVariant) selectedVariants.storage = storageVariant.name;
+    }
+    
+    // Add selected size for shoes and clothing
+    if ((product.category === 'shoes' || product.category === 'cloth') && selectedSize) {
+      selectedVariants.size = selectedSize;
     }
 
     // 0.5s: show "Added"
@@ -47,7 +55,7 @@ const BottomButtons = ({ product }) => {
     setLoadingBuy(true);
     setTimeout(() => {
       setLoadingBuy(false);
-      // Add to cart first, then redirect to cart
+      // Clear cart first, then add only this product for Buy Now
       if (product) {
         const selectedVariants = {};
         if (product.category === 'mobile' && product.variants) {
@@ -56,8 +64,26 @@ const BottomButtons = ({ product }) => {
           if (colorVariant) selectedVariants.color = colorVariant.name;
           if (storageVariant) selectedVariants.storage = storageVariant.name;
         }
+        
+        // Add selected size for shoes and clothing
+        if ((product.category === 'shoes' || product.category === 'cloth') && selectedSize) {
+          selectedVariants.size = selectedSize;
+        }
+        
+        // Clear existing cart items for Buy Now
+        clearCart();
         addToCart(product, 1, selectedVariants);
-        window.location.href = '/cart';
+        
+        // Check if address exists
+        const savedAddress = getAddressFromStorage();
+        
+        if (savedAddress) {
+          // Address exists, go directly to summary
+          navigate('/summary');
+        } else {
+          // No address, go to address page with summary as destination
+          navigate('/address?from=/summary');
+        }
       }
     }, 1000);
   };

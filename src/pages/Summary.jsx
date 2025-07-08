@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header3 from "../components/Header3";
 import AddressBar from "../components/cart-ui/AddressBar";
 import SummaryProduct from "../components/cart-ui/SummaryProduct";
@@ -52,12 +53,12 @@ const Summary = () => {
         </div>
       </div>
       <div>
-        <a
-          href="#"
+        <Link
+          to="#"
           className="inline-block bg-yellow-400 text-black py-3 px-12 text-sm font-medium rounded hover:bg-yellow-500 transition-colors"
         >
           Continue
-        </a>
+        </Link>
       </div>
     </div>
   );

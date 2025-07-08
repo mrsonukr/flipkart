@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   getCartFromStorage,
   updateCartItemQuantity,
@@ -71,12 +72,12 @@ const CartProduct = ({ onCartUpdate }) => {
           Your cart is empty
         </h3>
         <p className="text-gray-500 mb-4">Add items to get started</p>
-        <a
-          href="/"
+        <Link
+          to="/"
           className="inline-block bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
         >
           Shop Now
-        </a>
+        </Link>
       </div>
     );
   }
@@ -150,15 +151,7 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
 
   // Get size display for shoes and clothing
   const getSizeDisplay = () => {
-    if (product.category === "shoes" || product.category === "cloth") {
-      // For demo purposes, we'll show a default size since we don't have size in cart data yet
-      // In a real app, this would come from the selected size when adding to cart
-      if (product.category === "shoes") {
-        return "Size: 9"; // Default shoe size for demo
-      } else if (product.category === "cloth") {
-        return "Size: L"; // Default clothing size for demo
-      }
-    }
+    // Don't show separate size display since it's handled in getVariantDisplay
     return null;
   };
 
@@ -218,11 +211,6 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
           </div>
 
           {/* Size Display for shoes and clothing */}
-          {getSizeDisplay() && (
-            <div className="text-xs text-gray-500">{getSizeDisplay()}</div>
-          )}
-
-          {/* Variants */}
           {getVariantDisplay() && (
             <div className="text-xs text-gray-500">{getVariantDisplay()}</div>
           )}
