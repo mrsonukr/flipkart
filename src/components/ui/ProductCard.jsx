@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+import { validateImageUrl } from "../../utils/securityUtils";
 
 const ProductCard = ({
   href,
@@ -47,7 +48,14 @@ const ProductCard = ({
       className="flex flex-col relative box-border border-b border-r border-gray-200 bg-white"
     >
       <div className="relative p-2 h-[200px] bg-white w-full overflow-hidden">
-        <img src={image} alt={title} className="w-full h-full object-contain" />
+        <img 
+          src={validateImageUrl(image) ? image : '/assets/images/img/placeholder.jpg'} 
+          alt={title} 
+          className="w-full h-full object-contain"
+          onError={(e) => {
+            e.target.src = '/assets/images/img/placeholder.jpg';
+          }}
+        />
         <div className="absolute top-3 right-3 flex justify-center items-center">
           <svg width="24" height="24" viewBox="0 0 256 256">
             <path fill="none" d="M0 0h256v256H0z" />

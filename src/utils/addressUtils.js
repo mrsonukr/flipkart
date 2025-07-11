@@ -1,11 +1,13 @@
 // Address utility functions for localStorage management
+import { encryptData, decryptData, sanitizeInput } from './securityUtils';
+
 const ADDRESS_STORAGE_KEY = 'flipkart_address';
 
 // Get address from localStorage
 export const getAddressFromStorage = () => {
   try {
     const address = localStorage.getItem(ADDRESS_STORAGE_KEY);
-    return address ? JSON.parse(address) : null;
+    return address ? decryptData(address) : null;
   } catch (error) {
     console.error('Error reading address from localStorage:', error);
     return null;
@@ -15,7 +17,23 @@ export const getAddressFromStorage = () => {
 // Save address to localStorage
 export const saveAddressToStorage = (address) => {
   try {
-    localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(address));
+    // Sanitize address data
+    const sanitizedAddress = {
+      fullName: sanitizeInput(address.fullName),
+      mobileNumber: sanitizeInput(address.mobileNumber),
+      alternatePhone: sanitizeInput(address.alternatePhone),
+      pincode: sanitizeInput(address.pincode),
+      state: sanitizeInput(address.state),
+      city: sanitizeInput(address.city),
+      houseNo: sanitizeInput(address.houseNo),
+      roadName: sanitizeInput(address.roadName),
+      addressType: sanitizeInput(address.addressType)
+    };
+    
+    const encryptedAddress = encryptData(sanitizedAddress);
+    if (encryptedAddress) {
+      localStorage.setItem(ADDRESS_STORAGE_KEY, encryptedAddress);
+    }
     return true;
   } catch (error) {
     console.error('Error saving address to localStorage:', error);
