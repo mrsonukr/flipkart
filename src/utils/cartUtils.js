@@ -124,7 +124,7 @@ export const calculateCartTotals = () => {
   });
 
   const totalAmount = totalMRP - totalDiscount;
-  const deliveryCharges = totalAmount > 500 ? 0 : 40; // Free delivery above ₹500
+  const deliveryCharges = 0; // No delivery charges for payment
   const packagingFee = totalItems > 0 ? 59 : 0;
   const finalAmount = totalAmount + deliveryCharges + packagingFee;
 

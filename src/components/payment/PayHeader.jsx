@@ -1,6 +1,18 @@
 import React, { useEffect, useRef } from "react";
+import { calculateCartTotals } from "../../utils/cartUtils";
 
 const PayHeader = () => {
+  const [cartTotals, setCartTotals] = React.useState({
+    totalMRP: 0,
+    totalDiscount: 0,
+    totalAmount: 0,
+    deliveryCharges: 0,
+    packagingFee: 0,
+    finalAmount: 0,
+    totalItems: 0,
+    savings: 0
+  });
+
   // Use refs to track DOM elements
   const headerRef = useRef(null);
   const detailsRef = useRef(null);
@@ -8,13 +20,47 @@ const PayHeader = () => {
   const arrowImageRef = useRef(null);
   const backButtonRef = useRef(null);
 
+  // Function to update content margin based on header height
+  const updateContentMargin = () => {
+    if (headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight;
+      // Update CSS custom property for content margin
+      document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+    }
+  };
+
+  const updateCartTotals = () => {
+    const totals = calculateCartTotals();
+    setCartTotals(totals);
+  };
+
   useEffect(() => {
+    updateCartTotals();
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      updateCartTotals();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+
     const header = headerRef.current;
     const details = detailsRef.current;
     const headerToggle = headerToggleRef.current;
     const arrowImage = arrowImageRef.current;
     const backButton = backButtonRef.current;
 
+    // Initial margin update
+    updateContentMargin();
+
+    // Create ResizeObserver to watch header height changes
+    const resizeObserver = new ResizeObserver(() => {
+      updateContentMargin();
+    });
+
+    if (header) {
+      resizeObserver.observe(header);
+    }
     const handleScroll = () => {
       if (window.scrollY > 0) {
         header?.classList.add("shadow-md");
@@ -35,6 +81,8 @@ const PayHeader = () => {
           details.classList.remove("open");
           arrowImage.classList.remove("rotate-270");
           arrowImage.classList.add("rotate-90");
+          // Update margin after collapse animation
+          setTimeout(updateContentMargin, 300);
         });
       } else {
         // Expand
@@ -42,6 +90,8 @@ const PayHeader = () => {
         details.style.height = `${details.scrollHeight}px`;
         arrowImage.classList.remove("rotate-90");
         arrowImage.classList.add("rotate-270");
+        // Update margin after expand animation
+        setTimeout(updateContentMargin, 300);
       }
     };
 
@@ -61,6 +111,8 @@ const PayHeader = () => {
     // Cleanup event listeners
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+      resizeObserver.disconnect();
       if (headerToggle) {
         headerToggle.removeEventListener("click", toggleDetails);
       }
@@ -77,6 +129,8 @@ const PayHeader = () => {
       detailsRef.current?.classList.contains("open")
     ) {
       detailsRef.current.style.height = "auto"; // Allow dynamic resizing after expansion
+      // Update margin after transition completes
+      updateContentMargin();
     }
   };
 
@@ -133,13 +187,29 @@ const PayHeader = () => {
               onTransitionEnd={handleTransitionEnd}
             >
               <div className="flex justify-between px-3 py-3 mb-[-10px] text-[#1a1a1a]">
-                <span>Price (3 items)</span>
-                <span>₹1,147</span>
+                <span>Price ({cartTotals.totalItems} item{cartTotals.totalItems > 1 ? 's' : ''})</span>
+                <span>₹{cartTotals.totalMRP.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between px-3 py-3 mb-[-10px] text-[#1a1a1a]">
+                <span>Discount</span>
+                <span className="text-green-600">-₹{cartTotals.totalDiscount.toLocaleString()}</span>
               </div>
               <div className="flex justify-between px-3 py-3 mb-[-10px] text-[#1a1a1a]">
                 <span>Delivery Charges</span>
-                <span className="text-green-600">FREE</span>
+                <span>
+                  {cartTotals.deliveryCharges > 0 ? (
+                    <span>₹{cartTotals.deliveryCharges}</span>
+                  ) : (
+                    <span className="text-green-600">FREE</span>
+                  )}
+                </span>
               </div>
+              {cartTotals.packagingFee > 0 && (
+                <div className="flex justify-between px-3 py-3 mb-[-10px] text-[#1a1a1a]">
+                  <span>Secured Packaging Fee</span>
+                  <span>₹{cartTotals.packagingFee}</span>
+                </div>
+              )}
               <div className="border border-dashed border-[#d2d2d2] mt-4 scale-y-[0.6]"></div>
             </div>
             <div
@@ -175,7 +245,7 @@ const PayHeader = () => {
                 </span>
               </span>
               <span className="tracking-[-0.01px] font-semibold text-[17px] text-[#2a55e5]">
-                ₹1,147
+                ₹{cartTotals.finalAmount.toLocaleString()}
               </span>
             </div>
           </div>

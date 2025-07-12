@@ -9,7 +9,7 @@ const Test = () => {
     return (
         <div>
             <PayHeader />
-            <div className='mt-[136px]'></div>
+            <div style={{ marginTop: 'var(--header-height, 136px)' }}></div>
             <UPIPaymentOptions />
             <DisableOption/>
         </div>

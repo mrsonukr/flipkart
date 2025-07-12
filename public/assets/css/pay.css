@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --header-height: 136px;
+}
+
 body {
 
     background-color: #ffffff;

@@ -1,10 +1,9 @@
 // UPIPaymentOptions.jsx
 import React, { useState } from "react";
+import { calculateCartTotals } from "../../utils/cartUtils";
 
 const upiId = "merchant@upi";
 const merchantName = "My Store";
-const totalSellPrice = 1147;
-const showPackagingCharges = false;
 const tr = "TRX12345";
 const mc = "0000";
 
@@ -13,15 +12,44 @@ const formatNumberWithCommas = (num) =>
 
 const UPIPaymentOptions = () => {
   const [selected, setSelected] = useState("upi");
+  const [cartTotals, setCartTotals] = React.useState({
+    totalMRP: 0,
+    totalDiscount: 0,
+    totalAmount: 0,
+    deliveryCharges: 0,
+    packagingFee: 0,
+    finalAmount: 0,
+    totalItems: 0,
+    savings: 0
+  });
 
-  const generateLink = (scheme) =>
+  React.useEffect(() => {
+    updateCartTotals();
+    
+    // Listen for cart updates
+    const handleCartUpdate = () => {
+      updateCartTotals();
+    };
+    
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+  }, []);
+
+  const updateCartTotals = () => {
+    const totals = calculateCartTotals();
+    setCartTotals(totals);
+  };
+
+  const generateLink = (scheme) => {
+    const totalAmount = cartTotals.finalAmount;
+    return (
     `${scheme}://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(
       merchantName
-    )}&am=${formatNumberWithCommas(
-      totalSellPrice + (showPackagingCharges ? 59 : 0)
-    )}&tr=${encodeURIComponent(tr)}&cu=INR&mc=${encodeURIComponent(
+    )}&am=${totalAmount}&tr=${encodeURIComponent(tr)}&cu=INR&mc=${encodeURIComponent(
       mc
-    )}&qrMedium=04&tn=PaymenttoPRODUCTS`;
+    )}&qrMedium=04&tn=PaymenttoPRODUCTS`
+    );
+  };
 
   const paymentOptions = [
     {
@@ -65,14 +93,14 @@ const UPIPaymentOptions = () => {
           <path
             d="M7 10L12 15"
             stroke="#202224"
-            stroke-width="1.4"
-            stroke-linecap="round"
+            strokeWidth="1.4"
+            strokeLinecap="round"
           />
           <path
             d="M17 10L12 15"
             stroke="#202224"
-            stroke-width="1.4"
-            stroke-linecap="round"
+            strokeWidth="1.4"
+            strokeLinecap="round"
           />
         </svg>
       </div>
@@ -118,9 +146,7 @@ const UPIPaymentOptions = () => {
                   onClick={() => (window.location.href = generateLink(scheme))}
                 >
                   Pay ₹
-                  {formatNumberWithCommas(
-                    totalSellPrice + (showPackagingCharges ? 59 : 0)
-                  )}
+                  {cartTotals.finalAmount.toLocaleString()}
                 </button>
               </div>
             )}

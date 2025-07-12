@@ -54,7 +54,7 @@ const Summary = () => {
       </div>
       <div>
         <Link
-          to="#"
+          to="/payment"
           className="inline-block bg-yellow-400 text-black py-3 px-12 text-sm font-medium rounded hover:bg-yellow-500 transition-colors"
         >
           Continue
