@@ -52,7 +52,7 @@ const Address = () => {
     mobileNumber: '',
     alternatePhone: '',
     pincode: '',
-    state: '',
+    state: 'Andhra Pradesh',
     city: '',
     houseNo: '',
     roadName: '',
@@ -60,10 +60,10 @@ const Address = () => {
   });
   
   const fields = [
-    { id: "full-name", label: "Full Name (Required)*" },
-    { id: "mobile-number", label: "Mobile Number (Required)*" },
-    { id: "address1", label: "House No., Building Name (Required)*" },
-    { id: "address2", label: "Road name, Area, Colony (Required)*" },
+    { id: "full-name", label: "Full Name" },
+    { id: "mobile-number", label: "Mobile Number" },
+    { id: "address1", label: "House No., Building Name" },
+    { id: "address2", label: "Road name, Area, Colony" },
   ];
 
   const [showAlternateInput, setShowAlternateInput] = useState(false);
@@ -109,15 +109,6 @@ const Address = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Check all required fields
-    const requiredFields = ['fullName', 'mobileNumber', 'pincode', 'state', 'city', 'houseNo', 'roadName'];
-    const isValid = requiredFields.every(field => formData[field].trim() !== '');
-    
-    if (!isValid) {
-      // Don't submit if validation fails - user will see empty required fields
-      return;
-    }
-    
     // Save to localStorage
     const success = saveAddressToStorage(formData);
     
@@ -156,7 +147,6 @@ const Address = () => {
             label={fields[0].label}
             variant="outlined"
             fullWidth
-            required
             value={formData.fullName}
             onChange={(e) => handleInputChange('fullName', e.target.value)}
             sx={textFieldStyles}
@@ -169,7 +159,6 @@ const Address = () => {
             label={fields[1].label}
             variant="outlined"
             fullWidth
-            required
             value={formData.mobileNumber}
             onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
             sx={textFieldStyles}
@@ -201,9 +190,8 @@ const Address = () => {
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <TextField
               id="pincode"
-              label="Pincode (Required)*"
+              label="Pincode"
               variant="outlined"
-              required
               value={formData.pincode}
               onChange={(e) => handleInputChange('pincode', e.target.value)}
               sx={{ ...textFieldStyles, width: "50%" }}
@@ -229,9 +217,8 @@ const Address = () => {
             </Box>
             <TextField
               id="city"
-              label="City (Required)*"
+              label="City"
               variant="outlined"
-              required
               value={formData.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
               sx={{ ...textFieldStyles, width: "50%", mb: 2 }}
@@ -249,7 +236,6 @@ const Address = () => {
               label={label}
               variant="outlined"
               fullWidth
-              required
               value={formData[fieldName]}
               onChange={(e) => handleInputChange(fieldName, e.target.value)}
               sx={textFieldStyles}

@@ -1,13 +1,17 @@
 // Cart utility functions for localStorage management
 import { encryptData, decryptData, sanitizeInput } from './securityUtils';
 
-const CART_STORAGE_KEY = 'flipkart_cart';
+// Obfuscated storage key
+const CART_STORAGE_KEY = btoa('flipme_secure_cart_2025');
 
 // Get cart from localStorage
 export const getCartFromStorage = () => {
   try {
     const cart = localStorage.getItem(CART_STORAGE_KEY);
-    return cart ? decryptData(cart) || [] : [];
+    if (!cart) return [];
+    
+    const decrypted = decryptData(cart);
+    return decrypted || [];
   } catch (error) {
     console.error('Error reading cart from localStorage:', error);
     return [];
@@ -17,12 +21,21 @@ export const getCartFromStorage = () => {
 // Save cart to localStorage
 export const saveCartToStorage = (cart) => {
   try {
+    // Validate cart data
+    if (!Array.isArray(cart)) {
+      console.error('Invalid cart data');
+      return false;
+    }
+    
     const encryptedCart = encryptData(cart);
     if (encryptedCart) {
       localStorage.setItem(CART_STORAGE_KEY, encryptedCart);
+      return true;
     }
+    return false;
   } catch (error) {
     console.error('Error saving cart to localStorage:', error);
+    return false;
   }
 };
 

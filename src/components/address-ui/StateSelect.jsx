@@ -46,7 +46,7 @@ const StateSelect = ({ value, onChange, sx }) => {
         htmlFor="state"
         className="absolute left-3 -top-2 text-xs bg-white px-1 text-[#757575]"
       >
-        State (Required)*
+        State
       </label>
       <select
         id="state"

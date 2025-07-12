@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "../components/product-ui/ReviewCard";
 import { getProductById } from "../utils/productUtils";
@@ -6,14 +6,41 @@ import { generateReviewsForProduct } from "../utils/reviewUtils";
 
 const Reviews = () => {
   const { id } = useParams();
-  const product = getProductById(id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
   
-  if (!product) {
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const productData = await getProductById(id);
+        setProduct(productData);
+        
+        if (productData) {
+          // Generate 3 dynamic reviews based on product category
+          const generatedReviews = generateReviewsForProduct(productData, 3);
+          setReviews(generatedReviews);
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchProduct();
+    }
+  }, [id]);
+
+  if (loading) {
     return <div>Loading reviews...</div>;
   }
-  
-  // Generate 3 dynamic reviews based on product category
-  const reviews = generateReviewsForProduct(product, 3);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <div className="mb-20">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Header2 from "../components/Header2";
@@ -14,7 +14,28 @@ import { getProductById } from "../utils/productUtils";
 
 const Product = () => {
   const { id } = useParams();
-  const product = getProductById(id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    loadProduct();
+  }, [id]);
+
+  const loadProduct = async () => {
+    try {
+      setLoading(true);
+      const data = await getProductById(id);
+      setProduct(data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load product');
+      console.error('Error loading product:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Set default size based on category
   const getDefaultSize = () => {
     if (product?.category === 'shoes') return '8';
@@ -24,15 +45,49 @@ const Product = () => {
   
   const [selectedSize, setSelectedSize] = useState(getDefaultSize());
 
-  if (!product) {
+  // Update selected size when product loads
+  useEffect(() => {
+    setSelectedSize(getDefaultSize());
+  }, [product]);
+
+  if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h2>
-          <p className="text-gray-600">The product you're looking for doesn't exist.</p>
-          <Link to="/" className="text-blue-600 hover:underline mt-4 inline-block">
-            Go back to home
-          </Link>
+      <div>
+        <Header2 />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            <p className="text-gray-600">Loading product...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div>
+        <Header2 />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              {error || "Product Not Found"}
+            </h2>
+            <p className="text-gray-600 mb-4">
+              {error ? "Failed to load product details." : "The product you're looking for doesn't exist."}
+            </p>
+            {error && (
+              <button 
+                onClick={loadProduct}
+                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+              >
+                Retry
+              </button>
+            )}
+            <Link to="/" className="text-blue-600 hover:underline mt-4 inline-block">
+              Go back to home
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -48,6 +103,7 @@ const Product = () => {
   const handleSizeChange = (size) => {
     setSelectedSize(size);
   };
+
   return (
     <div>
       <Header2 />

@@ -1,19 +1,71 @@
 // Utility functions for product data manipulation
-import productsData from '../data/products.json';
+import { protectedApi } from '../api/mockApi';
+
+// Cache for products
+let productsCache = null;
+let cacheTimestamp = null;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// Get products from cache or API
+const getProductsFromApi = async () => {
+  const now = Date.now();
+  
+  // Return cache if valid
+  if (productsCache && cacheTimestamp && (now - cacheTimestamp) < CACHE_DURATION) {
+    return productsCache;
+  }
+  
+  try {
+    const response = await protectedApi.getProducts();
+    if (response.success) {
+      productsCache = response.data;
+      cacheTimestamp = now;
+      return productsCache;
+    }
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+  }
+  
+  // Return empty array if API fails
+  return [];
+};
 
 // Get all products
-export const getAllProducts = () => {
-  return productsData.products;
+export const getAllProducts = async () => {
+  return await getProductsFromApi();
 };
 
 // Get product by ID
-export const getProductById = (id) => {
-  return productsData.products.find(product => product.id === id);
+export const getProductById = async (id) => {
+  try {
+    const response = await protectedApi.getProductById(id);
+    return response.success ? response.data : null;
+  } catch (error) {
+    console.error('Failed to fetch product:', error);
+    return null;
+  }
 };
 
 // Get products by category
-export const getProductsByCategory = (category) => {
-  return productsData.products.filter(product => product.category === category);
+export const getProductsByCategory = async (category) => {
+  try {
+    const response = await protectedApi.getProductsByCategory(category);
+    return response.success ? response.data : [];
+  } catch (error) {
+    console.error('Failed to fetch products by category:', error);
+    return [];
+  }
+};
+
+// Search products
+export const searchProducts = async (query) => {
+  try {
+    const response = await protectedApi.searchProducts(query);
+    return response.success ? response.data : [];
+  } catch (error) {
+    console.error('Failed to search products:', error);
+    return [];
+  }
 };
 
 // Calculate discounted price
@@ -58,8 +110,8 @@ export const getRatingImage = (rating) => {
 };
 
 // Get random products for suggestions
-export const getRandomProducts = (count = 6, excludeId = null) => {
-  let products = getAllProducts();
+export const getRandomProducts = async (count = 6, excludeId = null) => {
+  let products = await getAllProducts();
   if (excludeId) {
     products = products.filter(p => p.id !== excludeId);
   }

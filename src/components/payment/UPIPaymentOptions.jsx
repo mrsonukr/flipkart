@@ -73,8 +73,8 @@ const UPIPaymentOptions = () => {
     {
       id: "upi",
       label: "Others UPI",
-      img: "assets/images/svg/phonepe.svg",
-      scheme: "phonepe",
+      img: "assets/images/svg/upi-app.svg",
+      scheme: "upi",
     },
   ];
 

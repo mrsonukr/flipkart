@@ -6,7 +6,6 @@ import {
   removeFromCart,
   calculateItemPrice,
 } from "../../utils/cartUtils";
-import Lottie from "lottie-react";
 
 const formatDeliveryDate = (days) => {
   const today = new Date();
@@ -59,15 +58,7 @@ const CartProduct = ({ onCartUpdate }) => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="bg-white h-screen p-8 text-center">
-        <div className="w-full  mx-auto mb-4 opacity-50">
-          <Lottie
-            animationData={null} // Will load via `path`
-            path="/assets/json/animation.json" // 👈 Use path when it's in public folder
-            loop
-            autoplay
-          />
-        </div>
+      <div className="bg-gray-100 h-[80vh] p-8 text-center items-center flex flex-col justify-center">
         <h3 className="text-lg font-medium text-gray-800 mb-2">
           Your cart is empty
         </h3>

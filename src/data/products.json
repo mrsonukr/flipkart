@@ -1,4 +1,10 @@
 {
+  "_security": {
+    "version": "2.0",
+    "encrypted": false,
+    "access_method": "api_only",
+    "last_modified": "2025-01-27"
+  },
   "products": [
     {
       "id": "mobile-1751732479103",
