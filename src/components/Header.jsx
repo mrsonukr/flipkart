@@ -27,7 +27,7 @@ const Header = () => {
       <header className="flex justify-between items-center p-4 py-2 bg-white shadow-md">
         <div className="flex items-center gap-4">
           <img src="/assets/images/svg/menu.svg" alt="" />
-          <img src="/assets/images/svg/flogo.svg" alt="" />
+          <img className=" h-8" src="/assets/images/svg/flogo.png" alt="" />
         </div>
         <div className="flex items-center gap-4">
           <img src="/assets/images/svg/download.svg" alt="" />

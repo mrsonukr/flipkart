@@ -4,7 +4,7 @@
 export const preloadCriticalResources = () => {
   // Preload critical images
   const criticalImages = [
-    '/assets/images/svg/flogo.svg',
+    '/assets/images/svg/flogo.png',
     '/assets/images/svg/cart.svg',
     '/assets/images/svg/menu.svg',
     '/assets/images/svg/search.webp'
