@@ -49,11 +49,11 @@ const ProductCard = ({
     >
       <div className="relative p-2 h-[200px] bg-white w-full overflow-hidden">
         <img 
-          src={validateImageUrl(image) ? image : '/assets/images/img/placeholder.jpg'} 
+          src={image} 
           alt={title} 
           className="w-full h-full object-contain"
           onError={(e) => {
-            e.target.src = '/assets/images/img/placeholder.jpg';
+            console.log('Image failed to load:', image);
           }}
         />
         <div className="absolute top-3 right-3 flex justify-center items-center">

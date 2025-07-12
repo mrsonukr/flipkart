@@ -35,7 +35,7 @@ const Reviews = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading reviews...</div>;
+    return <div></div>;
   }
 
   if (!product) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import { getAllProducts, calculateDiscountedPrice, formatPrice, getDeliveryDate } from "../../utils/productUtils";
+import { cacheManager, performanceMonitor } from "../../utils/performanceUtils";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
@@ -14,9 +15,25 @@ const ProductGrid = () => {
   const loadProducts = async () => {
     try {
       setLoading(true);
+      performanceMonitor.start('product-loading');
+      
+      // Try to get from cache first
+      const cachedProducts = cacheManager.get('products');
+      if (cachedProducts) {
+        setProducts(cachedProducts);
+        setLoading(false);
+        performanceMonitor.end('product-loading');
+        return;
+      }
+      
       const data = await getAllProducts();
       setProducts(data);
+      
+      // Cache the products for faster subsequent loads
+      cacheManager.set('products', data, 300000); // 5 minutes
+      
       setError(null);
+      performanceMonitor.end('product-loading');
     } catch (err) {
       setError('Failed to load products');
       console.error('Error loading products:', err);
@@ -27,12 +44,7 @@ const ProductGrid = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-          <p className="text-gray-600">Loading products...</p>
-        </div>
-      </div>
+      <div></div>
     );
   }
 
@@ -46,6 +58,22 @@ const ProductGrid = () => {
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
             Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <div className="text-center">
+          <p className="text-gray-600 mb-2">No products found</p>
+          <button 
+            onClick={loadProducts}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Reload
           </button>
         </div>
       </div>

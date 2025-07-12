@@ -1,25 +1,24 @@
 // Mock API to prevent direct JSON access
-import { encryptData, decryptData } from '../utils/securityUtils';
+// import { encryptData, decryptData } from '../utils/securityUtils';
 
 // Encrypted product data storage
-let encryptedProductData = null;
+let productData = null;
 
 // Initialize encrypted data
 const initializeData = async () => {
-  if (!encryptedProductData) {
+  if (!productData) {
     try {
-      // Import the JSON data
-      const response = await fetch('/src/data/products.json');
-      const data = await response.json();
+      // Import the JSON data directly
+      const { default: data } = await import('../data/products.json');
       
-      // Encrypt and store
-      encryptedProductData = encryptData(data);
+      // Store data directly
+      productData = data;
     } catch (error) {
       console.error('Failed to load product data:', error);
       // Fallback data
-      encryptedProductData = encryptData({
+      productData = {
         products: []
-      });
+      };
     }
   }
 };
@@ -31,10 +30,9 @@ export const mockApi = {
     await initializeData();
     
     try {
-      const decryptedData = decryptData(encryptedProductData);
       return {
         success: true,
-        data: decryptedData?.products || [],
+        data: productData?.products || [],
         timestamp: new Date().toISOString()
       };
     } catch (error) {
@@ -51,8 +49,7 @@ export const mockApi = {
     await initializeData();
     
     try {
-      const decryptedData = decryptData(encryptedProductData);
-      const product = decryptedData?.products?.find(p => p.id === id);
+      const product = productData?.products?.find(p => p.id === id);
       
       if (product) {
         return {
@@ -81,8 +78,7 @@ export const mockApi = {
     await initializeData();
     
     try {
-      const decryptedData = decryptData(encryptedProductData);
-      const products = decryptedData?.products?.filter(p => p.category === category) || [];
+      const products = productData?.products?.filter(p => p.category === category) || [];
       
       return {
         success: true,
@@ -103,8 +99,7 @@ export const mockApi = {
     await initializeData();
     
     try {
-      const decryptedData = decryptData(encryptedProductData);
-      const products = decryptedData?.products?.filter(p => 
+      const products = productData?.products?.filter(p => 
         p.name.toLowerCase().includes(query.toLowerCase()) ||
         p.brand.toLowerCase().includes(query.toLowerCase()) ||
         p.category.toLowerCase().includes(query.toLowerCase())
