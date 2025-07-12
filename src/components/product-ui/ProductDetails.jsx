@@ -15,7 +15,7 @@ const ProductDetails = ({ product }) => {
       <div className="flex items-center justify-center space-x-2 mb-3">
         <div>
           <img
-            src="https://rukminim2.flixcart.com/www/48/48/promos/15/07/2021/e2ee7c1c-ec9e-4ae7-b5dd-6b2685299686.jpg"
+            src="/assets/images/product/e2ee7c1c-ec9e-4ae7-b5dd-6b2685299686.webp"
             alt="Increase Icon"
             className="w-6 h-6"
           />
@@ -72,7 +72,7 @@ const ProductDetails = ({ product }) => {
       </div>
       
       <p className="capitalize text-[14px] my-3">
-        5% cashback & no joining fee with flipkart axis bank credit card{" "}
+        5% cashback & no joining fee with axis bank credit card{" "}
         <span className="text-blue-600">complete now</span>
       </p>
     </div>

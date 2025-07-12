@@ -37,10 +37,6 @@ const advancedDecrypt = (encryptedText, key) => {
 };
 
 const ALLOWED_DOMAINS = [
-  'rukminim1.flixcart.com',
-  'rukminim2.flixcart.com',
-  'm.media-amazon.com',
-  'your-domain.com' // Add your actual domain
 ];
 
 // Validate external image URLs

@@ -6,10 +6,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const images = [
-  "https://rukminim1.flixcart.com/fk-p-flap/3240/1580/image/4902ac8d1411e50a.png?q=60",
-  "https://rukminim1.flixcart.com/fk-p-flap/960/460/image/de79f66d25c80afb.jpeg?q=60",
-  "https://rukminim1.flixcart.com/fk-p-flap/3240/1580/image/36d677f51218c6b8.jpeg?q=60",
-  "https://rukminim1.flixcart.com/fk-p-flap/960/460/image/60f88e6e12d3aeca.jpeg?q=60",
+  "/assets/images/banner/4902ac8d1411e50a.webp",
+  "/assets/images/banner/de79f66d25c80afb.webp",
+  "/assets/images/banner/36d677f51218c6b8.webp",
+  "/assets/images/banner/60f88e6e12d3aeca.webp",
 ];
 const BannerSlider = () => {
   return (

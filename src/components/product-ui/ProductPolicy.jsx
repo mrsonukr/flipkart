@@ -19,7 +19,7 @@ const ProductPolicy = () => {
         {/* Highlight 1 */}
         <div className="flex flex-col items-center w-24 text-center">
           <img
-            src="https://rukminim1.flixcart.com/www/110/48/promos/12/08/2021/d7e463af-de7d-4ae6-9cb1-9ce00ef63195.png?q=90"
+            src="/assets/images/product/d7e463af-de7d-4ae6-9cb1-9ce00ef63195.webp"
             alt="7 Days Replacement"
             className="w-[55px] h-[24px] object-contain mb-2"
           />

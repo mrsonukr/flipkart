@@ -22,7 +22,7 @@ const DeliveryDetails = ({ product }) => {
       <div className="flex justify-between items-center px-3 py-4 mx-2">
         <div className="flex items-center gap-2">
           <img
-            src="https://rukminim1.flixcart.com/www/48/48/promos/16/08/2022/df850a95-675e-479f-aa51-77c863fb682d.png?"
+            src="/assets/images/product/df850a95-675e-479f-aa51-77c863fb682d.webp"
             alt="Truck"
             className="w-6 h-6"
           />
