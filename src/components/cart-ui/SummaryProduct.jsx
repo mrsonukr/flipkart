@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getCartFromStorage, updateCartItemQuantity, calculateItemPrice } from "../../utils/cartUtils";
+import {
+  getCartFromStorage,
+  updateCartItemQuantity,
+  getItemSalePrice,
+} from "../../utils/cartUtils";
 
 const formatDeliveryDate = (days) => {
   const today = new Date();
@@ -20,14 +24,14 @@ const SummaryProduct = ({ onCartUpdate }) => {
 
   useEffect(() => {
     loadCartItems();
-    
+
     // Listen for cart updates
     const handleCartUpdate = () => {
       loadCartItems();
     };
-    
-    window.addEventListener('cartUpdated', handleCartUpdate);
-    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate);
   }, []);
 
   const loadCartItems = () => {
@@ -41,21 +45,23 @@ const SummaryProduct = ({ onCartUpdate }) => {
   const handleQuantityUpdate = (productId, variants, newQuantity) => {
     updateCartItemQuantity(productId, variants, newQuantity);
     loadCartItems();
-    window.dispatchEvent(new Event('cartUpdated'));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   if (cartItems.length === 0) {
     return (
       <div className="bg-white p-8 text-center">
-        <img 
-          src="/assets/images/img/grocery-emp.webp" 
-          alt="Empty Cart" 
+        <img
+          src="/assets/images/img/grocery-emp.webp"
+          alt="Empty Cart"
           className="w-32 h-32 mx-auto mb-4 opacity-50"
         />
-        <h3 className="text-lg font-medium text-gray-800 mb-2">Your cart is empty</h3>
+        <h3 className="text-lg font-medium text-gray-800 mb-2">
+          Your cart is empty
+        </h3>
         <p className="text-gray-500 mb-4">Add items to get started</p>
-        <a 
-          href="/" 
+        <a
+          href="/"
           className="inline-block bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
         >
           Shop Now
@@ -67,9 +73,9 @@ const SummaryProduct = ({ onCartUpdate }) => {
   return (
     <div>
       {cartItems.map((item) => (
-        <SummaryProductCard 
-          key={`${item.id}-${JSON.stringify(item.variants)}`} 
-          product={item} 
+        <SummaryProductCard
+          key={`${item.id}-${JSON.stringify(item.variants)}`}
+          product={item}
           onQuantityUpdate={handleQuantityUpdate}
         />
       ))}
@@ -82,7 +88,7 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
   const [showQtyDropdown, setShowQtyDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const finalPrice = calculateItemPrice(product.basePrice, product.discountPercentage);
+  const finalPrice = getItemSalePrice(product);
   const deliveryText = formatDeliveryDate(product.delivery);
 
   useEffect(() => {
@@ -115,13 +121,14 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
     if (!product.variants || Object.keys(product.variants).length === 0) {
       return null;
     }
-    
+
     const variantParts = [];
     if (product.variants.color) variantParts.push(product.variants.color);
     if (product.variants.storage) variantParts.push(product.variants.storage);
-    if (product.variants.size) variantParts.push(`Size: ${product.variants.size}`);
-    
-    return variantParts.join(', ');
+    if (product.variants.size)
+      variantParts.push(`Size: ${product.variants.size}`);
+
+    return variantParts.join(", ");
   };
 
   // Get size display for shoes and clothing
@@ -135,11 +142,11 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
       <div className="flex justify-start flex-row gap-5 mt-1">
         {/* Image + Qty */}
         <div className="flex flex-col justify-start gap-2">
-          <div className="w-20 h-18 border border-gray-400 rounded overflow-hidden">
+          <div className="w-20 h-20 border border-gray-400 rounded overflow-hidden flex items-center justify-center bg-white">
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-contain"
+              className="max-w-full max-h-full object-contain"
             />
           </div>
 
@@ -187,9 +194,7 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
 
           {/* Size Display for shoes and clothing */}
           {getVariantDisplay() && (
-            <div className="text-xs text-gray-500">
-              {getVariantDisplay()}
-            </div>
+            <div className="text-xs text-gray-500">{getVariantDisplay()}</div>
           )}
 
           {/* Rating */}
@@ -215,18 +220,16 @@ const SummaryProductCard = ({ product, onQuantityUpdate }) => {
               alt="Discount"
               className="w-auto h-4"
             />
-            <span className="text-green-700 ml-[-3px]">
-              {product.discountPercentage}%
-            </span>
+            <span className="text-green-700 ml-[-3px]">98%</span>
             <span className="text-gray-500 line-through text-base mt-0.5 ml-1">
-              ₹{product.basePrice.toLocaleString()}
+              ₹{product.mrp.toLocaleString()}
             </span>
             <span className="text-black">₹{finalPrice.toLocaleString()}</span>
           </div>
 
           {/* Offers - Now shows random count */}
-          <div className="mt-[-5px] text-green-700 text-sm font-medium">
-            {offerCount} offer{offerCount > 1 ? 's' : ''} available
+          <div className="text-xs text-green-700 font-medium">
+            {offerCount} offer{offerCount > 1 ? "s" : ""} available
           </div>
         </div>
       </div>

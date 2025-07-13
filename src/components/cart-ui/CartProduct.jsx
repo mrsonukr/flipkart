@@ -4,7 +4,7 @@ import {
   getCartFromStorage,
   updateCartItemQuantity,
   removeFromCart,
-  calculateItemPrice,
+  getItemSalePrice,
 } from "../../utils/cartUtils";
 
 const formatDeliveryDate = (days) => {
@@ -92,10 +92,7 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
   const [showQtyDropdown, setShowQtyDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
-  const finalPrice = calculateItemPrice(
-    product.basePrice,
-    product.discountPercentage
-  );
+  const finalPrice = getItemSalePrice(product);
   const deliveryText = formatDeliveryDate(product.delivery);
 
   // Generate random number of offers (1-4)
@@ -151,11 +148,11 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
       <div className="flex justify-start flex-row gap-5 mt-1">
         {/* Image + Qty */}
         <div className="flex flex-col justify-start gap-2">
-          <div className="w-20 h-18 border border-gray-400 rounded overflow-hidden">
+          <div className="w-20 h-20 border border-gray-400 rounded overflow-hidden flex items-center justify-center bg-white">
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-contain"
+              className="max-w-full max-h-full object-contain"
             />
           </div>
 
@@ -229,11 +226,9 @@ const ProductCard = ({ product, onQuantityUpdate, onRemoveItem }) => {
               alt="Discount"
               className="w-auto h-4"
             />
-            <span className="text-green-700 ml-[-3px]">
-              {product.discountPercentage}%
-            </span>
+            <span className="text-green-700 ml-[-3px]">98%</span>
             <span className="text-gray-500 line-through text-base mt-0.5 ml-1">
-              ₹{product.basePrice.toLocaleString()}
+              ₹{product.mrp.toLocaleString()}
             </span>
             <span className="text-black">₹{finalPrice.toLocaleString()}</span>
           </div>

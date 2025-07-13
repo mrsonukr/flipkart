@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { getAllProducts, calculateDiscountedPrice, formatPrice, getDeliveryDate } from "../../utils/productUtils";
+import { getAllProducts, getSalePrice, getMRP, getDiscountPercentage, formatPrice, getDeliveryDate } from "../../utils/productUtils";
 import { cacheManager, performanceMonitor } from "../../utils/performanceUtils";
 
 const ProductGrid = () => {
@@ -84,7 +84,9 @@ const ProductGrid = () => {
     <div className="border border-gray-200">
       <div className="grid grid-cols-2">
         {products.map((product) => {
-          const discountedPrice = calculateDiscountedPrice(product.basePrice, product.discountPercentage);
+          const salePrice = getSalePrice(product);
+          const mrp = getMRP(product);
+          const discountPercentage = getDiscountPercentage();
           const deliveryText = `Free delivery by ${getDeliveryDate(product.delivery)}`;
           
           return (
@@ -94,9 +96,9 @@ const ProductGrid = () => {
               image={product.images[0]}
               title={product.name}
               brand={product.brand}
-              discountPercent={`${product.discountPercentage}%`}
-              oldPrice={formatPrice(product.basePrice)}
-              newPrice={formatPrice(discountedPrice)}
+              discountPercent={`${discountPercentage}%`}
+              oldPrice={formatPrice(mrp)}
+              newPrice={formatPrice(salePrice)}
               badgeText={product.stockStatus}
               rating={Math.round(product.averageRating)}
               deliveryText={deliveryText}

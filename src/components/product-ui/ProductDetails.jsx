@@ -1,14 +1,16 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import FlashingTag from "../ui/FlashingTag";
-import { calculateDiscountedPrice, formatPrice, getRatingLabel } from "../../utils/productUtils";
+import { getSalePrice, getMRP, getDiscountPercentage, formatPrice, getRatingLabel } from "../../utils/productUtils";
 
 const ProductDetails = ({ product }) => {
   if (!product) {
     return <div>Loading...</div>;
   }
 
-  const discountedPrice = calculateDiscountedPrice(product.basePrice, product.discountPercentage);
+  const salePrice = getSalePrice(product);
+  const mrp = getMRP(product);
+  const discountPercentage = getDiscountPercentage();
 
   return (
     <div className="px-4">
@@ -61,13 +63,13 @@ const ProductDetails = ({ product }) => {
               fill="#008C00"
             ></path>
           </svg>
-          <span className="text-lg text-green-700 font-semibold">{product.discountPercentage}%</span>
+          <span className="text-lg text-green-700 font-semibold">{discountPercentage}%</span>
         </div>
         <span className="text-lg font-semibold text-gray-500 line-through">
-          {formatPrice(product.basePrice)}
+          {formatPrice(mrp)}
         </span>
         <span className="text-lg font-semibold">
-          {formatPrice(discountedPrice)}
+          {formatPrice(salePrice)}
         </span>
       </div>
       

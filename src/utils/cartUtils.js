@@ -49,8 +49,8 @@ export const addToCart = (product, quantity = 1, selectedVariants = {}) => {
     name: product.name,
     brand: product.brand,
     category: product.category,
-    basePrice: product.basePrice,
-    discountPercentage: product.discountPercentage,
+    mrp: product.mrp,
+    salePrice: product.salePrice,
     image: product.images[0],
     averageRating: product.averageRating,
     totalReviews: product.totalReviews,
@@ -128,8 +128,9 @@ export const calculateCartTotals = () => {
   let totalItems = 0;
 
   cart.forEach(item => {
-    const itemMRP = item.basePrice * item.quantity;
-    const itemDiscount = Math.round((item.basePrice * item.discountPercentage / 100) * item.quantity);
+    const itemMRP = item.mrp * item.quantity;
+    const itemSalePrice = item.salePrice * item.quantity;
+    const itemDiscount = itemMRP - itemSalePrice;
     
     totalMRP += itemMRP;
     totalDiscount += itemDiscount;
@@ -153,7 +154,7 @@ export const calculateCartTotals = () => {
   };
 };
 
-// Calculate discounted price for a single item
-export const calculateItemPrice = (basePrice, discountPercentage) => {
-  return Math.round(basePrice * (1 - discountPercentage / 100));
+// Get sale price for a single item (no calculation needed)
+export const getItemSalePrice = (item) => {
+  return item.salePrice || 0;
 };

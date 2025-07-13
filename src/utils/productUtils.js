@@ -68,9 +68,19 @@ export const searchProducts = async (query) => {
   }
 };
 
-// Calculate discounted price
-export const calculateDiscountedPrice = (basePrice, discountPercentage) => {
-  return Math.round(basePrice * (1 - discountPercentage / 100));
+// Get sale price (no calculation needed, directly from product data)
+export const getSalePrice = (product) => {
+  return product.salePrice || 0;
+};
+
+// Get MRP (directly from product data)
+export const getMRP = (product) => {
+  return product.mrp || 0;
+};
+
+// Calculate static discount percentage (always 98%)
+export const getDiscountPercentage = () => {
+  return 98;
 };
 
 // Format price to Indian currency
