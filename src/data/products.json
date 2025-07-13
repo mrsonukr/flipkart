@@ -1,467 +1,467 @@
 {
-  "products": [
-    {
-      "id": "mobile-1751732479103",
-      "name": "Galaxy S25 Ultra 5G Smartphone with Galaxy AI (Titanium Whitesilver, 12GB RAM, 256GB Storage), Titanium Frame, Snapdragon 8 Elite, 200 MP Camera with ProVisual Engine and 5000mAh Battery",
-      "brand": "Samsung",
-      "category": "mobile",
-      "basePrice": 129999,
-      "discountPercentage": 90,
-      "images": [
-        "https://m.media-amazon.com/images/I/71-d7XDbhIL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71dtnI25tmL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71PrkZz2itL._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/81gJVEFtA8L._SX679_.jpg",
-        "https://m.media-amazon.com/images/I/71pfjBJUA7L._SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/611g2+85L8L._SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/712NYl2u91L._SL1500_.jpg",
-        "https://m.media-amazon.com/images/I/71zurXypP7L._SL1500_.jpg"
-      ],
-      "averageRating": 4,
-      "totalReviews": 45178,
-      "stockStatus": "Hot Deal",
-      "variants": [
+    "products": [
         {
-          "type": "color",
-          "name": "Titanium Whitesilver"
+            "id": "mobile-1751732479103",
+            "name": "Galaxy S25 Ultra 5G Smartphone with Galaxy AI (Titanium Whitesilver, 12GB RAM, 256GB Storage), Titanium Frame, Snapdragon 8 Elite, 200 MP Camera with ProVisual Engine and 5000mAh Battery",
+            "brand": "Samsung",
+            "category": "mobile",
+            "basePrice": 129999,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/mobile-1751732479103_0.jpg",
+                "/assets/images/product/mobile-1751732479103_1.jpg",
+                "/assets/images/product/mobile-1751732479103_2.jpg",
+                "/assets/images/product/mobile-1751732479103_3.jpg",
+                "/assets/images/product/mobile-1751732479103_4.jpg",
+                "/assets/images/product/mobile-1751732479103_5.jpg",
+                "/assets/images/product/mobile-1751732479103_6.jpg",
+                "/assets/images/product/mobile-1751732479103_7.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 45178,
+            "stockStatus": "Hot Deal",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Titanium Whitesilver"
+                },
+                {
+                    "type": "storage",
+                    "name": "12GB + 256GB"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "12GB + 256GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "prod_013",
-      "name": "POCO M6 Plus 5G (Misty Lavender, 128 GB)  (8 GB RAM)",
-      "brand": "POCO",
-      "category": "mobile",
-      "basePrice": 17999,
-      "discountPercentage": 80,
-      "images": [
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/9/b/n/-original-imah3afnqj84usyy.jpeg",
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/b/5/u/-original-imah4hfnf5fxagfs.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/p/a/r/-original-imah4b2zfaf79bxn.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/s/o/a/-original-imah3bakhvhvf7rj.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/3/9/t/-original-imah3bakpfmkfznc.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/g/t/j/-original-imah3baky6sgf73k.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/0/k/r/-original-imah3bakzhfvjvaz.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/h/a/g/-original-imah4gzvcyhvchmt.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/w/f/t/-original-imah4gzvheffrjxn.jpeg?q=90&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 18523,
-      "stockStatus": "Performance Beast",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Misty Lavender"
+            "id": "prod_013",
+            "name": "POCO M6 Plus 5G (Misty Lavender, 128 GB)  (8 GB RAM)",
+            "brand": "POCO",
+            "category": "mobile",
+            "basePrice": 17999,
+            "discountPercentage": 80,
+            "images": [
+                "/assets/images/product/prod_013_0.jpg",
+                "/assets/images/product/prod_013_1.jpg",
+                "/assets/images/product/prod_013_2.jpg",
+                "/assets/images/product/prod_013_3.jpg",
+                "/assets/images/product/prod_013_4.jpg",
+                "/assets/images/product/prod_013_5.jpg",
+                "/assets/images/product/prod_013_6.jpg",
+                "/assets/images/product/prod_013_7.jpg",
+                "/assets/images/product/prod_013_8.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 18523,
+            "stockStatus": "Performance Beast",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Misty Lavender"
+                },
+                {
+                    "type": "storage",
+                    "name": "256 GB"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "256 GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "iphone-16-pro-max",
-      "name": "iPhone 16 Pro Max (Natural Titanium, 256 GB)",
-      "brand": "Apple",
-      "category": "mobile",
-      "basePrice": 144900,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/u/8/w/-original-imah4jz6qhwgukgt.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/808/970/xif0q/mobile/y/r/l/-original-imah4jz6xzxhqpdu.jpeg?q=60&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/7/i/c/-original-imah4jyweenbdphu.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/2560/2560/xif0q/mobile/a/w/q/-original-imah4jywmuur2nwb.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/m/9/1/-original-imah4jywasgcqcqz.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/h/j/f/-original-imah4jywzggxndyg.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/0/1/c/-original-imahb4mudzkcggyh.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/0/7/e/-original-imahb4mumpgykgqe.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/8/l/x/-original-imah4jz6rjv5zjkg.jpeg?q=90&crop=false"
-      ],
-      "averageRating": 5,
-      "totalReviews": 71204,
-      "stockStatus": "Top Discount",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Natural Titanium"
+            "id": "iphone-16-pro-max",
+            "name": "iPhone 16 Pro Max (Natural Titanium, 256 GB)",
+            "brand": "Apple",
+            "category": "mobile",
+            "basePrice": 144900,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/iphone-16-pro-max_0.jpg",
+                "/assets/images/product/iphone-16-pro-max_1.jpg",
+                "/assets/images/product/iphone-16-pro-max_2.jpg",
+                "/assets/images/product/iphone-16-pro-max_3.jpg",
+                "/assets/images/product/iphone-16-pro-max_4.jpg",
+                "/assets/images/product/iphone-16-pro-max_5.jpg",
+                "/assets/images/product/iphone-16-pro-max_6.jpg",
+                "/assets/images/product/iphone-16-pro-max_7.jpg",
+                "/assets/images/product/iphone-16-pro-max_8.jpg"
+            ],
+            "averageRating": 5,
+            "totalReviews": 71204,
+            "stockStatus": "Top Discount",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Natural Titanium"
+                },
+                {
+                    "type": "storage",
+                    "name": "256 GB"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "256 GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "bodyguard-jacket",
-      "name": "Men Solid Leather Jacket",
-      "brand": "BodyGuard",
-      "category": "cloth",
-      "basePrice": 6999,
-      "discountPercentage": 91,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/f/c/1/s-1-no-m-c-bodyguard-original-imahbwgus8xrucxu.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/k/r/9/s-1-no-m-c-bodyguard-original-imahbwguj7frztwz.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/jacket/0/e/q/s-1-no-m-c-bodyguard-original-imahbwguyzfgeekd.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 1923,
-      "stockStatus": "Hot Deal",
-      "variants": null,
-      "delivery": 5
-    },
-    {
-      "id": "air-max-impact-4",
-      "name": "Air Max Impact 4 Sneakers For Men (Black)",
-      "brand": "NIKE",
-      "category": "shoes",
-      "basePrice": 8495,
-      "discountPercentage": 95,
-      "images": [
-        "https://rukminim1.flixcart.com/image/808/1212/xif0q/shoe/h/z/b/-original-imah58q5vmhqh8xa.jpeg?q=60&crop=false",
-        "https://rukminim1.flixcart.com/image/808/1212/xif0q/shoe/f/1/j/-original-imah58q59zgrfwzv.jpeg?q=60&crop=false",
-        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/k/8/b/-original-imah58q5tzp3abng.jpeg?q=90&crop=false",
-        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/e/6/0/-original-imah58q5pqqd2zam.jpeg?q=90&crop=false",
-        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/c/a/n/-original-imah58q55sk9rtrb.jpeg?q=90&crop=false",
-        "https://rukminim1.flixcart.com/image/2560/3072/xif0q/shoe/x/z/z/-original-imah58q5e4vgbpr6.jpeg?q=90&crop=false"
-      ],
-      "averageRating": 4.2,
-      "totalReviews": 4567,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "mobile-1752395992111",
-      "name": "iPhone 15 Pro",
-      "brand": "Apple",
-      "category": "mobile",
-      "basePrice": 164900,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/9/u/a/-original-imagtc4hsx9mzfra.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/z/q/f/-original-imagtc4hmrdfffmn.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/e/j/x/-original-imagtc4hr6tjxhfh.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/j/i/l/-original-imagtc3kbzhefbc7.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/1/5/a/-original-imagtc4gjqfnarcs.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/4/e/r/-original-imagtc3kugbc22hu.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/1/w/r/-original-imagtc3kkgr9nqxe.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/t/y/4/-original-imagtc3kfsrgguwa.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/360/360/xif0q/mobile/m/1/r/-original-imagtc4hydzer2tq.jpeg?q=90&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 45421,
-      "stockStatus": "Hot Deal",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Natural Titanium"
+            "id": "bodyguard-jacket",
+            "name": "Men Solid Leather Jacket",
+            "brand": "BodyGuard",
+            "category": "cloth",
+            "basePrice": 6999,
+            "discountPercentage": 91,
+            "images": [
+                "/assets/images/product/bodyguard-jacket_0.jpg",
+                "/assets/images/product/bodyguard-jacket_1.jpg",
+                "/assets/images/product/bodyguard-jacket_2.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 1923,
+            "stockStatus": "Hot Deal",
+            "variants": null,
+            "delivery": 5
         },
         {
-          "type": "storage",
-          "name": "256"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "mobile-1752396482183",
-      "name": "11R 5G (Sonic Black, 8GB RAM, 128GB Storage)",
-      "brand": "OnePlus ",
-      "category": "mobile",
-      "basePrice": 39999,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/6/x/a/11r-5g-5011102525-oneplus-original-imagn3afeqfr6acy.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/f/g/n/11r-5g-5011102525-oneplus-original-imagn3afr52an2eq.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/d/x/r/11r-5g-5011102525-oneplus-original-imagn3afshbgnat7.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/b/u/t/11r-5g-5011102525-oneplus-original-imagn3afdzrxkjf2.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/0/f/7/11r-5g-5011102525-oneplus-original-imagn3afhvqpgbgg.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 4565,
-      "stockStatus": "Top Discount",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Sonic Black"
+            "id": "air-max-impact-4",
+            "name": "Air Max Impact 4 Sneakers For Men (Black)",
+            "brand": "NIKE",
+            "category": "shoes",
+            "basePrice": 8495,
+            "discountPercentage": 95,
+            "images": [
+                "/assets/images/product/air-max-impact-4_0.jpg",
+                "/assets/images/product/air-max-impact-4_1.jpg",
+                "/assets/images/product/air-max-impact-4_2.jpg",
+                "/assets/images/product/air-max-impact-4_3.jpg",
+                "/assets/images/product/air-max-impact-4_4.jpg",
+                "/assets/images/product/air-max-impact-4_5.jpg"
+            ],
+            "averageRating": 4.2,
+            "totalReviews": 4567,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "128 GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "mobile-1752396751136",
-      "name": "Pixel 7 Pro (Obsidian, 128 GB)  (12 GB RAM)",
-      "brand": "Google ",
-      "category": "mobile",
-      "basePrice": 84999,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/t/u/m/-original-imaggsuehy3nyj3b.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/h/r/r/-original-imaggsue6krv6ka5.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/e/u/x/-original-imaggsueyynkhm6t.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/l/u/5/-original-imaggsuexeu8zf9y.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/0/2/x/-original-imaggsuectgvgyhg.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/d/n/x/-original-imaggsuexwkr2yqr.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/e/q/5/-original-imaggsud5jdkhhmj.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/w/f/v/-original-imaggsuedrcz7ghn.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/h/s/e/-original-imaggsuey64nzfwy.jpeg?q=90&crop=false",
-        "https://rukminim2.flixcart.com/image/1280/1280/xif0q/mobile/n/7/5/-original-imaggsue8rdvyapk.jpeg?q=90&crop=false"
-      ],
-      "averageRating": 5,
-      "totalReviews": 24323,
-      "stockStatus": "Top Discount",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Obsidian"
+            "id": "mobile-1752395992111",
+            "name": "iPhone 15 Pro",
+            "brand": "Apple",
+            "category": "mobile",
+            "basePrice": 164900,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/mobile-1752395992111_0.jpg",
+                "/assets/images/product/mobile-1752395992111_1.jpg",
+                "/assets/images/product/mobile-1752395992111_2.jpg",
+                "/assets/images/product/mobile-1752395992111_3.jpg",
+                "/assets/images/product/mobile-1752395992111_4.jpg",
+                "/assets/images/product/mobile-1752395992111_5.jpg",
+                "/assets/images/product/mobile-1752395992111_6.jpg",
+                "/assets/images/product/mobile-1752395992111_7.jpg",
+                "/assets/images/product/mobile-1752395992111_8.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 45421,
+            "stockStatus": "Hot Deal",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Natural Titanium"
+                },
+                {
+                    "type": "storage",
+                    "name": "256"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "128 GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "mobile-1752397001354",
-      "name": "Edge 40 (Eclipse Black, 256 GB)  (8 GB RAM)",
-      "brand": "Motorola",
-      "category": "mobile",
-      "basePrice": 34999,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/b/q/6/edge-40-pay40028in-motorola-original-imagpqzdnhrgvhj7.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/z/7/g/edge-40-pay40028in-motorola-original-imagpqzdf2ptzcfk.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/z/p/o/edge-40-pay40028in-motorola-original-imagpqzdzbtfxcmt.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/p/1/d/edge-40-pay40028in-motorola-original-imagpqzdf8knkgd9.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/p/n/a/edge-40-pay40028in-motorola-original-imagpqzd3spckyeg.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/a/i/x/edge-40-pay40028in-motorola-original-imagpqzdsavndfhu.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/t/r/p/edge-40-pay40028in-motorola-original-imagpqzdt6uda45h.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/r/z/o/-original-imagtrvtsf5fkkg2.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 6545,
-      "stockStatus": "Top Discount",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Eclipse Black"
+            "id": "mobile-1752396482183",
+            "name": "11R 5G (Sonic Black, 8GB RAM, 128GB Storage)",
+            "brand": "OnePlus ",
+            "category": "mobile",
+            "basePrice": 39999,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/mobile-1752396482183_0.jpg",
+                "/assets/images/product/mobile-1752396482183_1.jpg",
+                "/assets/images/product/mobile-1752396482183_2.jpg",
+                "/assets/images/product/mobile-1752396482183_3.jpg",
+                "/assets/images/product/mobile-1752396482183_4.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 4565,
+            "stockStatus": "Top Discount",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Sonic Black"
+                },
+                {
+                    "type": "storage",
+                    "name": "128 GB"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "256 GB"
-        }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "mobile-1752397318559",
-      "name": "MacBook Pro Apple M3 - (8 GB/1 TB SSD/macOS Sonoma) MTL83HN/A  (14 Inch, Space Grey, 1.55 Kg)",
-      "brand": "Apple",
-      "category": "mobile",
-      "basePrice": 169900,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/m/f/0/-original-imaguw3hswqadydy.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/4/j/o/-original-imaguw3hvfswsagh.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/m/1/v/-original-imaguw3hd56cvumy.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/d/o/m/-original-imaguw3hupbpsr3g.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/z/y/r/-original-imaguw3hanhja4wu.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/n/2/d/-original-imaguw3hznfjz2dx.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/computer/a/j/9/-original-imaguw3htyyfzsrg.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 5554,
-      "stockStatus": "Top Discount",
-      "variants": [
-        {
-          "type": "color",
-          "name": "Space Grey"
+            "id": "mobile-1752396751136",
+            "name": "Pixel 7 Pro (Obsidian, 128 GB)  (12 GB RAM)",
+            "brand": "Google ",
+            "category": "mobile",
+            "basePrice": 84999,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/mobile-1752396751136_0.jpg",
+                "/assets/images/product/mobile-1752396751136_1.jpg",
+                "/assets/images/product/mobile-1752396751136_2.jpg",
+                "/assets/images/product/mobile-1752396751136_3.jpg",
+                "/assets/images/product/mobile-1752396751136_4.jpg",
+                "/assets/images/product/mobile-1752396751136_5.jpg",
+                "/assets/images/product/mobile-1752396751136_6.jpg",
+                "/assets/images/product/mobile-1752396751136_7.jpg",
+                "/assets/images/product/mobile-1752396751136_8.jpg",
+                "/assets/images/product/mobile-1752396751136_9.jpg"
+            ],
+            "averageRating": 5,
+            "totalReviews": 24323,
+            "stockStatus": "Top Discount",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Obsidian"
+                },
+                {
+                    "type": "storage",
+                    "name": "128 GB"
+                }
+            ],
+            "delivery": 2
         },
         {
-          "type": "storage",
-          "name": "8 GB/1 TB SSD/macOS"
+            "id": "mobile-1752397001354",
+            "name": "Edge 40 (Eclipse Black, 256 GB)  (8 GB RAM)",
+            "brand": "Motorola",
+            "category": "mobile",
+            "basePrice": 34999,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/mobile-1752397001354_0.jpg",
+                "/assets/images/product/mobile-1752397001354_1.jpg",
+                "/assets/images/product/mobile-1752397001354_2.jpg",
+                "/assets/images/product/mobile-1752397001354_3.jpg",
+                "/assets/images/product/mobile-1752397001354_4.jpg",
+                "/assets/images/product/mobile-1752397001354_5.jpg",
+                "/assets/images/product/mobile-1752397001354_6.jpg",
+                "/assets/images/product/mobile-1752397001354_7.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 6545,
+            "stockStatus": "Top Discount",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Eclipse Black"
+                },
+                {
+                    "type": "storage",
+                    "name": "256 GB"
+                }
+            ],
+            "delivery": 2
+        },
+        {
+            "id": "mobile-1752397318559",
+            "name": "MacBook Pro Apple M3 - (8 GB/1 TB SSD/macOS Sonoma) MTL83HN/A  (14 Inch, Space Grey, 1.55 Kg)",
+            "brand": "Apple",
+            "category": "mobile",
+            "basePrice": 169900,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/mobile-1752397318559_0.jpg",
+                "/assets/images/product/mobile-1752397318559_1.jpg",
+                "/assets/images/product/mobile-1752397318559_2.jpg",
+                "/assets/images/product/mobile-1752397318559_3.jpg",
+                "/assets/images/product/mobile-1752397318559_4.jpg",
+                "/assets/images/product/mobile-1752397318559_5.jpg",
+                "/assets/images/product/mobile-1752397318559_6.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 5554,
+            "stockStatus": "Top Discount",
+            "variants": [
+                {
+                    "type": "color",
+                    "name": "Space Grey"
+                },
+                {
+                    "type": "storage",
+                    "name": "8 GB/1 TB SSD/macOS"
+                }
+            ],
+            "delivery": 2
+        },
+        {
+            "id": "others-1752397455906",
+            "name": "EOS 3000D DSLR Camera 1 Body, 18 - 55 mm Lens  (Black)",
+            "brand": "Canon",
+            "category": "others",
+            "basePrice": 35995,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/others-1752397455906_0.jpg",
+                "/assets/images/product/others-1752397455906_1.jpg",
+                "/assets/images/product/others-1752397455906_2.jpg",
+                "/assets/images/product/others-1752397455906_3.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 34223,
+            "stockStatus": "Hot Deal",
+            "variants": null,
+            "delivery": 3
+        },
+        {
+            "id": "others-1752397599018",
+            "name": "Watch Series 10 GPS 46mm Silver Aluminium with Denim Sport Band  (Denim Strap, Free Size)",
+            "brand": "Apple",
+            "category": "others",
+            "basePrice": 49900,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/others-1752397599018_0.jpg",
+                "/assets/images/product/others-1752397599018_1.jpg",
+                "/assets/images/product/others-1752397599018_2.jpg",
+                "/assets/images/product/others-1752397599018_3.jpg",
+                "/assets/images/product/others-1752397599018_4.jpg",
+                "/assets/images/product/others-1752397599018_5.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 32443,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 3
+        },
+        {
+            "id": "others-1752397756173",
+            "name": "Watch Ultra 49mm GPS + Cellular - ECG App, Temp sensor, Fall Detection  (Orange Strap, Medium)",
+            "brand": "Apple",
+            "category": "others",
+            "basePrice": 89900,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/others-1752397756173_0.jpg",
+                "/assets/images/product/others-1752397756173_1.jpg",
+                "/assets/images/product/others-1752397756173_2.jpg",
+                "/assets/images/product/others-1752397756173_3.jpg",
+                "/assets/images/product/others-1752397756173_4.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 3425,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 2
+        },
+        {
+            "id": "others-1752397869708",
+            "name": "190 L Direct Cool Single Door 4 Star Refrigerator with Toughned Glass ShelfLarge Vegetable Box  (DAZZLE STEEL, HED-204DS-P)",
+            "brand": "Haier",
+            "category": "others",
+            "basePrice": 20990,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/others-1752397869708_0.jpg",
+                "/assets/images/product/others-1752397869708_1.jpg",
+                "/assets/images/product/others-1752397869708_2.jpg",
+                "/assets/images/product/others-1752397869708_3.jpg",
+                "/assets/images/product/others-1752397869708_4.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 43243,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 2
+        },
+        {
+            "id": "others-1752398034379",
+            "name": "9 kg 5 Star, AI Control, AI Ecobubble, Super Speed, Wi-Fi, Hygiene Steam, Digital Inverter Motor Fully Automatic Front Load Washing Machine with In-built Heater Grey  (WW90DG6U24ASTL)",
+            "brand": " Samsung",
+            "category": "others",
+            "basePrice": 57990,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/others-1752398034379_0.jpg",
+                "/assets/images/product/others-1752398034379_1.jpg",
+                "/assets/images/product/others-1752398034379_2.jpg",
+                "/assets/images/product/others-1752398034379_3.jpg",
+                "/assets/images/product/others-1752398034379_4.jpg",
+                "/assets/images/product/others-1752398034379_5.jpg",
+                "/assets/images/product/others-1752398034379_6.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 6452,
+            "stockStatus": "Hot Deal",
+            "variants": null,
+            "delivery": 2
+        },
+        {
+            "id": "others-1752398190383",
+            "name": "AI TV UR7500 164 cm (65 inch) Ultra HD (4K) LED Smart WebOS TV 2025 Edition with Alpha5 AI Processor 4K Gen6 | 100+ Free LG Channels | 4K Upscaling | AI Brightness Control | AI Sound (Virtual Surround 5.1 Up-mix) | FTA Satellite Port | Magic Remote Compatible | 60Hz Refresh Rate | Alexa Built In | Works with Apple Air Play  (65UR75006LC)",
+            "brand": "LG",
+            "category": "others",
+            "basePrice": 114990,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/others-1752398190383_0.jpg",
+                "/assets/images/product/others-1752398190383_1.jpg",
+                "/assets/images/product/others-1752398190383_2.jpg",
+                "/assets/images/product/others-1752398190383_3.jpg",
+                "/assets/images/product/others-1752398190383_4.jpg",
+                "/assets/images/product/others-1752398190383_5.jpg",
+                "/assets/images/product/others-1752398190383_6.jpg",
+                "/assets/images/product/others-1752398190383_7.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 1334,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 2
+        },
+        {
+            "id": "others-1752398438137",
+            "name": "AirPods Pro (2nd generation) with MagSafe Case (USB-C) Bluetooth  (White, True Wireless)",
+            "brand": "Apple",
+            "category": "others",
+            "basePrice": 24900,
+            "discountPercentage": 98,
+            "images": [
+                "/assets/images/product/others-1752398438137_0.jpg",
+                "/assets/images/product/others-1752398438137_1.jpg",
+                "/assets/images/product/others-1752398438137_2.jpg",
+                "/assets/images/product/others-1752398438137_3.jpg",
+                "/assets/images/product/others-1752398438137_4.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 43554,
+            "stockStatus": "Hot Deal",
+            "variants": null,
+            "delivery": 2
+        },
+        {
+            "id": "others-1752398726625",
+            "name": "Zeb- Thunder, With 60H Backup, BT v5.3, Gaming Mode, ENC, AUX, mSD, Dual Pairing Bluetooth  (Black, On the Ear)",
+            "brand": "ZEBRONICS",
+            "category": "others",
+            "basePrice": 1699,
+            "discountPercentage": 90,
+            "images": [
+                "/assets/images/product/others-1752398726625_0.jpg",
+                "/assets/images/product/others-1752398726625_1.jpg",
+                "/assets/images/product/others-1752398726625_2.jpg",
+                "/assets/images/product/others-1752398726625_3.jpg",
+                "/assets/images/product/others-1752398726625_4.jpg",
+                "/assets/images/product/others-1752398726625_5.jpg",
+                "/assets/images/product/others-1752398726625_6.jpg"
+            ],
+            "averageRating": 4,
+            "totalReviews": 5353,
+            "stockStatus": "Top Discount",
+            "variants": null,
+            "delivery": 2
         }
-      ],
-      "delivery": 2
-    },
-    {
-      "id": "others-1752397455906",
-      "name": "EOS 3000D DSLR Camera 1 Body, 18 - 55 mm Lens  (Black)",
-      "brand": "Canon",
-      "category": "others",
-      "basePrice": 35995,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/dslr-camera/g/5/p/eos-18-eos-3000d-canon-original-imahbfq7fjbpzgvm.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/dslr-camera/b/b/x/eos-18-eos-3000d-canon-original-imahbfq7kayvf2jx.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/dslr-camera/v/m/x/eos-18-eos-3000d-canon-original-imahbfq7ehggewkw.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/dslr-camera/w/z/x/eos-18-eos-3000d-canon-original-imahbfq7zgs4yzfg.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 34223,
-      "stockStatus": "Hot Deal",
-      "variants": null,
-      "delivery": 3
-    },
-    {
-      "id": "others-1752397599018",
-      "name": "Watch Series 10 GPS 46mm Silver Aluminium with Denim Sport Band  (Denim Strap, Free Size)",
-      "brand": "Apple",
-      "category": "others",
-      "basePrice": 49900,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/g/l/g/-original-imah4jndzzuhsajc.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/r/e/k/-original-imah4jndy9bzkcdk.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/f/p/b/-original-imah4jndqyfgykb2.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/u/k/6/-original-imah4jndwgjrkbjv.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/3/h/5/-original-imah4jndfkz7dafu.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/m/t/t/-original-imah4jndq6smh5bb.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 32443,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 3
-    },
-    {
-      "id": "others-1752397756173",
-      "name": "Watch Ultra 49mm GPS + Cellular - ECG App, Temp sensor, Fall Detection  (Orange Strap, Medium)",
-      "brand": "Apple",
-      "category": "others",
-      "basePrice": 89900,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/e/4/c/-original-imaghxg9hnk2bztm.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/h/1/t/-original-imaghxg9pcvwvpcf.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/8/v/d/-original-imaghxg8rhscysu8.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/g/6/u/-original-imaghxg8egwfnf28.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/smartwatch/9/0/c/-original-imaghxg8yzeyvg8q.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 3425,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "others-1752397869708",
-      "name": "190 L Direct Cool Single Door 4 Star Refrigerator with Toughned Glass ShelfLarge Vegetable Box  (DAZZLE STEEL, HED-204DS-P)",
-      "brand": "Haier",
-      "category": "others",
-      "basePrice": 20990,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/refrigerator-new/u/n/o/-original-imahb9wybvnns5se.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/refrigerator-new/7/v/c/-original-imah44cnhfqpvege.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/refrigerator-new/v/o/e/-original-imahb9wyxjcj9dfa.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/refrigerator-new/r/g/g/-original-imahb9wydcgq7wwz.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/refrigerator-new/g/i/t/-original-imahb9wywbwhkexv.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 43243,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "others-1752398034379",
-      "name": "9 kg 5 Star, AI Control, AI Ecobubble, Super Speed, Wi-Fi, Hygiene Steam, Digital Inverter Motor Fully Automatic Front Load Washing Machine with In-built Heater Grey  (WW90DG6U24ASTL)",
-      "brand": " Samsung",
-      "category": "others",
-      "basePrice": 57990,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/n/a/b/-original-imaha7fqxhb2jtr5.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/y/m/5/-original-imah8whc5m6gccp6.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/f/7/s/-original-imah8whcdfzzwrub.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/8/i/o/-original-imah8vkhzh8buggr.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/k/r/g/-original-imah8whczjtupwsa.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/6/a/i/-original-imah8whcwkt4atgz.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/washing-machine-new/j/h/w/-original-imah8whcp6z4tf5z.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 6452,
-      "stockStatus": "Hot Deal",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "others-1752398190383",
-      "name": "AI TV UR7500 164 cm (65 inch) Ultra HD (4K) LED Smart WebOS TV 2025 Edition with Alpha5 AI Processor 4K Gen6 | 100+ Free LG Channels | 4K Upscaling | AI Brightness Control | AI Sound (Virtual Surround 5.1 Up-mix) | FTA Satellite Port | Magic Remote Compatible | 60Hz Refresh Rate | Alexa Built In | Works with Apple Air Play  (65UR75006LC)",
-      "brand": "LG",
-      "category": "others",
-      "basePrice": 114990,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/g/n/x/-original-imahdzrcfuhggcba.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/3/n/t/-original-imahdwgu623quzcb.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/o/c/e/-original-imahdwguuh2dxtfv.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/y/x/w/-original-imahdwgug2w3kkhs.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/e/k/4/-original-imahdwgut2kn26z5.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/e/4/o/-original-imahdwguuzdyjhyw.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/6/1/q/-original-imahdwgusffhnhvm.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/television/n/r/7/-original-imahdwguvzq23dk2.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 1334,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "others-1752398438137",
-      "name": "AirPods Pro (2nd generation) with MagSafe Case (USB-C) Bluetooth  (White, True Wireless)",
-      "brand": "Apple",
-      "category": "others",
-      "basePrice": 24900,
-      "discountPercentage": 98,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/e/a/f/-original-imagtc44nk4b3hfg.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/u/r/y/-original-imagtc44zcupzhqh.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/j/0/o/-original-imagtcfghamt7x4z.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/i/z/k/-original-imagtc447zmxjdpq.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/6/6/h/-original-imagtdqgnhzehtgm.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 43554,
-      "stockStatus": "Hot Deal",
-      "variants": null,
-      "delivery": 2
-    },
-    {
-      "id": "others-1752398726625",
-      "name": "Zeb- Thunder, With 60H Backup, BT v5.3, Gaming Mode, ENC, AUX, mSD, Dual Pairing Bluetooth  (Black, On the Ear)",
-      "brand": "ZEBRONICS",
-      "category": "others",
-      "basePrice": 1699,
-      "discountPercentage": 90,
-      "images": [
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/l/h/g/zeb-thunder-zebronics-original-imah5y2xhzxsfqz7.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/a/h/0/zeb-thunder-zebronics-original-imah5y2xytgxt4m7.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/t/8/p/zeb-thunder-zebronics-original-imah5y2xxkhavmkg.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/f/c/l/zeb-thunder-zebronics-original-imah5y2xwnmahuzf.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/o/e/t/zeb-thunder-zebronics-original-imah5y2xaaydvaem.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/q/h/g/zeb-thunder-zebronics-original-imah5y2xugzhmzyy.jpeg?q=70&crop=false",
-        "https://rukminim2.flixcart.com/image/832/832/xif0q/headphone/wireless-headset/l/j/g/zeb-thunder-zebronics-original-imah5y2xdy2zyzes.jpeg?q=70&crop=false"
-      ],
-      "averageRating": 4,
-      "totalReviews": 5353,
-      "stockStatus": "Top Discount",
-      "variants": null,
-      "delivery": 2
-    }
-  ]
+    ]
 }
