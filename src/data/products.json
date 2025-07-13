@@ -67,25 +67,37 @@
       "delivery": 2
     },
     {
-      "id": "others-1752397756173",
-      "name": "Watch Ultra 49mm GPS + Cellular - ECG App, Temp sensor, Fall Detection  (Orange Strap, Medium)",
+      "id": "prod_014",
+      "name": "Apple iPhone 14 (Starlight, 128 GB)",
       "brand": "Apple",
-      "category": "others",
-      "basePrice": 89900,
-      "discountPercentage": 90,
+      "category": "mobile",
+      "basePrice": 59900,
+      "discountPercentage": 0,
       "images": [
-        "/assets/images/product/others-1752397756173_0.jpg",
-        "/assets/images/product/others-1752397756173_1.jpg",
-        "/assets/images/product/others-1752397756173_2.jpg",
-        "/assets/images/product/others-1752397756173_3.jpg",
-        "/assets/images/product/others-1752397756173_4.jpg"
+        "/assets/images/product/prod_014_0.jpg",
+        "/assets/images/product/prod_014_1.jpg",
+        "/assets/images/product/prod_014_2.jpg",
+        "/assets/images/product/prod_014_3.jpg",
+        "/assets/images/product/prod_014_4.jpg",
+        "/assets/images/product/prod_014_5.jpg",
+        "/assets/images/product/prod_014_6.jpg"
       ],
-      "averageRating": 4,
-      "totalReviews": 3425,
-      "stockStatus": "Top Discount",
-      "variants": null,
+      "averageRating": 4.7,
+      "totalReviews": 25613,
+      "stockStatus": "In Stock",
+      "variants": [
+        {
+          "type": "color",
+          "name": "Starlight"
+        },
+        {
+          "type": "storage",
+          "name": "128 GB"
+        }
+      ],
       "delivery": 2
     },
+
     {
       "id": "mobile-1751732479103",
       "name": "Galaxy S25 Ultra 5G Smartphone with Galaxy AI (Titanium Whitesilver, 12GB RAM, 256GB Storage), Titanium Frame, Snapdragon 8 Elite, 200 MP Camera with ProVisual Engine and 5000mAh Battery",
@@ -151,7 +163,58 @@
       ],
       "delivery": 2
     },
-
+    {
+      "id": "prod_015",
+      "name": "Apple iPhone 15 (Blue, 128 GB)",
+      "brand": "Apple",
+      "category": "mobile",
+      "basePrice": 69900,
+      "discountPercentage": 0,
+      "images": [
+        "/assets/images/product/prod_015_0.jpg",
+        "/assets/images/product/prod_015_1.jpg",
+        "/assets/images/product/prod_015_2.jpg",
+        "/assets/images/product/prod_015_3.jpg",
+        "/assets/images/product/prod_015_4.jpg",
+        "/assets/images/product/prod_015_5.jpg",
+        "/assets/images/product/prod_015_6.jpg",
+        "/assets/images/product/prod_015_7.jpg"
+      ],
+      "averageRating": 4.8,
+      "totalReviews": 18947,
+      "stockStatus": "In Stock",
+      "variants": [
+        {
+          "type": "color",
+          "name": "White"
+        },
+        {
+          "type": "storage",
+          "name": "128 GB"
+        }
+      ],
+      "delivery": 2
+    },
+    {
+      "id": "others-1752397756173",
+      "name": "Watch Ultra 49mm GPS + Cellular - ECG App, Temp sensor, Fall Detection  (Orange Strap, Medium)",
+      "brand": "Apple",
+      "category": "others",
+      "basePrice": 89900,
+      "discountPercentage": 90,
+      "images": [
+        "/assets/images/product/others-1752397756173_0.jpg",
+        "/assets/images/product/others-1752397756173_1.jpg",
+        "/assets/images/product/others-1752397756173_2.jpg",
+        "/assets/images/product/others-1752397756173_3.jpg",
+        "/assets/images/product/others-1752397756173_4.jpg"
+      ],
+      "averageRating": 4,
+      "totalReviews": 3425,
+      "stockStatus": "Top Discount",
+      "variants": null,
+      "delivery": 2
+    },
     {
       "id": "bodyguard-jacket",
       "name": "Men Solid Leather Jacket",
