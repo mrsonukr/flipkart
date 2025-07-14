@@ -139,7 +139,7 @@ export const calculateCartTotals = () => {
 
   const totalAmount = totalMRP - totalDiscount;
   const deliveryCharges = 0; // No delivery charges for payment
-  const packagingFee = totalItems > 0 ? 59 : 0;
+  const packagingFee = totalItems > 0 ? 49 : 0;
   const finalAmount = totalAmount + deliveryCharges + packagingFee;
 
   return {

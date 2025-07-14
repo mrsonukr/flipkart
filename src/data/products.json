@@ -6,7 +6,7 @@
       "brand": "Apple",
       "category": "mobile",
       "mrp": 144900,
-      "salePrice": 699,
+      "salePrice": 499,
       "images": [
         "/assets/images/product/iphone-16-pro-max_0.jpg",
         "/assets/images/product/iphone-16-pro-max_1.jpg",
@@ -39,7 +39,7 @@
       "brand": "Apple",
       "category": "mobile",
       "mrp": 164900,
-      "salePrice": 599,
+      "salePrice": 459,
       "images": [
         "/assets/images/product/mobile-1752395992111_0.jpg",
         "/assets/images/product/mobile-1752395992111_1.jpg",
@@ -72,7 +72,7 @@
       "brand": "Apple",
       "category": "mobile",
       "mrp": 59900,
-      "salePrice": 499,
+      "salePrice": 289,
       "images": [
         "/assets/images/product/prod_014_0.jpg",
         "/assets/images/product/prod_014_1.jpg",
@@ -104,7 +104,7 @@
       "brand": "Samsung",
       "category": "mobile",
       "mrp": 129999,
-      "salePrice": 499,
+      "salePrice": 399,
       "images": [
         "/assets/images/product/mobile-1751732479103_0.jpg",
         "/assets/images/product/mobile-1751732479103_1.jpg",
@@ -169,7 +169,7 @@
       "brand": "Apple",
       "category": "mobile",
       "mrp": 69900,
-      "salePrice": 399,
+      "salePrice": 349,
       "images": [
         "/assets/images/product/prod_015_0.jpg",
         "/assets/images/product/prod_015_1.jpg",
@@ -283,7 +283,7 @@
       "brand": "OnePlus ",
       "category": "mobile",
       "mrp": 39999,
-      "salePrice": 399,
+      "salePrice": 299,
       "images": [
         "/assets/images/product/mobile-1752396482183_0.jpg",
         "/assets/images/product/mobile-1752396482183_1.jpg",
@@ -312,7 +312,7 @@
       "brand": "Google ",
       "category": "mobile",
       "mrp": 84999,
-      "salePrice": 499,
+      "salePrice": 349,
       "images": [
         "/assets/images/product/mobile-1752396751136_0.jpg",
         "/assets/images/product/mobile-1752396751136_1.jpg",
@@ -346,7 +346,7 @@
       "brand": "Motorola",
       "category": "mobile",
       "mrp": 34999,
-      "salePrice": 399,
+      "salePrice": 349,
       "images": [
         "/assets/images/product/mobile-1752397001354_0.jpg",
         "/assets/images/product/mobile-1752397001354_1.jpg",
@@ -428,7 +428,7 @@
       "brand": "Apple",
       "category": "others",
       "mrp": 49900,
-      "salePrice": 399,
+      "salePrice": 299,
       "images": [
         "/assets/images/product/others-1752397599018_0.jpg",
         "/assets/images/product/others-1752397599018_1.jpg",
@@ -450,7 +450,7 @@
       "brand": "Haier",
       "category": "others",
       "mrp": 20990,
-      "salePrice": 399,
+      "salePrice": 299,
       "images": [
         "/assets/images/product/others-1752397869708_0.jpg",
         "/assets/images/product/others-1752397869708_1.jpg",
@@ -470,7 +470,7 @@
       "brand": " Samsung",
       "category": "others",
       "mrp": 57990,
-      "salePrice": 449,
+      "salePrice": 249,
       "images": [
         "/assets/images/product/others-1752398034379_0.jpg",
         "/assets/images/product/others-1752398034379_1.jpg",
