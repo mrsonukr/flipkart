@@ -9,6 +9,8 @@ const Cart = lazy(() => import("./pages/Cart"));
 const AddressForm = lazy(() => import("./pages/Address"));
 const Summary = lazy(() => import("./pages/Summary"));
 const Payment = lazy(() => import("./pages/Payment"));
+const MyOrder = lazy(() => import("./pages/MyOrder"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 
 const Routing = () => {
   return (
@@ -20,6 +22,9 @@ const Routing = () => {
         <Route path="/address" element={<AddressForm />} />
         <Route path="/summary" element={<Summary />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/myorder" element={<MyOrder />} />
+        <Route path="/details/" element={<OrderDetails />} />
+        {/* Add more routes as needed */}
       </Routes>
     </Suspense>
   );

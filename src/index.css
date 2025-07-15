@@ -16,23 +16,24 @@
   top: 0;
   left: -40%;
   height: 100%;
-  width: 30%; /* narrower shine */
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 100%
-  );
+  width: 30%;
+  /* narrower shine */
+  background: linear-gradient(120deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%);
   transform: skewX(-20deg);
   animation: shimmer 3s infinite;
   pointer-events: none;
-  opacity: 0.7; /* further reduce brightness */
+  opacity: 0.7;
+  /* further reduce brightness */
 }
 
 @keyframes shimmer {
   0% {
     left: -40%;
   }
+
   100% {
     left: 100%;
   }
@@ -54,4 +55,16 @@
 
 .transition-smooth {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
 }

@@ -6,9 +6,11 @@ export default {
   theme: {
     extend: {
       fontSize: {
-        sm: "15px", // Override or add custom
+        sm: "15px",
       },
     },
   },
-  plugins: [scrollbarHide],
+  plugins: [
+    scrollbarHide,
+  ],
 };
