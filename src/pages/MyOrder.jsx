@@ -6,7 +6,7 @@ const MyOrder = () => {
   return (
     <div>
       <Header4 title="My Orders" />
-        <div className="py-[2px] mt-[50px] bg-gray-100"></div>
+      <div className="py-[2px] mt-[50px] bg-gray-100"></div>
       <Morder />
     </div>
   );

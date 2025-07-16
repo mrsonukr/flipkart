@@ -49,10 +49,7 @@ const OrderDetails = () => {
       <div className="bg-white text-sm text-black">
         {/* Tracking info */}
         <div className="px-4 py-3 border-b">
-          <p>
-            Order can be tracked by{" "}
-            <span className="font-medium">6202554185</span>.
-          </p>
+          <p>Track your order via SMS on your registered number.</p>
           <p>Tracking link is shared via SMS.</p>
         </div>
 

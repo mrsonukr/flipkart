@@ -11,6 +11,8 @@ const Summary = lazy(() => import("./pages/Summary"));
 const Payment = lazy(() => import("./pages/Payment"));
 const MyOrder = lazy(() => import("./pages/MyOrder"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails"));
+const PayWaiting = lazy(() => import("./pages/PayWaiting"));
+const OrderPlaced = lazy(() => import("./pages/OrderPlaced"));
 
 const Routing = () => {
   return (
@@ -24,6 +26,9 @@ const Routing = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/myorder" element={<MyOrder />} />
         <Route path="/details/" element={<OrderDetails />} />
+        <Route path="/pay/" element={<PayWaiting />} />
+        <Route path="/success" element={<OrderPlaced />} />
+
         {/* Add more routes as needed */}
       </Routes>
     </Suspense>
