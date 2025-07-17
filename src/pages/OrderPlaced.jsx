@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import successAnim from "../animations/success.json";
+import { calculateCartTotals } from "../utils/cartUtils";
 
 const OrderPlaced = () => {
   const [showHeading, setShowHeading] = useState(false);
   const [showSubtext, setShowSubtext] = useState(false);
+  const [cartTotals, setCartTotals] = useState({
+    totalDiscount: 0
+  });
 
   useEffect(() => {
+    // Load cart totals to get actual discount amount
+    const totals = calculateCartTotals();
+    setCartTotals(totals);
+    
     const timer1 = setTimeout(() => setShowHeading(true), 1000); // Heading after 1s
     const timer2 = setTimeout(() => setShowSubtext(true), 1500); // Subtext after 1.5s
 
@@ -38,7 +46,7 @@ const OrderPlaced = () => {
           showSubtext ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
-        You saved ₹1521
+        You saved ₹{cartTotals.totalDiscount.toLocaleString()}
       </p>
     </div>
   );
