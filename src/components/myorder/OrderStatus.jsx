@@ -1,38 +1,38 @@
 import React from "react";
 import { Check } from "lucide-react";
 
-const steps = [
-  {
-    status: "completed",
-    color: "bg-green-600",
-    icon: true,
-    title: "Order Confirmed, Today",
-    description: "Your Order has been placed, Tue 15th Jul",
-  },
-  {
-    status: "pending",
-    color: "border-2 border-gray-300 bg-white",
-    icon: false,
-    title: "Shipped,Expected By Jul 17",
-    description: "",
-  },
-  {
-    status: "pending",
-    color: "border-2 border-gray-300 bg-white",
-    icon: false,
-    title: "Out For Delivery",
-    description: "",
-  },
-  {
-    status: "pending",
-    color: "border-2 border-gray-300 bg-white",
-    icon: false,
-    title: "Delivery, Sat Jul 22 By 11 PM",
-    description: "",
-  },
-];
+const OrderStatus = ({ orderDate, deliveryDate }) => {
+  const steps = [
+    {
+      status: "completed",
+      color: "bg-green-600",
+      icon: true,
+      title: `Order Confirmed, ${orderDate}`,
+      description: `Your Order has been placed, ${orderDate}`,
+    },
+    {
+      status: "pending",
+      color: "border-2 border-gray-300 bg-white",
+      icon: false,
+      title: `Shipped, Expected By ${deliveryDate}`,
+      description: "",
+    },
+    {
+      status: "pending",
+      color: "border-2 border-gray-300 bg-white",
+      icon: false,
+      title: "Out For Delivery",
+      description: "",
+    },
+    {
+      status: "pending",
+      color: "border-2 border-gray-300 bg-white",
+      icon: false,
+      title: `Delivery, ${deliveryDate} By 11 PM`,
+      description: "",
+    },
+  ];
 
-const OrderStatus = () => {
   return (
     <div className="flex flex-col space-y-0 pt-8 px-4 bg-white">
       {steps.map((step, index) => {

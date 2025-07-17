@@ -1,33 +1,78 @@
+import React, { useState, useEffect } from "react";
 import Header4 from "../components/Header4";
 import OrderStatus from "../components/myorder/OrderStatus";
 import { ChevronRight } from "lucide-react";
+import { getCurrentOrder } from "../utils/orderUtils";
+import { getDeliveryDate } from "../utils/productUtils";
 const OrderDetails = () => {
+  const [orderData, setOrderData] = useState(null);
+  const [orderProduct, setOrderProduct] = useState(null);
+
+  useEffect(() => {
+    // Get current order data
+    const currentOrder = getCurrentOrder();
+    if (currentOrder && currentOrder.products.length > 0) {
+      setOrderData(currentOrder);
+      setOrderProduct(currentOrder.products[0]); // Show first product
+    }
+  }, []);
+
+  // Get variant display based on product category
+  const getVariantDisplay = (product) => {
+    if (!product) return "";
+    
+    if (product.category === 'mobile' && product.variants) {
+      const parts = [];
+      if (product.variants.color) parts.push(product.variants.color);
+      if (product.variants.storage) parts.push(product.variants.storage);
+      return parts.join(", ");
+    }
+    
+    if ((product.category === 'cloth' || product.category === 'shoes') && product.variants?.size) {
+      return `Size: ${product.variants.size}`;
+    }
+    
+    return product.brand || "";
+  };
+
+  if (!orderData || !orderProduct) {
+    return (
+      <div className="bg-gray-200">
+        <Header4 title="" />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <p className="text-gray-600">Loading order details...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-200">
       <Header4 title="" />
       <div className="px-4 border-b pb-2 mt-[52px] bg-white">
         <span className="text-[13px] text-gray-400">
-          Order ID - OD364623767432766
+          Order ID - {orderData.orderId}
         </span>
       </div>
 
       <div className="flex border-b bg-white justify-between items-start border p-4 w-full mx-auto">
         <div className="flex flex-col space-y-1">
           <h2 className="leading-tight line-clamp-2 max-w-[270px]">
-            PTron InTunes Ace with 38 Hrs Playback, Clear Calls, Deep Bas PTron
-            InTunes Ace with 38 Hrs Playback, Clear Calls, Deep Bas
+            {orderProduct.brand} {orderProduct.name}
           </h2>
-          <p className="text-xs text-gray-500">Green</p>
-          <p className="text-xs text-gray-500">Seller: TBL Online</p>
-          <p className="mt-1">₹557</p>
+          <p className="text-xs text-gray-500">{getVariantDisplay(orderProduct)}</p>
+          <p className="text-xs text-gray-500">Seller: {orderProduct.brand}</p>
+          <p className="mt-1">₹{orderProduct.salePrice.toLocaleString()}</p>
         </div>
         <img
-          src="/assets/images/product/bodyguard-jacket_0.jpg" // Replace with actual image path
-          alt="PTron InTunes Ace"
+          src={orderProduct.image}
+          alt={orderProduct.name}
           className="w-16 h-16 object-contain"
         />
       </div>
-      <OrderStatus />
+      <OrderStatus orderDate={orderData.orderDate} deliveryDate={getDeliveryDate(orderProduct.delivery)} />
       <div className="flex text-blue-700 text-sm bg-white px-4 pb-4">
         <p>See All Updates</p>
         <ChevronRight />

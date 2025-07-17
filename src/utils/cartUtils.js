@@ -110,6 +110,8 @@ export const updateCartItemQuantity = (productId, variants = {}, newQuantity) =>
 // Clear entire cart
 export const clearCart = () => {
   localStorage.removeItem(CART_STORAGE_KEY);
+  // Dispatch event to update UI
+  window.dispatchEvent(new Event('cartUpdated'));
   return [];
 };
 
