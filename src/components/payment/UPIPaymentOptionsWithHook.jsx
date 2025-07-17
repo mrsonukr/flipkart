@@ -1,25 +1,20 @@
-// UPIPaymentOptions.jsx
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+// Alternative implementation using the custom hook
+// This shows how to use the reusable hook approach
+
+import React, { useState, useEffect } from "react";
 import { calculateCartTotals } from "../../utils/cartUtils";
+import { usePageLeaveDetection } from "../../hooks/usePageLeaveDetection";
+
+const formatNumberWithCommas = (num) =>
+  num.toLocaleString("en-IN", { maximumFractionDigits: 2 });
 
 // Your custom payment URL format
 const customPaymentUrl =
   "//pay?ver=01&mode=01&pa=netc.34161FA820328AA2D2560DE0@mairtel&purpose=00&mc=4784&pn=NETC%20FASTag%20Recharge&orgid=159753&qrMedium=04";
 
-const formatNumberWithCommas = (num) =>
-  num.toLocaleString("en-IN", { maximumFractionDigits: 2 });
-
-const UPIPaymentOptions = () => {
+const UPIPaymentOptionsWithHook = () => {
   const [selected, setSelected] = useState("upi");
-  const navigate = useNavigate();
-  
-  // State to track if a payment button was clicked
   const [paymentButtonClicked, setPaymentButtonClicked] = useState(false);
-  
-  // Ref to store the latest state value for event handlers
-  const paymentButtonClickedRef = useRef(false);
-  
   const [cartTotals, setCartTotals] = useState({
     totalMRP: 0,
     totalDiscount: 0,
@@ -31,10 +26,12 @@ const UPIPaymentOptions = () => {
     savings: 0,
   });
 
-  useEffect(() => {
-    // Update ref whenever state changes
-    paymentButtonClickedRef.current = paymentButtonClicked;
-  }, [paymentButtonClicked]);
+  // Use the custom hook for page leave detection
+  const { resetAction } = usePageLeaveDetection(
+    paymentButtonClicked, 
+    '/pay/', 
+    1000 // 1 second delay
+  );
 
   useEffect(() => {
     updateCartTotals();
@@ -47,50 +44,6 @@ const UPIPaymentOptions = () => {
     return () => window.removeEventListener("cartUpdated", handleCartUpdate);
   }, []);
 
-  useEffect(() => {
-    // Page leave detection event handlers
-    const handleVisibilityChange = () => {
-      // Detect when page becomes hidden (user switches tabs/apps)
-      if (document.hidden && paymentButtonClickedRef.current) {
-        // Small delay to ensure the payment app has time to open
-        setTimeout(() => {
-          navigate('/pay/');
-        }, 1000);
-      }
-    };
-
-    const handlePageHide = () => {
-      // Detect when page is being hidden (more reliable than beforeunload)
-      if (paymentButtonClickedRef.current) {
-        navigate('/pay/');
-      }
-    };
-
-    const handleFocusOut = () => {
-      // Detect when window loses focus (user clicked outside)
-      if (paymentButtonClickedRef.current) {
-        // Delay to distinguish between temporary focus loss and actual app switch
-        setTimeout(() => {
-          if (document.hidden || !document.hasFocus()) {
-            navigate('/pay/');
-          }
-        }, 2000);
-      }
-    };
-
-    // Add event listeners for various page leave scenarios
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('pagehide', handlePageHide);
-    window.addEventListener('blur', handleFocusOut);
-
-    // Cleanup event listeners on component unmount
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('pagehide', handlePageHide);
-      window.removeEventListener('blur', handleFocusOut);
-    };
-  }, [navigate]);
-
   const updateCartTotals = () => {
     const totals = calculateCartTotals();
     setCartTotals(totals);
@@ -100,7 +53,6 @@ const UPIPaymentOptions = () => {
     return `${scheme}:${customPaymentUrl}&am=${cartTotals.finalAmount}`;
   };
 
-  // Enhanced payment handler that tracks button clicks and handles page leave
   const handlePaymentClick = (scheme) => {
     // Mark that a payment button was clicked
     setPaymentButtonClicked(true);
@@ -113,8 +65,9 @@ const UPIPaymentOptions = () => {
       window.location.href = paymentUrl;
     } catch (error) {
       console.error('Failed to open payment app:', error);
-      // If payment app fails to open, reset the clicked state
+      // Reset the clicked state if payment app fails to open
       setPaymentButtonClicked(false);
+      resetAction();
     }
   };
 
@@ -216,4 +169,4 @@ const UPIPaymentOptions = () => {
   );
 };
 
-export default UPIPaymentOptions;
+export default UPIPaymentOptionsWithHook;
