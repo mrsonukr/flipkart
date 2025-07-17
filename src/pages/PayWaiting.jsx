@@ -10,7 +10,7 @@ const PayWaiting = () => {
     finalAmount: 0,
   });
   const [hasReturnedToPage, setHasReturnedToPage] = useState(false);
-  const [returnTimer, setReturnTimer] = useState(28); // 28 seconds for success redirect
+  const [returnTimer, setReturnTimer] = useState(15); // 28 seconds for success redirect
 
   // Load cart totals on component mount
   useEffect(() => {
