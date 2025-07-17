@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header4 from "../components/Header4";
 import OrderStatus from "../components/myorder/OrderStatus";
 import { ChevronRight } from "lucide-react";
 import { getCurrentOrder } from "../utils/orderUtils";
 import { getDeliveryDate } from "../utils/productUtils";
 const OrderDetails = () => {
+  const navigate = useNavigate();
   const [orderData, setOrderData] = useState(null);
   const [orderProduct, setOrderProduct] = useState(null);
 
@@ -15,6 +17,19 @@ const OrderDetails = () => {
       setOrderData(currentOrder);
       setOrderProduct(currentOrder.products[0]); // Show first product
     }
+
+    // Override browser back button to go to home
+    const handlePopState = () => {
+      navigate('/', { replace: true });
+    };
+
+    // Add event listener for browser back button
+    window.addEventListener('popstate', handlePopState);
+
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   // Get variant display based on product category

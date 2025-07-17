@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getCartItemCount } from "../utils/cartUtils";
 
 const Header4 = ({ title }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
@@ -22,6 +24,16 @@ const Header4 = ({ title }) => {
     setCartCount(count);
   };
 
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    
+    // If on order details page, go to home instead of back
+    if (location.pathname === '/details/') {
+      navigate('/', { replace: true });
+    } else {
+      window.history.back();
+    }
+  };
   return (
     <div id="header" className="w-full fixed top-0 left-0 z-50 bg-white ">
       <div className="relative w-full">
@@ -32,10 +44,7 @@ const Header4 = ({ title }) => {
               id="back-btn"
               className="flex items-center justify-center mt-1"
               href="javascript:void(0)"
-              onClick={(e) => {
-                e.preventDefault();
-                window.history.back();
-              }}
+              onClick={handleBackClick}
             >
               <svg
                 width="19"

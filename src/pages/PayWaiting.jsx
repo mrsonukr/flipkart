@@ -7,7 +7,7 @@ const PayWaiting = () => {
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes = 300 seconds
   const [cartTotals, setCartTotals] = useState({
-    finalAmount: 0
+    finalAmount: 0,
   });
   const [hasReturnedToPage, setHasReturnedToPage] = useState(false);
   const [returnTimer, setReturnTimer] = useState(28); // 28 seconds for success redirect
@@ -27,10 +27,10 @@ const PayWaiting = () => {
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [hasReturnedToPage]);
 
@@ -57,7 +57,7 @@ const PayWaiting = () => {
           if (prev <= 1) {
             clearInterval(successTimer);
             setTimeout(() => {
-              navigate('/success');
+              navigate("/success");
             }, 0);
             return 0;
           }
@@ -93,8 +93,9 @@ const PayWaiting = () => {
 
       {/* Message with dynamic amount */}
       <p className="text-center text-gray-700 text-sm mt-6 px-6 max-w-sm">
-        Open the UPI app to complete the payment of ₹{cartTotals.finalAmount.toLocaleString()}, then return to the
-        Flipkart app
+        Open the UPI app to complete the payment of ₹
+        {cartTotals.finalAmount.toLocaleString()}, then return to the Flipkart
+        app
       </p>
 
       {/* Timer */}
