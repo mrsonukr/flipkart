@@ -1,71 +1,45 @@
-// src/components/OrderPlaced.tsx
-import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Lottie from "lottie-react";
+import successAnim from "../animations/success.json";
 
 const OrderPlaced = () => {
+  const [showHeading, setShowHeading] = useState(false);
+  const [showSubtext, setShowSubtext] = useState(false);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => setShowHeading(true), 1000); // Heading after 1s
+    const timer2 = setTimeout(() => setShowSubtext(true), 1500); // Subtext after 1.5s
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-white overflow-hidden">
-      {/* Ripple/Aura layers behind checkmark */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1.8, opacity: 0.15 }}
-          transition={{ duration: 0.6 }}
-          className="absolute w-48 h-48 bg-green-200 rounded-full"
-        />
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1.4, opacity: 0.25 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="absolute w-36 h-36 bg-green-300 rounded-full"
-        />
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="absolute w-24 h-24 bg-green-400 rounded-full"
-        />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white px-4">
+      {/* Lottie Animation */}
+      <div className="w-[200px] md:w-[300px] mb-4">
+        <Lottie animationData={successAnim} loop={false} autoplay />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col items-center justify-center z-10">
-        {/* Main checkmark circle */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="flex items-center justify-center w-24 h-24 rounded-full bg-green-500 shadow-lg"
-        >
-          <svg
-            className="w-12 h-12 text-white"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={3}
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </motion.div>
+      {/* Heading */}
+      <h1
+        className={`font-semibold text-xl text-gray-600 transition-all duration-500 transform ${
+          showHeading ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
+        Order Placed
+      </h1>
 
-        {/* Text below */}
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="text-2xl font-semibold mt-6 text-gray-900"
-        >
-          Order Placed
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-green-600 text-sm mt-2"
-        >
-          You saved ₹1512
-        </motion.p>
-      </div>
+      {/* Subtext */}
+      <p
+        className={`text-sm text-green-600 mt-1 transition-all duration-500 transform ${
+          showSubtext ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
+        You saved ₹1521
+      </p>
     </div>
   );
 };
