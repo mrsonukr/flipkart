@@ -3,7 +3,8 @@ import React from 'react';
 const LoadingSpinner = ({ 
   size = 'medium', 
   color = 'blue', 
-  fullScreen = false 
+  fullScreen = false,
+  className = ''
 }) => {
   const sizeClasses = {
     small: 'w-4 h-4 border-2',
@@ -17,7 +18,7 @@ const LoadingSpinner = ({
     gray: 'border-gray-600 border-t-transparent'
   };
 
-  const spinnerClass = `${sizeClasses[size]} ${colorClasses[color]} rounded-full animate-spin`;
+  const spinnerClass = `${sizeClasses[size]} ${colorClasses[color]} rounded-full animate-spin ${className}`;
 
   if (fullScreen) {
     return (
@@ -28,7 +29,7 @@ const LoadingSpinner = ({
   }
 
   return (
-    <div className="flex items-center justify-center p-4">
+    <div className="flex items-center justify-center">
       <div className={spinnerClass}></div>
     </div>
   );

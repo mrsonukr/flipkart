@@ -45,18 +45,18 @@ const ProductCard = ({
   return (
     <Link
       to={href}
-      className="flex flex-col relative box-border border-b border-r border-gray-200 bg-white"
+      className="flex flex-col relative box-border bg-white h-full"
     >
-      <div className="relative p-2 h-[200px] bg-white w-full overflow-hidden">
+      <div className="relative p-3 h-[200px] bg-white w-full overflow-hidden flex-shrink-0">
         <img 
           src={image} 
           alt={title} 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain transition-transform duration-200 hover:scale-105"
           onError={(e) => {
             console.log('Image failed to load:', image);
           }}
         />
-        <div className="absolute top-3 right-3 flex justify-center items-center">
+        <div className="absolute top-2 right-2 flex justify-center items-center opacity-80 hover:opacity-100 transition-opacity">
           <svg width="24" height="24" viewBox="0 0 256 256">
             <path fill="none" d="M0 0h256v256H0z" />
             <path
@@ -71,16 +71,17 @@ const ProductCard = ({
         </div>
       </div>
 
-      <div className="w-full px-3 py-2">
+      <div className="w-full px-3 py-3 flex-1 flex flex-col justify-between">
+        <div className="flex-1">
         <h2 className="font-semibold text-sm min-h-[20px] text-black">
           {brand || <span>&nbsp;</span>}
         </h2>
 
-        <h3 className="text-xs leading-[18px] font-normal text-gray-500 line-clamp-2 text-left">
+        <h3 className="text-xs leading-[18px] font-normal text-gray-500 line-clamp-2 text-left mb-2">
           {title}
         </h3>
 
-        <div className="flex items-center my-1 text-[14px] font-semibold leading-tight">
+        <div className="flex items-center mb-2 text-[14px] font-semibold leading-tight">
           <span className="text-green-500 mr-2 flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -100,12 +101,14 @@ const ProductCard = ({
         </div>
 
         {badgeText && (
-          <div className={`inline-block mb-2 ${getBadgeStyle(badgeText)}`}>
+          <div className={`inline-block mb-1 ${getBadgeStyle(badgeText)}`}>
             {badgeText}
           </div>
         )}
+        </div>
 
-        <div className="flex justify-between items-center pt-1 pb-1">
+        <div className="mt-auto">
+        <div className="flex justify-between items-center mb-1">
           <div className="flex text-lg space-x-[2px]">
             {[...Array(5)].map((_, i) => (
               <FaStar
@@ -117,7 +120,8 @@ const ProductCard = ({
           <img className="h-4" src={assuredImg} alt="assured" />
         </div>
 
-        <div className="text-xs font-medium py-1 rounded">{deliveryText}</div>
+        <div className="text-xs font-medium text-gray-600">{deliveryText}</div>
+        </div>
       </div>
     </Link>
   );
