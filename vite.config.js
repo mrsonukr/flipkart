@@ -4,17 +4,29 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@lottiefiles/lottie-player']
+  },
   build: {
+    target: 'es2015',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log']
+      }
+    },
     rollupOptions: {
       output: {
+        experimentalMinChunkSize: 1000,
         manualChunks: {
           // Core vendor libraries
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
+          vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['@mui/material', '@emotion/react', '@emotion/styled'],
           swiper: ['swiper'],
           icons: ['react-icons', 'lucide-react'],
-          lottie: ['lottie-react', 'lottie-web'],
           
           // Page chunks
           home: ['./src/pages/Home.jsx'],
@@ -47,7 +59,7 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 500
   },
   server: {
     host: true,        // 👈 enables access via IP like 192.168.x.x
@@ -57,6 +69,7 @@ export default defineConfig({
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': '1; mode=block',
+      'Cache-Control': 'public, max-age=31536000',
     }
   }
 })

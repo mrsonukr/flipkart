@@ -7,16 +7,37 @@ export const preloadCriticalResources = () => {
     '/assets/images/svg/flogo.png',
     '/assets/images/svg/cart.svg',
     '/assets/images/svg/menu.svg',
-    '/assets/images/svg/search.webp'
+    '/assets/images/svg/search.webp',
+    '/assets/images/svg/download.svg'
   ];
 
   criticalImages.forEach(src => {
+    // Create image object for instant caching
+    const img = new Image();
+    img.src = src;
+    
+    // Also add preload link
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
     link.href = src;
     document.head.appendChild(link);
   });
+  
+  // Preload critical CSS
+  const criticalCSS = `
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+  `;
+  
+  const style = document.createElement('style');
+  style.textContent = criticalCSS;
+  document.head.appendChild(style);
 };
 
 // Optimize images with lazy loading
@@ -32,7 +53,7 @@ export const createOptimizedImage = (src, alt, className = '') => {
 
 // Cache management for better performance
 export const cacheManager = {
-  set: (key, data, ttl = 300000) => { // 5 minutes default
+  set: (key, data, ttl = 1800000) => { // 30 minutes default for better back navigation
     const item = {
       data,
       timestamp: Date.now(),

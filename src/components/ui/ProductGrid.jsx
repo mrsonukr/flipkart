@@ -3,11 +3,13 @@ import ProductCard from "./ProductCard";
 import { getAllProducts, getSalePrice, getMRP, getDiscountPercentage, formatPrice, getDeliveryDate } from "../../utils/productUtils";
 import { performanceMonitor } from "../../utils/performanceUtils";
 import LoadingSpinner from "../LoadingSpinner";
+import { useLocation } from "react-router-dom";
 
-const PRODUCTS_PER_PAGE = 8;
-const GRID_STATE_KEY = 'product_grid_state';
+const PRODUCTS_PER_PAGE = 6; // Reduced for faster initial load
+const GRID_STATE_KEY = 'product_grid_state_v2';
 
 const ProductGrid = () => {
+  const location = useLocation();
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +17,8 @@ const ProductGrid = () => {
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isNavigatingBack, setIsNavigatingBack] = useState(false);
   
   // Intersection Observer ref
   const observer = useRef();
@@ -28,14 +32,15 @@ const ProductGrid = () => {
       currentPage,
       hasMore,
       scrollPosition: window.scrollY,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      pathname: location.pathname
     };
     try {
       sessionStorage.setItem(GRID_STATE_KEY, JSON.stringify(state));
     } catch (error) {
       console.warn('Failed to save grid state:', error);
     }
-  }, [allProducts, displayedProducts, currentPage, hasMore]);
+  }, [allProducts, displayedProducts, currentPage, hasMore, location.pathname]);
 
   // Restore grid state from sessionStorage (simple JSON)
   const restoreGridState = useCallback(() => {
@@ -45,19 +50,21 @@ const ProductGrid = () => {
         const state = JSON.parse(savedState);
         const now = Date.now();
         
-        // Only restore if state is less than 10 minutes old
-        if (now - state.timestamp < 600000 && state.allProducts && state.displayedProducts) {
+        // Only restore if state is less than 30 minutes old and from home page
+        if (now - state.timestamp < 1800000 && state.allProducts && state.displayedProducts && state.pathname === '/') {
           console.log('Restoring grid state with', state.displayedProducts.length, 'products');
           setAllProducts(state.allProducts);
           setDisplayedProducts(state.displayedProducts);
           setCurrentPage(state.currentPage);
           setHasMore(state.hasMore);
+          setIsNavigatingBack(true);
           
           // Restore scroll position after a short delay
           setTimeout(() => {
             if (state.scrollPosition > 0) {
               window.scrollTo(0, state.scrollPosition);
             }
+            setIsNavigatingBack(false);
           }, 100);
           
           return true;
@@ -119,27 +126,54 @@ const ProductGrid = () => {
 
   // Main effect - try to restore state first, then load if needed
   useEffect(() => {
-    // Always try to restore state first
-    if (restoreGridState()) {
-      setLoading(false);
-      setError(null);
-    } else {
-      // No valid state found, load fresh
-      loadInitialProducts();
+    // Only run on home page
+    if (location.pathname === '/') {
+      // Always try to restore state first
+      if (restoreGridState()) {
+        setLoading(false);
+        setError(null);
+      } else {
+        // No valid state found, load fresh
+        loadInitialProducts();
+      }
     }
-  }, [restoreGridState]);
+  }, [restoreGridState, location.pathname]);
 
   // Save state when products change
   useEffect(() => {
-    if (!loading && displayedProducts.length > 0) {
+    if (!loading && displayedProducts.length > 0 && location.pathname === '/') {
       saveGridState();
     }
-  }, [displayedProducts, loading, saveGridState]);
+  }, [displayedProducts, loading, saveGridState, location.pathname]);
 
+  // Handle page visibility change to save state when leaving
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && displayedProducts.length > 0 && location.pathname === '/') {
+        saveGridState();
+      }
+    };
+
+    const handleBeforeUnload = () => {
+      if (displayedProducts.length > 0 && location.pathname === '/') {
+        saveGridState();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [displayedProducts, saveGridState, location.pathname]);
   const loadInitialProducts = async () => {
     try {
       setLoading(true);
-      performanceMonitor.start('initial-product-loading');
+      if (isFirstLoad) {
+        performanceMonitor.start('initial-product-loading');
+      }
       
       const data = await getAllProducts();
       console.log('Loaded products from API:', data.length);
@@ -149,7 +183,10 @@ const ProductGrid = () => {
       setHasMore(data.length > PRODUCTS_PER_PAGE);
       
       setError(null);
-      performanceMonitor.end('initial-product-loading');
+      if (isFirstLoad) {
+        performanceMonitor.end('initial-product-loading');
+        setIsFirstLoad(false);
+      }
     } catch (err) {
       setError('Failed to load products');
       console.error('Error loading products:', err);
@@ -200,7 +237,11 @@ const ProductGrid = () => {
 
   if (loading) {
     return (
-      <div></div>
+      <div className="border border-gray-200 bg-white">
+        <div className="grid grid-cols-2 gap-0 min-h-[400px]">
+          {/* Show nothing while loading - just empty space */}
+        </div>
+      </div>
     );
   }
 

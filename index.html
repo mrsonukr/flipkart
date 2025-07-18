@@ -3,6 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!-- Critical resource hints for ultra-fast loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="/assets/images/svg/flogo.png" as="image">
+  <link rel="preload" href="/assets/images/svg/cart.svg" as="image">
+  <link rel="preload" href="/assets/images/svg/menu.svg" as="image">
+  <link rel="preload" href="/assets/images/svg/search.webp" as="image">
+  <link rel="preload" href="/assets/images/svg/download.svg" as="image">
+  
   <!-- Security Headers -->
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self' https:; img-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; connect-src 'self' https:;">
@@ -14,8 +23,14 @@
   <link rel="icon" type="image/svg+xml" href="/assets/images/img/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Big Discount- Secure Shopping Experience</title>
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
 
+  <!-- Critical CSS for instant render -->
+  <style>
+    /* Critical above-the-fold styles */
+    body { margin: 0; font-family: 'Roboto', sans-serif; }
+  </style>
+  
   <!-- Prevent clickjacking -->
   <style>
     body {
@@ -30,7 +45,7 @@
 <body>
   <div id="root"></div>
   <!-- ⚠️ This is a demo clone for educational purposes only. No real products or payments. -->
-  <script type="module" src="/src/main.jsx"></script>
+  <script type="module" src="/src/main.jsx" defer></script>
 </body>
 
 </html>

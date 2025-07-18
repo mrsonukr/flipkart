@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCartItemCount } from "../utils/cartUtils";
 
 const Header2 = () => {
+  const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
@@ -24,7 +25,8 @@ const Header2 = () => {
 
   const handleBackClick = (e) => {
     e.preventDefault();
-    window.history.back();
+    // Use navigate instead of window.history.back() for better state management
+    navigate(-1);
   };
   return (
     <div className="w-full">
