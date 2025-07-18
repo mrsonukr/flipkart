@@ -22,6 +22,10 @@ const Header2 = () => {
     setCartCount(count);
   };
 
+  const handleBackClick = (e) => {
+    e.preventDefault();
+    window.history.back();
+  };
   return (
     <div className="w-full">
       <div id="header" className="w-full">
@@ -33,10 +37,7 @@ const Header2 = () => {
                 id="back-btn"
                 className="flex items-center justify-center mt-1"
                 href="javascript:void(0)"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.history.back();
-                }}
+                onClick={handleBackClick}
               >
                 <svg
                   width="19"

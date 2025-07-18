@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import ProductCard from "./ProductCard";
 import { getAllProducts, getSalePrice, getMRP, getDiscountPercentage, formatPrice, getDeliveryDate } from "../../utils/productUtils";
-import { cacheManager, performanceMonitor } from "../../utils/performanceUtils";
+import { performanceMonitor } from "../../utils/performanceUtils";
 import LoadingSpinner from "../LoadingSpinner";
 
 const PRODUCTS_PER_PAGE = 8;
+const GRID_STATE_KEY = 'product_grid_state';
 
 const ProductGrid = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -18,6 +19,64 @@ const ProductGrid = () => {
   // Intersection Observer ref
   const observer = useRef();
   const loadingRef = useRef();
+
+  // Save grid state to sessionStorage (simple JSON)
+  const saveGridState = useCallback(() => {
+    const state = {
+      allProducts,
+      displayedProducts,
+      currentPage,
+      hasMore,
+      scrollPosition: window.scrollY,
+      timestamp: Date.now()
+    };
+    try {
+      sessionStorage.setItem(GRID_STATE_KEY, JSON.stringify(state));
+    } catch (error) {
+      console.warn('Failed to save grid state:', error);
+    }
+  }, [allProducts, displayedProducts, currentPage, hasMore]);
+
+  // Restore grid state from sessionStorage (simple JSON)
+  const restoreGridState = useCallback(() => {
+    try {
+      const savedState = sessionStorage.getItem(GRID_STATE_KEY);
+      if (savedState) {
+        const state = JSON.parse(savedState);
+        const now = Date.now();
+        
+        // Only restore if state is less than 10 minutes old
+        if (now - state.timestamp < 600000 && state.allProducts && state.displayedProducts) {
+          console.log('Restoring grid state with', state.displayedProducts.length, 'products');
+          setAllProducts(state.allProducts);
+          setDisplayedProducts(state.displayedProducts);
+          setCurrentPage(state.currentPage);
+          setHasMore(state.hasMore);
+          
+          // Restore scroll position after a short delay
+          setTimeout(() => {
+            if (state.scrollPosition > 0) {
+              window.scrollTo(0, state.scrollPosition);
+            }
+          }, 100);
+          
+          return true;
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to restore grid state:', error);
+    }
+    return false;
+  }, []);
+
+  // Clear grid state
+  const clearGridState = useCallback(() => {
+    try {
+      sessionStorage.removeItem(GRID_STATE_KEY);
+    } catch (error) {
+      console.warn('Failed to clear grid state:', error);
+    }
+  }, []);
 
   // Create intersection observer
   useEffect(() => {
@@ -58,27 +117,29 @@ const ProductGrid = () => {
     };
   }, [displayedProducts]);
 
+  // Main effect - try to restore state first, then load if needed
   useEffect(() => {
-    loadInitialProducts();
-  }, []);
+    // Always try to restore state first
+    if (restoreGridState()) {
+      setLoading(false);
+      setError(null);
+    } else {
+      // No valid state found, load fresh
+      loadInitialProducts();
+    }
+  }, [restoreGridState]);
+
+  // Save state when products change
+  useEffect(() => {
+    if (!loading && displayedProducts.length > 0) {
+      saveGridState();
+    }
+  }, [displayedProducts, loading, saveGridState]);
 
   const loadInitialProducts = async () => {
     try {
       setLoading(true);
       performanceMonitor.start('initial-product-loading');
-      
-      // Try to get from cache first
-      const cachedProducts = cacheManager.get('products');
-      if (cachedProducts && cachedProducts.length > 0) {
-        console.log('Loading from cache:', cachedProducts.length, 'products');
-        setAllProducts(cachedProducts);
-        setDisplayedProducts(cachedProducts.slice(0, PRODUCTS_PER_PAGE));
-        setCurrentPage(1);
-        setHasMore(cachedProducts.length > PRODUCTS_PER_PAGE);
-        setLoading(false);
-        performanceMonitor.end('initial-product-loading');
-        return;
-      }
       
       const data = await getAllProducts();
       console.log('Loaded products from API:', data.length);
@@ -86,9 +147,6 @@ const ProductGrid = () => {
       setDisplayedProducts(data.slice(0, PRODUCTS_PER_PAGE));
       setCurrentPage(1);
       setHasMore(data.length > PRODUCTS_PER_PAGE);
-      
-      // Cache the products for faster subsequent loads
-      cacheManager.set('products', data, 300000); // 5 minutes
       
       setError(null);
       performanceMonitor.end('initial-product-loading');
@@ -142,24 +200,7 @@ const ProductGrid = () => {
 
   if (loading) {
     return (
-      <div className="border border-gray-200">
-        {/* Show skeleton grid while loading */}
-        <div className="grid grid-cols-2">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="border-b border-r border-gray-200 bg-white">
-              <div className="p-2 h-[200px] bg-gray-100 animate-pulse"></div>
-              <div className="px-3 py-2 space-y-2">
-                <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-3 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center justify-center py-4">
-          <LoadingSpinner size="medium" />
-        </div>
-      </div>
+      <div></div>
     );
   }
 
