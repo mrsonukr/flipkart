@@ -10,7 +10,8 @@ const PayWaiting = () => {
     finalAmount: 0,
   });
   const [hasReturnedToPage, setHasReturnedToPage] = useState(false);
-  const [returnTimer, setReturnTimer] = useState(15); // 28 seconds for success redirect
+  const [returnTimer, setReturnTimer] = useState(28); // 28 seconds for success redirect
+  const [fallbackTimer, setFallbackTimer] = useState(123); // 123 seconds fallback timer
 
   // Load cart totals on component mount
   useEffect(() => {
@@ -48,6 +49,23 @@ const PayWaiting = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  // Fallback timer - redirect after 123 seconds regardless of detection
+  useEffect(() => {
+    const fallbackInterval = setInterval(() => {
+      setFallbackTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(fallbackInterval);
+          // Redirect to success after 123 seconds
+          navigate("/success");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(fallbackInterval);
+  }, [navigate]);
 
   // 28-second success redirect timer when user returns
   useEffect(() => {
@@ -126,8 +144,16 @@ const PayWaiting = () => {
       </div>
 
       {/* Note */}
-      <p className="text-gray-500 text-sm mt-4 mb-10">
-        Please do not refresh or press back
+      <p className="text-gray-500 text-sm mt-4 mb-2 text-center">
+        {hasReturnedToPage 
+          ? `Confirming payment in ${returnTimer}s...` 
+          : "Please do not refresh or press back"
+        }
+      </p>
+      
+      {/* Fallback timer info */}
+      <p className="text-gray-400 text-xs mb-10 text-center">
+        Auto-confirm in {Math.floor(fallbackTimer / 60)}:{(fallbackTimer % 60).toString().padStart(2, '0')}
       </p>
     </div>
   );
