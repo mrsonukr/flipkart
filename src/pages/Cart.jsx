@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/ui/Spinner";
 import Header3 from "../components/Header3";
 import PriceDetails from "../components/cart-ui/PriceDetails";
 import AddressBar from "../components/cart-ui/AddressBar";
@@ -9,6 +10,7 @@ import { getAddressFromStorage } from "../utils/addressUtils";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [cartTotals, setCartTotals] = useState({
     totalMRP: 0,
     totalDiscount: 0,
@@ -22,6 +24,7 @@ const Cart = () => {
 
   useEffect(() => {
     updateCartTotals();
+    setLoading(false);
     
     // Listen for cart updates
     const handleCartUpdate = () => {
@@ -76,6 +79,10 @@ const Cart = () => {
       navigate('/address?from=/summary');
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>

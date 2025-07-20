@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/ui/Spinner";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import StateSelect from "../components/address-ui/StateSelect";
@@ -43,6 +44,7 @@ const textFieldStyles = {
 const Address = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
   const searchParams = new URLSearchParams(location.search);
   const fromPage = searchParams.get('from') || '/cart'; // Default to cart if no 'from' param
   
@@ -78,6 +80,7 @@ const Address = () => {
         setShowAlternateInput(true);
       }
     }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -126,6 +129,10 @@ const Address = () => {
       }
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
