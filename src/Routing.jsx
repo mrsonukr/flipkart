@@ -29,7 +29,13 @@ const Routing = () => {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex justify-center items-center">
+          <div className="w-10 h-10 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+        </div>
+      }
+    >
       <Routes>
         <Route path="/homepage" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
@@ -41,6 +47,7 @@ const Routing = () => {
         <Route path="/details/" element={<OrderDetails />} />
         <Route path="/pay/" element={<PayWaiting />} />
         <Route path="/success" element={<OrderPlaced />} />
+        <Route path="*" element={<Navigate to="/homepage" replace />} />
       </Routes>
     </Suspense>
   );
