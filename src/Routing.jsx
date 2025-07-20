@@ -18,7 +18,7 @@ const Routing = () => {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      // External redirect to Flipkart homepage
+      // External redirect to Flipkart dsghr763wdsvfht
       window.location.href = "https://www.flipkart.com/";
     }
   }, [location.pathname]);
@@ -37,7 +37,7 @@ const Routing = () => {
       }
     >
       <Routes>
-        <Route path="/homepage" element={<Home />} />
+        <Route path="/dsghr763wdsvfht" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/address" element={<AddressForm />} />

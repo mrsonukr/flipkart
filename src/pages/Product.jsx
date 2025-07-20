@@ -79,8 +79,8 @@ const Product = () => {
                 Retry
               </button>
             )}
-            <Link to="/homepage" className="text-blue-600 hover:underline mt-4 inline-block">
-              Go back to homepage
+            <Link to="/dsghr763wdsvfht" className="text-blue-600 hover:underline mt-4 inline-block">
+              Go back to dsghr763wdsvfht
             </Link>
           </div>
         </div>

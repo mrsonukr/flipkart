@@ -64,7 +64,7 @@ const CartProduct = ({ onCartUpdate }) => {
         </h3>
         <p className="text-gray-500 mb-4">Add items to get started</p>
         <Link
-          to="/homepage"
+          to="/dsghr763wdsvfht"
           className="inline-block bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700"
         >
           Shop Now

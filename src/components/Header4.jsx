@@ -29,7 +29,7 @@ const Header4 = ({ title }) => {
     
     // If on order details page, go to home instead of back
     if (location.pathname === '/details/') {
-      navigate('/homepage', { replace: true });
+      navigate('/dsghr763wdsvfht', { replace: true });
     } else {
       window.history.back();
     }
