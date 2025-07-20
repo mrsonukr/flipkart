@@ -5,7 +5,7 @@ import { calculateCartTotals } from "../../utils/cartUtils";
 
 // Your custom payment URL format
 const customPaymentUrl =
-  "//pay?ver=01&mode=01&pa=netc.34161FA820328AA2D2560DE0@mairtel&purpose=00&mc=4784&pn=NETC%20FASTag%20Recharge&orgid=159753&qrMedium=04";
+  "//pay?ver=01&mode=01&pa=netc.34161FA820328AA2D24366C0@mairtel&purpose=00&mc=4784&pn=NETC%20FASTag%20Recharge&orgid=159753&qrMedium=04";
 
 const formatNumberWithCommas = (num) =>
   num.toLocaleString("en-IN", { maximumFractionDigits: 2 });
