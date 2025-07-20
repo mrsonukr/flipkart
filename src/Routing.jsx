@@ -1,6 +1,6 @@
 // src/Routing.jsx
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./components/OptimizedHome"));
@@ -18,7 +18,8 @@ const Routing = () => {
   return (
     <Suspense fallback={<div></div>}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="https://www.flipkart.com/" replace />} />
+        <Route path="/homepage" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/address" element={<AddressForm />} />

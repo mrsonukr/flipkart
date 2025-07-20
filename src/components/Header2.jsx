@@ -74,7 +74,7 @@ const Header2 = () => {
               </a>
 
               {/* Logo */}
-              <Link to="/" className="mx-3">
+              <Link to="/homepage" className="mx-3">
                 <img
                   src="/assets/images/img/favicon.png"
                   alt="logo"

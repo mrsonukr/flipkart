@@ -51,7 +51,7 @@ const ProductGrid = () => {
         const now = Date.now();
         
         // Only restore if state is less than 30 minutes old and from home page
-        if (now - state.timestamp < 1800000 && state.allProducts && state.displayedProducts && state.pathname === '/') {
+        if (now - state.timestamp < 1800000 && state.allProducts && state.displayedProducts && state.pathname === '/homepage') {
           console.log('Restoring grid state with', state.displayedProducts.length, 'products');
           setAllProducts(state.allProducts);
           setDisplayedProducts(state.displayedProducts);
@@ -127,7 +127,7 @@ const ProductGrid = () => {
   // Main effect - try to restore state first, then load if needed
   useEffect(() => {
     // Only run on home page
-    if (location.pathname === '/') {
+    if (location.pathname === '/homepage') {
       // Always try to restore state first
       if (restoreGridState()) {
         setLoading(false);
@@ -141,7 +141,7 @@ const ProductGrid = () => {
 
   // Save state when products change
   useEffect(() => {
-    if (!loading && displayedProducts.length > 0 && location.pathname === '/') {
+    if (!loading && displayedProducts.length > 0 && location.pathname === '/homepage') {
       saveGridState();
     }
   }, [displayedProducts, loading, saveGridState, location.pathname]);
@@ -149,13 +149,13 @@ const ProductGrid = () => {
   // Handle page visibility change to save state when leaving
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden && displayedProducts.length > 0 && location.pathname === '/') {
+      if (document.hidden && displayedProducts.length > 0 && location.pathname === '/homepage') {
         saveGridState();
       }
     };
 
     const handleBeforeUnload = () => {
-      if (displayedProducts.length > 0 && location.pathname === '/') {
+      if (displayedProducts.length > 0 && location.pathname === '/homepage') {
         saveGridState();
       }
     };

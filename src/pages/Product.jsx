@@ -80,7 +80,8 @@ const Product = () => {
               </button>
             )}
             <Link to="/" className="text-blue-600 hover:underline mt-4 inline-block">
-              Go back to home
+            <Link to="/homepage" className="text-blue-600 hover:underline mt-4 inline-block">
+              Go back to homepage
             </Link>
           </div>
         </div>
