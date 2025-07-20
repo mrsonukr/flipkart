@@ -42,8 +42,7 @@ const Header = () => {
         </div>
       </header>
       <div className="w-full py-1 px-2 bg-white" id="customSearchGuid">
-        <Link
-          to="/search"
+        <div
           className="mx-[10px] block w-[calc(100%-20px)] h-10 text-sm text-[#777] text-left rounded-[10px] bg-white relative overflow-hidden whitespace-nowrap"
         >
           {/* Search Icon inside input */}
@@ -58,7 +57,7 @@ const Header = () => {
             placeholder="Search for Products, Brands and More"
             readOnly
           />
-        </Link>
+        </div>
       </div>
     </div>
   );
