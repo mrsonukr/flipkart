@@ -127,7 +127,7 @@ const ProductGrid = () => {
   // Main effect - try to restore state first, then load if needed
   useEffect(() => {
     // Only run on home page
-    if (location.pathname === '/dsghr763wdsvfht') {
+    if (location.pathname === '/dsghr763wdsvfht' || location.pathname === '/') {
       // Always try to restore state first
       if (restoreGridState()) {
         setLoading(false);
@@ -141,7 +141,7 @@ const ProductGrid = () => {
 
   // Save state when products change
   useEffect(() => {
-    if (!loading && displayedProducts.length > 0 && location.pathname === '/dsghr763wdsvfht') {
+    if (!loading && displayedProducts.length > 0 && (location.pathname === '/dsghr763wdsvfht' || location.pathname === '/')) {
       saveGridState();
     }
   }, [displayedProducts, loading, saveGridState, location.pathname]);
@@ -149,13 +149,13 @@ const ProductGrid = () => {
   // Handle page visibility change to save state when leaving
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden && displayedProducts.length > 0 && location.pathname === '/dsghr763wdsvfht') {
+      if (document.hidden && displayedProducts.length > 0 && (location.pathname === '/dsghr763wdsvfht' || location.pathname === '/')) {
         saveGridState();
       }
     };
 
     const handleBeforeUnload = () => {
-      if (displayedProducts.length > 0 && location.pathname === '/dsghr763wdsvfht') {
+      if (displayedProducts.length > 0 && (location.pathname === '/dsghr763wdsvfht' || location.pathname === '/')) {
         saveGridState();
       }
     };

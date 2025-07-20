@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 // Lazy load components
 const Home = lazy(() => import("./components/OptimizedHome"));
@@ -23,20 +24,12 @@ const Routing = () => {
     }
   }, [location.pathname]);
 
-  // While redirecting, render nothing or loading
-  if (location.pathname === "/") {
-    return null;
-  }
-
   return (
     <Suspense
-      fallback={
-        <div className="fixed inset-0 bg-white flex justify-center items-center z-50">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
-        </div>
-      }
+      fallback={<LoadingSpinner fullScreen={true} size="large" />}
     >
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/dsghr763wdsvfht" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />

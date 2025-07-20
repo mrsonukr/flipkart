@@ -4,45 +4,6 @@ import { BrowserRouter } from 'react-router-dom'; // <-- ✅ import this
 import './index.css';
 import App from './App.jsx';
 import 'typeface-roboto';
-import { preloadCriticalResources, performanceMonitor } from './utils/performanceUtils';
-
-// Start performance monitoring
-performanceMonitor.start('app-initialization');
-
-// Preload critical resources for faster loading
-preloadCriticalResources();
-
-// Optimize for first paint
-const optimizeFirstPaint = () => {
-  // Remove unused CSS for first paint
-  const unusedCSS = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])');
-  unusedCSS.forEach(link => {
-    link.media = 'print';
-    link.onload = function() {
-      this.media = 'all';
-    };
-  });
-  
-  // Prefetch DNS for external resources
-  const dnsPrefetch = ['//fonts.googleapis.com', '//fonts.gstatic.com', '//apiv2.instaguru.shop'];
-  dnsPrefetch.forEach(domain => {
-    const link = document.createElement('link');
-    link.rel = 'dns-prefetch';
-    link.href = domain;
-    document.head.appendChild(link);
-  });
-  
-  // Add preconnect for API if not already present
-  if (!document.querySelector('link[href="https://apiv2.instaguru.shop"]')) {
-    const preconnect = document.createElement('link');
-    preconnect.rel = 'preconnect';
-    preconnect.href = 'https://apiv2.instaguru.shop';
-    preconnect.crossOrigin = 'anonymous';
-    document.head.appendChild(preconnect);
-  }
-};
-
-optimizeFirstPaint();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -51,8 +12,3 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>
 );
-
-// End performance monitoring
-setTimeout(() => {
-  performanceMonitor.end('app-initialization');
-}, 100);

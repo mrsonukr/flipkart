@@ -4,12 +4,17 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  css: {
+    postcss: './postcss.config.js',
+  },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
     exclude: ['@lottiefiles/lottie-player']
   },
   build: {
     target: 'es2015',
+    cssCodeSplit: false,
+    assetsInlineLimit: 0,
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -21,6 +26,17 @@ export default defineConfig({
     rollupOptions: {
       output: {
         experimentalMinChunkSize: 1000,
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const extType = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          if (/css/i.test(extType)) {
+            return `assets/css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
         manualChunks: {
           // Core vendor libraries
           vendor: ['react', 'react-dom', 'react-router-dom'],
@@ -69,7 +85,7 @@ export default defineConfig({
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'SAMEORIGIN',
       'X-XSS-Protection': '1; mode=block',
-      'Cache-Control': 'public, max-age=31536000',
+      'Cache-Control': 'no-cache',
     }
   }
 })

@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure CSS is loaded properly */
+:root {
+  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
 /* Critical performance optimizations */
 * {
   box-sizing: border-box;
@@ -12,13 +17,15 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-family);
 }
 
 body {
   margin: 0;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-family);
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
+  background-color: white;
 }
 
 img {
