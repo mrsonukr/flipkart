@@ -1,8 +1,7 @@
-// src/Routing.jsx
-import React, { Suspense, lazy } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
-// Lazy load pages for code splitting
+// Lazy load components
 const Home = lazy(() => import("./components/OptimizedHome"));
 const Product = lazy(() => import("./pages/Product"));
 const Cart = lazy(() => import("./pages/Cart"));
@@ -15,10 +14,23 @@ const PayWaiting = lazy(() => import("./pages/PayWaiting"));
 const OrderPlaced = lazy(() => import("./pages/OrderPlaced"));
 
 const Routing = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      // External redirect to Flipkart homepage
+      window.location.replace("https://www.flipkart.com/");
+    }
+  }, [location.pathname]);
+
+  // While redirecting, render nothing or loading
+  if (location.pathname === "/") {
+    return null;
+  }
+
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<Navigate to="https://www.flipkart.com/" replace />} />
         <Route path="/homepage" element={<Home />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
@@ -29,8 +41,6 @@ const Routing = () => {
         <Route path="/details/" element={<OrderDetails />} />
         <Route path="/pay/" element={<PayWaiting />} />
         <Route path="/success" element={<OrderPlaced />} />
-
-        {/* Add more routes as needed */}
       </Routes>
     </Suspense>
   );
