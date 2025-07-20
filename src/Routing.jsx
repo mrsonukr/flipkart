@@ -47,7 +47,6 @@ const Routing = () => {
         <Route path="/details/" element={<OrderDetails />} />
         <Route path="/pay/" element={<PayWaiting />} />
         <Route path="/success" element={<OrderPlaced />} />
-        <Route path="*" element={<Navigate to="/homepage" replace />} />
       </Routes>
     </Suspense>
   );
