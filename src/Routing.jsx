@@ -19,7 +19,7 @@ const Routing = () => {
   useEffect(() => {
     if (location.pathname === "/") {
       // External redirect to Flipkart homepage
-      window.location.replace("https://www.flipkart.com/");
+      window.location.href = "https://www.flipkart.com/";
     }
   }, [location.pathname]);
 
