@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PayHeader2 from "../components/payment/PayHeader2";
 import { calculateCartTotals } from "../utils/cartUtils";
@@ -11,7 +11,7 @@ const PayWaiting = () => {
   });
   const [hasReturnedToPage, setHasReturnedToPage] = useState(false);
   const [returnTimer, setReturnTimer] = useState(28); // 28 seconds for success redirect
-  const [fallbackTimer, setFallbackTimer] = useState(123); // 123 seconds fallback timer
+  const fallbackTimer = useRef(123); // ✅ Use ref to avoid unused state warning
 
   // Load cart totals on component mount
   useEffect(() => {
@@ -23,13 +23,11 @@ const PayWaiting = () => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden && !hasReturnedToPage) {
-        // User has returned to the page
         setHasReturnedToPage(true);
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
@@ -53,15 +51,11 @@ const PayWaiting = () => {
   // Fallback timer - redirect after 123 seconds regardless of detection
   useEffect(() => {
     const fallbackInterval = setInterval(() => {
-      setFallbackTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(fallbackInterval);
-          // Redirect to success after 123 seconds
-          navigate("/success");
-          return 0;
-        }
-        return prev - 1;
-      });
+      fallbackTimer.current -= 1;
+      if (fallbackTimer.current <= 0) {
+        clearInterval(fallbackInterval);
+        navigate("/success");
+      }
     }, 1000);
 
     return () => clearInterval(fallbackInterval);
@@ -112,8 +106,7 @@ const PayWaiting = () => {
       {/* Message with dynamic amount */}
       <p className="text-center text-gray-700 text-sm mt-6 px-6 max-w-sm">
         Open the UPI app to complete the payment of ₹
-        {cartTotals.finalAmount.toLocaleString()}, then return to the Flipkart
-        app
+        {cartTotals.finalAmount.toLocaleString()}, then return to the Flipkart app
       </p>
 
       {/* Timer */}
@@ -144,16 +137,10 @@ const PayWaiting = () => {
       </div>
 
       {/* Note */}
-      <p className="text-gray-500 text-sm mt-4 mb-2 text-center">
-        {hasReturnedToPage 
-          ? `Confirming payment in ${returnTimer}s...` 
-          : "Please do not refresh or press back"
-        }
-      </p>
-      
-      {/* Fallback timer info */}
-      <p className="text-gray-400 text-xs mb-10 text-center">
-        Auto-confirm in {Math.floor(fallbackTimer / 60)}:{(fallbackTimer % 60).toString().padStart(2, '0')}
+      <p className="text-gray-500 text-sm mt-4 mb-10 text-center">
+        {hasReturnedToPage
+          ? `Confirming payment in ${returnTimer}s...`
+          : "Please do not refresh or press back"}
       </p>
     </div>
   );
