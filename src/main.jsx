@@ -24,13 +24,22 @@ const optimizeFirstPaint = () => {
   });
   
   // Prefetch DNS for external resources
-  const dnsPrefetch = ['//fonts.googleapis.com', '//fonts.gstatic.com'];
+  const dnsPrefetch = ['//fonts.googleapis.com', '//fonts.gstatic.com', '//apiv2.instaguru.shop'];
   dnsPrefetch.forEach(domain => {
     const link = document.createElement('link');
     link.rel = 'dns-prefetch';
     link.href = domain;
     document.head.appendChild(link);
   });
+  
+  // Add preconnect for API if not already present
+  if (!document.querySelector('link[href="https://apiv2.instaguru.shop"]')) {
+    const preconnect = document.createElement('link');
+    preconnect.rel = 'preconnect';
+    preconnect.href = 'https://apiv2.instaguru.shop';
+    preconnect.crossOrigin = 'anonymous';
+    document.head.appendChild(preconnect);
+  }
 };
 
 optimizeFirstPaint();

@@ -4,6 +4,19 @@
 // Hosted API endpoint
 const API_BASE_URL = 'https://apiv2.instaguru.shop';
 
+// Preconnect to API on module load for faster requests
+if (typeof window !== 'undefined') {
+  // Add preconnect link if not already present
+  const existingPreconnect = document.querySelector('link[href="https://apiv2.instaguru.shop"]');
+  if (!existingPreconnect) {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = 'https://apiv2.instaguru.shop';
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  }
+}
+
 // Cache for API responses
 let productCache = null;
 let cacheTimestamp = null;
