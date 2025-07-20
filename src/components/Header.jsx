@@ -58,8 +58,6 @@ const Header = () => {
             placeholder="Search for Products, Brands and More"
             readOnly
           />
-        <Link to="/homepage">
-          <img className=" h-8" src="/assets/images/svg/flogo.png" alt="" />
         </Link>
       </div>
     </div>
