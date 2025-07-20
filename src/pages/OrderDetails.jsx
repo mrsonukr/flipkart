@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../components/ui/Spinner";
 import Header4 from "../components/Header4";
 import OrderStatus from "../components/myorder/OrderStatus";
 import { ChevronRight } from "lucide-react";
@@ -8,7 +7,6 @@ import { getCurrentOrder } from "../utils/orderUtils";
 import { getDeliveryDate } from "../utils/productUtils";
 const OrderDetails = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [orderData, setOrderData] = useState(null);
   const [orderProduct, setOrderProduct] = useState(null);
 
@@ -19,7 +17,6 @@ const OrderDetails = () => {
       setOrderData(currentOrder);
       setOrderProduct(currentOrder.products[0]); // Show first product
     }
-    setLoading(false);
 
     // Override browser back button to go to home
     const handlePopState = () => {
@@ -55,12 +52,15 @@ const OrderDetails = () => {
 
   if (!orderData || !orderProduct) {
     return (
-      <Spinner />
+      <div className="bg-gray-200">
+        <Header4 title="" />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <p className="text-gray-600">Loading order details...</p>
+          </div>
+        </div>
+      </div>
     );
-  }
-
-  if (loading) {
-    return <Spinner />;
   }
 
   return (

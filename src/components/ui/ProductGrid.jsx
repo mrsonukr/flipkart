@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ProductCard from "./ProductCard";
 import { getAllProducts, getSalePrice, getMRP, getDiscountPercentage, formatPrice, getDeliveryDate } from "../../utils/productUtils";
 import { performanceMonitor } from "../../utils/performanceUtils";
-import Spinner from "./Spinner";
+import LoadingSpinner from "../LoadingSpinner";
 import { useLocation } from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 6; // Reduced for faster initial load
@@ -237,7 +237,11 @@ const ProductGrid = () => {
 
   if (loading) {
     return (
-      <Spinner />
+      <div className="border border-gray-200 bg-white">
+        <div className="grid grid-cols-2 gap-0 min-h-[400px]">
+          {/* Show nothing while loading - just empty space */}
+        </div>
+      </div>
     );
   }
 

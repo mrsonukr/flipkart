@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Spinner from "../components/ui/Spinner";
 import Header2 from "../components/Header2";
 import ProductSlider from "../components/product-ui/ProductSlider";
 import ProductDetails from "../components/product-ui/ProductDetails";
@@ -53,7 +52,10 @@ const Product = () => {
 
   if (loading) {
     return (
-      <Spinner />
+      <div>
+        <Header2 />
+        <div></div>
+      </div>
     );
   }
 

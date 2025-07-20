@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Spinner from "../components/ui/Spinner";
 import Header3 from "../components/Header3";
 import AddressBar from "../components/cart-ui/AddressBar";
 import SummaryProduct from "../components/cart-ui/SummaryProduct";
@@ -8,7 +7,6 @@ import PriceDetails from "../components/cart-ui/PriceDetails";
 import { calculateCartTotals } from "../utils/cartUtils";
 
 const Summary = () => {
-  const [loading, setLoading] = useState(true);
   const [cartTotals, setCartTotals] = useState({
     totalMRP: 0,
     totalDiscount: 0,
@@ -22,7 +20,6 @@ const Summary = () => {
 
   useEffect(() => {
     updateCartTotals();
-    setLoading(false);
     
     // Listen for cart updates
     const handleCartUpdate = () => {
@@ -65,10 +62,6 @@ const Summary = () => {
       </div>
     </div>
   );
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   return (
     <div>
