@@ -1,69 +1,25 @@
-// API client to fetch data from hosted endpoint
+// Mock API to prevent direct JSON access
 // import { encryptData, decryptData } from '../utils/securityUtils';
 
-// Hosted API endpoint
-const API_BASE_URL = 'https://apiv2.instaguru.shop';
+// Encrypted product data storage
+let productData = null;
 
-// Preconnect to API on module load for faster requests
-if (typeof window !== 'undefined') {
-  // Add preconnect link if not already present
-  const existingPreconnect = document.querySelector('link[href="https://apiv2.instaguru.shop"]');
-  if (!existingPreconnect) {
-    const link = document.createElement('link');
-    link.rel = 'preconnect';
-    link.href = 'https://apiv2.instaguru.shop';
-    link.crossOrigin = 'anonymous';
-    document.head.appendChild(link);
-  }
-}
-
-// Cache for API responses
-let productCache = null;
-let cacheTimestamp = null;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-// Initialize data from hosted API
-const fetchProductsFromAPI = async () => {
-  const now = Date.now();
-  
-  // Return cache if valid
-  if (productCache && cacheTimestamp && (now - cacheTimestamp) < CACHE_DURATION) {
-    return productCache;
-  }
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/products`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+// Initialize encrypted data
+const initializeData = async () => {
+  if (!productData) {
+    try {
+      // Import the JSON data directly
+      const { default: data } = await import('../data/products.json');
+      
+      // Store data directly
+      productData = data;
+    } catch (error) {
+      console.error('Failed to load product data:', error);
+      // Fallback data
+      productData = {
+        products: []
+      };
     }
-
-    const data = await response.json();
-    
-    // Cache the response
-    productCache = data;
-    cacheTimestamp = now;
-    
-    return data;
-  } catch (error) {
-    console.error('Failed to fetch from API:', error);
-    
-    // Fallback: try to use any cached data even if expired
-    if (productCache) {
-      console.warn('Using expired cache due to API failure');
-      return productCache;
-    }
-    
-    // Ultimate fallback: return empty structure
-    return {
-      products: []
-    };
   }
 };
 
@@ -71,12 +27,12 @@ const fetchProductsFromAPI = async () => {
 export const mockApi = {
   // Get all products
   async getProducts() {
+    await initializeData();
+    
     try {
-      const data = await fetchProductsFromAPI();
-      
       return {
         success: true,
-        data: data?.products || [],
+        data: productData?.products || [],
         timestamp: new Date().toISOString()
       };
     } catch (error) {
@@ -90,9 +46,10 @@ export const mockApi = {
 
   // Get product by ID
   async getProductById(id) {
+    await initializeData();
+    
     try {
-      const data = await fetchProductsFromAPI();
-      const product = data?.products?.find(p => p.id === id);
+      const product = productData?.products?.find(p => p.id === id);
       
       if (product) {
         return {
@@ -118,9 +75,10 @@ export const mockApi = {
 
   // Get products by category
   async getProductsByCategory(category) {
+    await initializeData();
+    
     try {
-      const data = await fetchProductsFromAPI();
-      const products = data?.products?.filter(p => p.category === category) || [];
+      const products = productData?.products?.filter(p => p.category === category) || [];
       
       return {
         success: true,
@@ -138,9 +96,10 @@ export const mockApi = {
 
   // Search products
   async searchProducts(query) {
+    await initializeData();
+    
     try {
-      const data = await fetchProductsFromAPI();
-      const products = data?.products?.filter(p => 
+      const products = productData?.products?.filter(p => 
         p.name.toLowerCase().includes(query.toLowerCase()) ||
         p.brand.toLowerCase().includes(query.toLowerCase()) ||
         p.category.toLowerCase().includes(query.toLowerCase())
