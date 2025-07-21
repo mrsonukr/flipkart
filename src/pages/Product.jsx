@@ -11,6 +11,7 @@ import VariantSelector from "../components/product-ui/VariantSelector";
 import SizeSelector from "../components/product-ui/SizeSelector";
 import BottomButtons from "../components/product-ui/BottomButtons";
 import { getProductById } from "../utils/productUtils";
+import RatingSummary from "../components/product-ui/RatingSummary";
 
 const Product = () => {
   const { id } = useParams();
@@ -128,6 +129,7 @@ const Product = () => {
       <div className="h-2 bg-gray-100"></div>
       <ProductPolicy />
       <div className="h-2 bg-gray-100"></div>
+      <RatingSummary />
       <Reviews />
       <BottomButtons product={product} selectedSize={selectedSize} />
     </div>
