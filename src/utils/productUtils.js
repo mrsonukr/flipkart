@@ -130,3 +130,13 @@ export const getRandomProducts = async (count = 6, excludeId = null) => {
   const shuffled = [...products].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
 };
+
+// Fisher-Yates shuffle algorithm for better randomization
+export const shuffleProducts = (products) => {
+  const shuffled = [...products];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};

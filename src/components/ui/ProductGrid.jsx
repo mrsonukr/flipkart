@@ -8,6 +8,19 @@ import { useLocation } from "react-router-dom";
 const PRODUCTS_PER_PAGE = 6; // Reduced for faster initial load
 const GRID_STATE_KEY = 'product_grid_state_v2';
 
+// Toggle to control random display - set to true for random, false for original order
+const SHOW_PRODUCTS_RANDOMLY = true;
+
+// Fisher-Yates shuffle algorithm for randomizing products
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const ProductGrid = () => {
   const location = useLocation();
   const [allProducts, setAllProducts] = useState([]);
@@ -33,7 +46,8 @@ const ProductGrid = () => {
       hasMore,
       scrollPosition: window.scrollY,
       timestamp: Date.now(),
-      pathname: location.pathname
+      pathname: location.pathname,
+      randomMode: SHOW_PRODUCTS_RANDOMLY
     };
     try {
       sessionStorage.setItem(GRID_STATE_KEY, JSON.stringify(state));
@@ -50,8 +64,8 @@ const ProductGrid = () => {
         const state = JSON.parse(savedState);
         const now = Date.now();
         
-        // Only restore if state is less than 30 minutes old and from home page
-        if (now - state.timestamp < 1800000 && state.allProducts && state.displayedProducts && state.pathname === '/dsghr763wdsvfht') {
+        // Only restore if state is less than 30 minutes old, from home page, and random setting matches
+        if (now - state.timestamp < 1800000 && state.allProducts && state.displayedProducts && state.pathname === '/dsghr763wdsvfht' && state.randomMode === SHOW_PRODUCTS_RANDOMLY) {
           console.log('Restoring grid state with', state.displayedProducts.length, 'products');
           setAllProducts(state.allProducts);
           setDisplayedProducts(state.displayedProducts);
@@ -171,16 +185,25 @@ const ProductGrid = () => {
   const loadInitialProducts = async () => {
     try {
       setLoading(true);
+      
+      // Clear any existing state when loading fresh products
+      clearGridState();
+      
       if (isFirstLoad) {
         performanceMonitor.start('initial-product-loading');
       }
       
       const data = await getAllProducts();
       console.log('Loaded products from API:', data.length);
-      setAllProducts(data);
-      setDisplayedProducts(data.slice(0, PRODUCTS_PER_PAGE));
+      
+      // Conditionally shuffle products based on toggle
+      const processedData = SHOW_PRODUCTS_RANDOMLY ? shuffleArray(data) : data;
+      console.log('Products processed with random =', SHOW_PRODUCTS_RANDOMLY);
+      
+      setAllProducts(processedData);
+      setDisplayedProducts(processedData.slice(0, PRODUCTS_PER_PAGE));
       setCurrentPage(1);
-      setHasMore(data.length > PRODUCTS_PER_PAGE);
+      setHasMore(processedData.length > PRODUCTS_PER_PAGE);
       
       setError(null);
       if (isFirstLoad) {

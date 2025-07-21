@@ -107,7 +107,7 @@ const Product = () => {
       <ProductDetails product={product} />
       
       {/* Show variant selector only for mobile category */}
-      {product.category === 'mobile' && (
+      {product.category === 'mobile' && (colorVariants.length > 0 || storageVariants.length > 0) && (
         <VariantSelector 
           color={selectedColor} 
           storage={selectedStorage}

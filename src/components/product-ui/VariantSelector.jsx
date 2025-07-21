@@ -9,6 +9,11 @@ const VariantSelector = ({
   const [selectedColor, setSelectedColor] = useState(color);
   const [selectedStorage, setSelectedStorage] = useState(storage);
 
+  // Don't render anything if there are no variants
+  if (colorVariants.length === 0 && storageVariants.length === 0) {
+    return null;
+  }
+
   return (
     <div className="bg-white">
       {/* Top gray line */}
