@@ -76,13 +76,15 @@ const OrderStatus = ({ orderDate, deliveryDate }) => {
                     <div className="bg-gray-300 flex-1" />
                   </div>
                 ) : (
-                  <div
-                    className={`w-[2px] flex-1 my-[1.5px] ${
-                      isDashed
-                        ? "border-l-[1.5px] border-dashed border-gray-300"
-                        : "bg-gray-300"
-                    }`}
-                  />
+                  <div className="w-[2px] flex-1 my-[1.5px]">
+                    <div
+                      className={`h-full w-full ${
+                        isDashed
+                          ? "bg-[repeating-linear-gradient(to_bottom,_#d1d5db_0px,_#d1d5db_4px,_transparent_4px,_transparent_8px)]"
+                          : "bg-gray-300"
+                      }`}
+                    />
+                  </div>
                 ))}
             </div>
 

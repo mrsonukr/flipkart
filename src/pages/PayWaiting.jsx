@@ -10,16 +10,15 @@ const PayWaiting = () => {
     finalAmount: 0,
   });
   const [hasReturnedToPage, setHasReturnedToPage] = useState(false);
-  const [returnTimer, setReturnTimer] = useState(28); // 28 seconds for success redirect
-  const fallbackTimer = useRef(123); // ✅ Use ref to avoid unused state warning
+  const fallbackTimer = useRef(123); // Fallback redirect timer
 
-  // Load cart totals on component mount
+  // Load cart totals
   useEffect(() => {
     const totals = calculateCartTotals();
     setCartTotals(totals);
   }, []);
 
-  // Handle page visibility change to detect when user returns
+  // Detect user returning to page
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden && !hasReturnedToPage) {
@@ -33,7 +32,7 @@ const PayWaiting = () => {
     };
   }, [hasReturnedToPage]);
 
-  // Main 5-minute timer
+  // Main 5-minute countdown (used only for circle UI)
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -48,7 +47,7 @@ const PayWaiting = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Fallback timer - redirect after 123 seconds regardless of detection
+  // Fallback: redirect after 123 seconds
   useEffect(() => {
     const fallbackInterval = setInterval(() => {
       fallbackTimer.current -= 1;
@@ -61,23 +60,14 @@ const PayWaiting = () => {
     return () => clearInterval(fallbackInterval);
   }, [navigate]);
 
-  // 28-second success redirect timer when user returns
+  // Redirect 28 seconds after user returns
   useEffect(() => {
     if (hasReturnedToPage) {
-      const successTimer = setInterval(() => {
-        setReturnTimer((prev) => {
-          if (prev <= 1) {
-            clearInterval(successTimer);
-            setTimeout(() => {
-              navigate("/success");
-            }, 0);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+      const timeout = setTimeout(() => {
+        navigate("/success");
+      }, 28000); // 28 seconds
 
-      return () => clearInterval(successTimer);
+      return () => clearTimeout(timeout);
     }
   }, [hasReturnedToPage, navigate]);
 
@@ -109,7 +99,7 @@ const PayWaiting = () => {
         {cartTotals.finalAmount.toLocaleString()}, then return to the Flipkart app
       </p>
 
-      {/* Timer */}
+      {/* Circle countdown */}
       <div className="mt-6 relative w-32 h-32">
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
           <circle
@@ -136,11 +126,9 @@ const PayWaiting = () => {
         </div>
       </div>
 
-      {/* Note */}
+      {/* Static note (no timer shown) */}
       <p className="text-gray-500 text-sm mt-4 mb-10 text-center">
-        {hasReturnedToPage
-          ? `Confirming payment in ${returnTimer}s...`
-          : "Please do not refresh or press back"}
+        Please do not refresh or press back
       </p>
     </div>
   );
