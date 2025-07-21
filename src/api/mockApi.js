@@ -3,39 +3,62 @@
 
 // Encrypted product data storage
 let productData = null;
+let dataLoadPromise = null;
 
 // Initialize encrypted data
 const initializeData = async () => {
-  if (!productData) {
+  if (productData) {
+    return productData;
+  }
+
+  // If already loading, return the existing promise
+  if (dataLoadPromise) {
+    return dataLoadPromise;
+  }
+
+  dataLoadPromise = (async () => {
     try {
       // Import the JSON data directly
       const { default: data } = await import('../data/products.json');
       
+      // Validate data structure
+      if (!data || !Array.isArray(data.products)) {
+        throw new Error('Invalid data structure: products array not found');
+      }
+
       // Store data directly
       productData = data;
+      return productData;
     } catch (error) {
       console.error('Failed to load product data:', error);
       // Fallback data
       productData = {
         products: []
       };
+      return productData;
+    } finally {
+      // Clear the promise so future calls can retry if needed
+      dataLoadPromise = null;
     }
-  }
+  })();
+
+  return dataLoadPromise;
 };
 
 // Mock API endpoints
 export const mockApi = {
   // Get all products
   async getProducts() {
-    await initializeData();
-    
     try {
+      const data = await initializeData();
+      
       return {
         success: true,
-        data: productData?.products || [],
+        data: data?.products || [],
         timestamp: new Date().toISOString()
       };
     } catch (error) {
+      console.error('Error in getProducts:', error);
       return {
         success: false,
         error: 'Failed to fetch products',
@@ -46,10 +69,17 @@ export const mockApi = {
 
   // Get product by ID
   async getProductById(id) {
-    await initializeData();
-    
     try {
-      const product = productData?.products?.find(p => p.id === id);
+      if (!id) {
+        return {
+          success: false,
+          error: 'Product ID is required',
+          data: null
+        };
+      }
+
+      const data = await initializeData();
+      const product = data?.products?.find(p => p.id === id);
       
       if (product) {
         return {
@@ -65,6 +95,7 @@ export const mockApi = {
         };
       }
     } catch (error) {
+      console.error('Error in getProductById:', error);
       return {
         success: false,
         error: 'Failed to fetch product',
@@ -75,10 +106,19 @@ export const mockApi = {
 
   // Get products by category
   async getProductsByCategory(category) {
-    await initializeData();
-    
     try {
-      const products = productData?.products?.filter(p => p.category === category) || [];
+      if (!category) {
+        return {
+          success: false,
+          error: 'Category is required',
+          data: []
+        };
+      }
+
+      const data = await initializeData();
+      const products = data?.products?.filter(p => 
+        p.category && p.category.toLowerCase() === category.toLowerCase()
+      ) || [];
       
       return {
         success: true,
@@ -86,6 +126,7 @@ export const mockApi = {
         timestamp: new Date().toISOString()
       };
     } catch (error) {
+      console.error('Error in getProductsByCategory:', error);
       return {
         success: false,
         error: 'Failed to fetch products by category',
@@ -96,14 +137,39 @@ export const mockApi = {
 
   // Search products
   async searchProducts(query) {
-    await initializeData();
-    
     try {
-      const products = productData?.products?.filter(p => 
-        p.name.toLowerCase().includes(query.toLowerCase()) ||
-        p.brand.toLowerCase().includes(query.toLowerCase()) ||
-        p.category.toLowerCase().includes(query.toLowerCase())
-      ) || [];
+      if (!query || typeof query !== 'string') {
+        return {
+          success: false,
+          error: 'Search query is required',
+          data: []
+        };
+      }
+
+      const data = await initializeData();
+      const searchTerm = query.toLowerCase().trim();
+      
+      if (searchTerm.length === 0) {
+        return {
+          success: true,
+          data: [],
+          timestamp: new Date().toISOString()
+        };
+      }
+
+      const products = data?.products?.filter(p => {
+        if (!p) return false;
+        
+        const searchableFields = [
+          p.name,
+          p.brand,
+          p.category
+        ].filter(Boolean);
+
+        return searchableFields.some(field => 
+          field.toLowerCase().includes(searchTerm)
+        );
+      }) || [];
       
       return {
         success: true,
@@ -111,6 +177,7 @@ export const mockApi = {
         timestamp: new Date().toISOString()
       };
     } catch (error) {
+      console.error('Error in searchProducts:', error);
       return {
         success: false,
         error: 'Failed to search products',
@@ -120,29 +187,46 @@ export const mockApi = {
   }
 };
 
-// Rate limiting
+// Rate limiting with better error handling
 const rateLimiter = {
   requests: new Map(),
   
   isAllowed(endpoint, limit = 100, windowMs = 60000) {
-    const now = Date.now();
-    const key = `${endpoint}_${Math.floor(now / windowMs)}`;
-    
-    const current = this.requests.get(key) || 0;
-    if (current >= limit) {
-      return false;
-    }
-    
-    this.requests.set(key, current + 1);
-    
-    // Clean old entries
-    for (const [k, v] of this.requests.entries()) {
-      if (k.split('_')[1] < Math.floor((now - windowMs) / windowMs)) {
-        this.requests.delete(k);
+    try {
+      const now = Date.now();
+      const key = `${endpoint}_${Math.floor(now / windowMs)}`;
+      
+      const current = this.requests.get(key) || 0;
+      if (current >= limit) {
+        return false;
       }
+      
+      this.requests.set(key, current + 1);
+      
+      // Clean old entries periodically
+      if (Math.random() < 0.1) { // 10% chance to clean up
+        this.cleanup(now, windowMs);
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Rate limiter error:', error);
+      return true; // Allow request if rate limiter fails
     }
-    
-    return true;
+  },
+
+  cleanup(now, windowMs) {
+    try {
+      const cutoff = Math.floor((now - windowMs) / windowMs);
+      for (const [key] of this.requests.entries()) {
+        const keyTime = parseInt(key.split('_')[1]);
+        if (keyTime < cutoff) {
+          this.requests.delete(key);
+        }
+      }
+    } catch (error) {
+      console.error('Rate limiter cleanup error:', error);
+    }
   }
 };
 
@@ -152,7 +236,7 @@ export const protectedApi = {
     if (!rateLimiter.isAllowed('getProducts')) {
       return {
         success: false,
-        error: 'Rate limit exceeded',
+        error: 'Rate limit exceeded. Please try again later.',
         data: []
       };
     }
@@ -164,7 +248,7 @@ export const protectedApi = {
     if (!rateLimiter.isAllowed('getProductById')) {
       return {
         success: false,
-        error: 'Rate limit exceeded',
+        error: 'Rate limit exceeded. Please try again later.',
         data: null
       };
     }
@@ -176,7 +260,7 @@ export const protectedApi = {
     if (!rateLimiter.isAllowed('getProductsByCategory')) {
       return {
         success: false,
-        error: 'Rate limit exceeded',
+        error: 'Rate limit exceeded. Please try again later.',
         data: []
       };
     }
@@ -188,7 +272,7 @@ export const protectedApi = {
     if (!rateLimiter.isAllowed('searchProducts')) {
       return {
         success: false,
-        error: 'Rate limit exceeded',
+        error: 'Rate limit exceeded. Please try again later.',
         data: []
       };
     }
