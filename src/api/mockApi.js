@@ -19,7 +19,7 @@ const initializeData = async () => {
   dataLoadPromise = (async () => {
     try {
       // Import the JSON data directly
-      const { default: data } = await import('../data/products.json');
+      const { default: data } = await import('../data/watchbuds.json');
       
       // Validate data structure
       if (!data || !Array.isArray(data.products)) {
